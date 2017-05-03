@@ -8,7 +8,7 @@ class Unidad extends Model
 {
     protected $table = 'unidades';
 
-    protected $fillable = ['nombre_unidad', 'telefono_unidad', 'interno_unidad', 'correo_unidad', 'tipo_unidad'];
+    protected $fillable = ['nombre_unidad', 'telefono_unidad', 'interno_unidad', 'correo_unidad'];
 
     public function usuario_asignar_sub_roles()
 	{
