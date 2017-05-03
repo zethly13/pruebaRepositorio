@@ -1,0 +1,22 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Usuario_email extends Model
+{
+    protected $table = 'usuario_emails';
+
+    protected $fillable = ['email', 'email_activo', 'email_defecto', 'cadena_verificacion', 'id_usuario', 'id_tipo_email'];
+
+    public function tipo_email()
+	{
+		return $this->belongsTo('App\Tipo_email');
+	}
+
+	public function usuario()
+	{
+		return $this->belongsTo('App\Usuario');
+	}
+}

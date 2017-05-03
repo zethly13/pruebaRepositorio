@@ -15,6 +15,7 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -87,6 +88,7 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'C' => 
         array (
             'Cron\\' => 5,
+            'Collective\\Html\\' => 16,
             'Carbon\\' => 7,
         ),
         'A' => 
@@ -222,6 +224,10 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         array (
             0 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
         ),
+        'Collective\\Html\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelcollective/html/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -279,6 +285,8 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\RolsController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolsController.php',
+        'App\\Http\\Controllers\\Sub_RolsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sub_RolsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -289,12 +297,38 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\Rol' => __DIR__ . '/../..' . '/app/Rol.php',
+        'App\\Sub_Rol' => __DIR__ . '/../..' . '/app/Sub_Rol.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
+        'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
+        'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+        'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
+        'Collective\\Html\\FormFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/FormFacade.php',
+        'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
+        'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
+        'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
+        'CreateAccesosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_030108_create_accesos_table.php',
+        'CreateCiudadesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013915_create_ciudades_table.php',
+        'CreateEstadoCivilesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013602_create_estado_civiles_table.php',
+        'CreateFuncionesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013235_create_funciones_table.php',
+        'CreatePaisesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013436_create_paises_table.php',
+        'CreateProvinciasTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_014650_create_provincias_table.php',
+        'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_005756_create_roles_table.php',
+        'CreateSubAccesosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_031155_create_sub_accesos_table.php',
+        'CreateSubRolesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_025643_create_sub_roles_table.php',
+        'CreateTipoDireccionesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013633_create_tipo_direcciones_table.php',
+        'CreateTipoDocIdentidadesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013334_create_tipo_doc_identidades_table.php',
+        'CreateTipoEmailsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013759_create_tipo_emails_table.php',
+        'CreateTipoTelefonosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013737_create_tipo_telefonos_table.php',
+        'CreateUnidadesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_013258_create_unidades_table.php',
+        'CreateUsuarioAsignarSubRolesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_025830_create_usuario_asignar_sub_roles_table.php',
+        'CreateUsuarioDireccionesTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_023911_create_usuario_direcciones_table.php',
+        'CreateUsuarioEmailsTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_025227_create_usuario_emails_table.php',
+        'CreateUsuarioFotografiasTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_023720_create_usuario_fotografias_table.php',
+        'CreateUsuarioTelefonosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_024234_create_usuario_telefonos_table.php',
+        'CreateUsuariosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_24_022609_create_usuarios_table.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
@@ -1440,6 +1474,7 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'Illuminate\\Support\\Facades\\View' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Facades/View.php',
         'Illuminate\\Support\\Fluent' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Fluent.php',
         'Illuminate\\Support\\HigherOrderCollectionProxy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/HigherOrderCollectionProxy.php',
+        'Illuminate\\Support\\HigherOrderTapProxy' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/HigherOrderTapProxy.php',
         'Illuminate\\Support\\HtmlString' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/HtmlString.php',
         'Illuminate\\Support\\Manager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Manager.php',
         'Illuminate\\Support\\MessageBag' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/MessageBag.php',
@@ -1524,6 +1559,7 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',
+        'League\\Flysystem\\Adapter\\CanOverwriteFiles' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/CanOverwriteFiles.php',
         'League\\Flysystem\\Adapter\\Ftp' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Ftp.php',
         'League\\Flysystem\\Adapter\\Ftpd' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Ftpd.php',
         'League\\Flysystem\\Adapter\\Local' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Local.php',

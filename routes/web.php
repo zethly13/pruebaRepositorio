@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('roles', 'RolesController');
+Route::resource('sub_roles', 'Sub_RolesController');
