@@ -2,6 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos.css">
 
     <title>proyecto titulacion</title>
 
@@ -24,7 +28,10 @@
     </nav>
    
      <section>
-        @yield('contenido')
+       <div class="container">
+            @yield('contenido')
+       </div>
+       
     </section>
      <footer>
         <h1>mi pie de pagina</h1>
