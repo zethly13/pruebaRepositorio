@@ -17,10 +17,10 @@ class CreateUsuariosTable extends Migration
             $table->increments('id');
             $table->string('doc_identidad',20);
             $table->string('login',30);
-            $table->string('clave',200);
+            $table->string('clave',35);
             $table->string('apellidos',50);
             $table->string('nombres',50);
-            $table->string('sexo',10);
+            $table->enum('sexo',['Femenino','Maculino']);
             $table->date('fecha_nac');
             $table->enum('usuario_activo',['SI','NO']);
             $table->enum('inscribir_adm',['SI','NO']);

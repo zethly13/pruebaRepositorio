@@ -17,6 +17,8 @@ class CreateUsuarioEmailsTable extends Migration
             $table->increments('id');
             $table->string('email',100);
             $table->enum('email_activo',['SI','NO']);
+            $table->enum('email_defecto',['SI','NO']);
+            $table->string('cadena_verificacion',50);
             
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_tipo_email')->unsigned();

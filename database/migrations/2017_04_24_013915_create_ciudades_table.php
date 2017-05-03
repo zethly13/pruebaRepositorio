@@ -15,7 +15,7 @@ class CreateCiudadesTable extends Migration
     {
         Schema::create('ciudades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_ciudad',50);
+            $table->string('nombre_pais',50);
             $table->integer('peso_ciudad');
 
             $table->integer('id_pais')->unsigned();
