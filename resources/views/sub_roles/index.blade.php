@@ -8,9 +8,9 @@
 		<td>No</td>
 		<td>Nombre Rol</td>
 		<td>Descripcion</td>
-		<td>Rol</td>
+		<td>Nombre de Rol al que pertenece</td>
 		<td>Modificar</td>
-	</thead><thead></thead><thead></thead><thead></thead>
+	</thead>
 
 @foreach ($sRoles as $roles)
 <tr>

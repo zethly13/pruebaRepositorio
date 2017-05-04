@@ -23,7 +23,7 @@ class Sub_RolesController extends Controller
 //        $rol_sub_rol = $subroles->rol();
         //$rol = Rol::where($id,'=',$sub_rol->id_rol)->get();
         //return $sRoles;
-        return view('sub_roles.index',compact('sRoles'));
+        return view($this->path.'.index',compact('sRoles'));
     }
 
     /**
@@ -57,8 +57,8 @@ class Sub_RolesController extends Controller
                $subRol->descripcion_sub_rol = $request->desc_sub_rol;
                $subRol->id_rol=$request->rol_seleccionado;
                $subRol->save();
-               //return $subRol;
-               return redirect()->route('sub_roles.index');
+               // return $subRol;
+               return redirect()->route($this->path.'.index');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
            } 
@@ -83,7 +83,11 @@ class Sub_RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        //$sRol = Sub_rol::findOrFail($id);
+        $sRol=Sub_rol::join('roles','roles.id','=','sub_roles.id_rol')->select('sub_roles.id','sub_roles.nombre_sub_rol','sub_roles.descripcion_sub_rol', 'sub_roles.id_rol','roles.nombre_rol')->where('sub_roles.id','=',$id)->get()->first();
+        $rol=Rol::all();
+        //return $sRol;
+        return view($this->path.'.edit', compact('sRol','rol'));
     }
 
     /**
@@ -95,7 +99,12 @@ class Sub_RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sRol_editar=Sub_rol::findOrFail($id);
+        $sRol_editar->nombre_sub_rol     = $request->nombre_sub_rol;
+        $sRol_editar->descripcion_sub_rol= $request->desc_sub_rol;
+        $sRol_editar->id_rol= $request->rol_seleccionado;
+        $sRol_editar->save();
+        return redirect()->route($this->path.'.index');
     }
 
     /**
@@ -110,7 +119,7 @@ class Sub_RolesController extends Controller
             $sRolEliminar = Sub_rol::findOrFail($id);
             $sRolEliminar->delete(); 
             //return redirect()->route('rols.index');
-            return redirect()->route('sub_roles.index');
+            return redirect()->route($this->path.'.index');
         } catch (Exception $e) {
             return "Fatal Error - ".$e->getMessage();
         }
