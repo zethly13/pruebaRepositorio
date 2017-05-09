@@ -5,6 +5,7 @@
 /* color del encabezado class
 ------------------------- */
 body {
+  overflow:hidden; 
   position: relative;
   padding-top: 0px;
 }
