@@ -62,7 +62,7 @@ $factory->define(App\Usuario::class, function (Faker\Generator $faker)
         'estilo' =>$faker->randomElement(['Moderno','General']),
         'subir_foto' =>$faker->randomElement(['Si','No']),
         'id_estado_civil' =>$faker->numberBetween($min = 1, $max = 4),
-        'id_provincia' =>$faker->numberBetween($min = 1, $max = 9),
+        'id_provincia' =>$faker->numberBetween($min = 1, $max = 47),
         'ciudad_expedido_doc' =>$faker->numberBetween($min = 1, $max = 9),
         'id_tipo_doc_identidad' =>$faker->randomElement(['1']),
         
