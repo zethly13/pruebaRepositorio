@@ -1,9 +1,8 @@
 @extends('layout.master')
 @section('contenido')
-<h1>Lista de Rols</h1>
-<table border="1" width="1">
-<h2><a href="{{ URL::to('roles/create') }}">Crear un Rol</a></h2>
+<h1>Lista de Roles creados</h1>
 
+<table class="table table-bordered">
 	<thead>No</thead><thead>Nombre Rol</thead><thead>Descripcion</thead><thead>Modificar</thead>
 
 @foreach ($rol as $roles)
@@ -16,7 +15,9 @@
                         <input type="submit"  value ="ELIMINAR" >
                         {!! Form::close() !!}</td>
 </tr>
+
 @endforeach
 </table>
+<h2><a href="{{ URL::to('roles/create') }}">Crear un Rol</a></h2>
 @endsection
 {{-- URL::to('/rols/'.$roles->id.'/edit') --}}
