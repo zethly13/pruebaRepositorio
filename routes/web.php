@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 Route::resource('roles', 'RolesController');
 Route::resource('sub_roles', 'Sub_RolesController');
+Route::resource('usuarios', 'UsuariosController');
