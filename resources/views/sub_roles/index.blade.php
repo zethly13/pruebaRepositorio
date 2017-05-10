@@ -1,16 +1,18 @@
 @extends('layout.master')
 @section('contenido')
-<h1>Lista de Rols</h1>
+<h1>Lista de Sub-Roles</h1>
 <table border="1" width="1">
-<h2><a href="{{ URL::to('sub_roles/create') }}">Crear un Rol</a></h2>
+<h2><a href="{{ URL::to('sub_roles/create') }}">CREAR UN SUB-ROL</a></h2>
 
-	<thead>
-		<td>No</td>
-		<td>Nombre Rol</td>
-		<td>Descripcion</td>
-		<td>Nombre de Rol al que pertenece</td>
-		<td>Modificar</td>
-	</thead>
+<div class="table-responsive container-fluid">  
+	<table  class="table table-condensed table-striped table-bordered">
+		<thead>
+			<th class="col-lg-1">Nro</th>
+        	<th class="col-lg-2">NOMBRE SUB-ROL</th>
+        	<th class="col-lg-4">DESCRIPCION</th>
+        	<th class="col-lg-2">MODIFICAR</th>
+        	<th class="col-lg-1">ELIMINAR</th>
+		</thead>
 
 @foreach ($sRoles as $roles)
 <tr>
@@ -25,5 +27,6 @@
 </tr>
 @endforeach
 </table>
+</div>
 @endsection
 {{-- URL::to('/rols/'.$roles->id.'/edit') --}}

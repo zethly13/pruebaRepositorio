@@ -119,6 +119,7 @@ textarea {
   margin: 0;
   font-size: 100%;
   vertical-align: middle;
+
 }
 
 button,
@@ -139,6 +140,7 @@ input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
+
 }
 
 label,
@@ -150,7 +152,9 @@ input[type="submit"],
 input[type="radio"],
 input[type="checkbox"] {
   cursor: pointer;
+
 }
+
 
 input[type="search"] {
   -webkit-box-sizing: content-box;
@@ -2004,6 +2008,8 @@ table {
 .table {
   width: 100%;
   margin-bottom: 20px;
+  border-radius:5px; /* modifique */
+  border:1px; /* modifique */
 }
 
 .table th,
@@ -2017,7 +2023,11 @@ table {
 
 .table th {
   font-weight: bold;
+  text-align: center;/* modifique*/
+  background-color: #121647;/* modifique*/
+  color: white;/* modifique*/
 }
+
 
 .table thead th {
   vertical-align: bottom;
