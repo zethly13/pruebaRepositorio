@@ -26,8 +26,9 @@ class UsuariosController extends Controller
     private $path = 'usuarios';
     public function index()
     {
-        $user=Usuario::all();
-        return $user;
+        $usuario=Usuario::all();
+        //return $user;
+        return view($this->path.'.listaUsuarios', compact('usuario'));
     }
 
     /**
