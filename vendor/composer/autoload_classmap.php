@@ -18,7 +18,6 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\RolesController' => $baseDir . '/app/Http/Controllers/RolesController.php',
-    'App\\Http\\Controllers\\RolsController' => $baseDir . '/app/Http/Controllers/RolsController.php',
     'App\\Http\\Controllers\\Sub_RolesController' => $baseDir . '/app/Http/Controllers/Sub_RolesController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

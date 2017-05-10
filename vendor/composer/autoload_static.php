@@ -290,7 +290,6 @@ class ComposerStaticInit1d0c6ae54330ca64ef64edc3d0723eb8
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolesController.php',
-        'App\\Http\\Controllers\\RolsController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolsController.php',
         'App\\Http\\Controllers\\Sub_RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Sub_RolesController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
