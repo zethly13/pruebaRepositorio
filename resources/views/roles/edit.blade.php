@@ -1,6 +1,10 @@
 @extends('layout.master')
 
 @section('contenido')
+{{-- 	@foreach ($rol as $rol_editar)
+		{{ $rol_editar }}
+	@endforeach	
+	 --}}
 	<h2>prueba de edicion</h2>
 	{{ Form::open(array('route' =>  array('roles.update', $rol->id), 'method' => 'POST'), array('role'=> 'form')) }}
 	{{ method_field('PUT') }}

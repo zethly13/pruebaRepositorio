@@ -8,7 +8,8 @@
 		{{ Form::text('nombre_rol',null, array('placeholder'=> 'Introduce el nuevo Rol', 'class' => 'form-control')) }}
 		{{ Form::label('desc_rol', 'Descripcion Rol') }}
 		{{ Form::text('desc_rol',null, array('placeholder'=> 'Introduce  la Descripcion del nuevo Rol', 'class' => 'form-control')) }}
-		{{ Form::button('Crear Rol', array('type'=> 'submit')) }}
+		<br>
+		{{ Form::button('Crear Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
 
 	{{ Form::close() }}
 
