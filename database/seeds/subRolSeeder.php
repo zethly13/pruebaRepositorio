@@ -14,7 +14,7 @@ class subRolSeeder extends Seeder
         
 		App\Sub_rol::create([
 			
-			'nombre_sub_rol' =>'Administrasor total',
+			'nombre_sub_rol' =>'Administrador total',
 			'descripcion_sub_rol' => 'Es un administrador total',
 			'id_rol' =>'1'
         	
