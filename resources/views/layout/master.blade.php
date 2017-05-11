@@ -25,9 +25,9 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul class="navbar navbar-nav">
-          <li><a href="">Inicio</a></li>
-          <li><a href="#">noticias</a></li>          
-          <li><a href="#">Ingresar al sistema</a></li>
+          <li><a href="/roles">Lista roles</a></li>
+          <li><a href="/sub_roles">Lista sub-roles</a></li>          
+          <li><a href="/usuarios">Lista Usuario</a></li>
         </ul>
   </div>
 </nav>
