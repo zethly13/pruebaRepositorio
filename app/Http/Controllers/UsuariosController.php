@@ -101,7 +101,7 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        $user=Usuario::join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->select('usuarios.id','usuarios.nombres','usuarios.apellidos', 'usuarios.sexo','usuarios.fecha_nac', 'estado_civiles.estado_civil')->where('usuarios.id','=',$id)->get()->first();
+        $user=Usuario::join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->join('tipo_doc_identidades','tipo_doc_identidades.id','=','usuarios.id_tipo_doc_identidad')->join('provincias','provincias.id','=','usuarios.id_provincia')->join('ciudades','ciudades.id','=','usuarios.ciudad_expedido_doc')->select('usuarios.id','usuarios.nombres','usuarios.apellidos','doc_identidad','tipo_doc_identidades.nombre_tipo_doc_identidad','usuarios.id_tipo_doc_identidad','provincias.nombre_provincia', 'usuarios.id_provincia','usuarios.ciudad_expedido_doc','ciudades.nombre_ciudad', 'usuarios.fecha_nac', 'usuarios.id_estado_civil','estado_civiles.estado_civil', 'usuarios.sexo')->where('usuarios.id','=',$id)->get()->first();
         $pais=Pais::all();
         $tipoDocId=Tipo_doc_identidad::all();
         $ciudad=Ciudad::all();

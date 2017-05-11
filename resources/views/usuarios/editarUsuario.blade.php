@@ -10,7 +10,7 @@
     <div class="col-sm-2">
              <div class="form-group">
          <label for="exampleInputName2">Documento de identidad</label>
-         <input type="text" class="form-control" id="exampleInputName2" value="" name="numero_identidad_usuario">
+         <input type="text" class="form-control" id="exampleInputName2" value="{{ $user->doc_identidad }}" name="numero_identidad_usuario">
         </div>
     </div>
     <div class="col-sm-6">
@@ -18,7 +18,7 @@
          <label for="exampleInputName2">Tipo documento</label>
 
             <select name="tipo_doc_usuario">
-      <option value='-1'>Seleccione</option>  
+      <option value='{{ $user->id_tipo_doc_identidad }}'>{{ $user->nombre_tipo_doc_identidad }}</option>  
 
       @foreach ($tipoDocId as $tipoDoc)
         <option value="{{$tipoDoc->id}}">{{$tipoDoc->nombre_tipo_doc_identidad}}</option>
@@ -33,7 +33,7 @@
     <label for="exampleInputName2">Expedido en:</label>
     
         <select name="expedido_usuario">
-      <option value='-1'>Seleccione</option>  
+      <option value='{{ $user->ciudad_expedido_doc }}'>{{ $user->nombre_ciudad }}</option>  
 
       @foreach ($ciudad as $expedido)
         <option value="{{$expedido->id}}">{{$expedido->nombre_ciudad}}</option>
@@ -49,7 +49,7 @@
   <div class="form-group">
     <label for="exampleInputName2" class="col-sm-2 control-label">Apellidos</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="exampleInputName2" name="apellido_usuario">
+      <input type="text" class="form-control" id="exampleInputName2" name="apellido_usuario" value="{{ $user->apellidos }}">
   </div>
    <div class="form-group">
     <label for="exampleInputName2" class="col-sm-2 control-label">Nombres</label>
@@ -64,10 +64,7 @@
   </div>
   <div class="col-xs-6 col-sm-6">
     <label for="inputBirthday" class="control-label">Fecha de Nacimiento</label>
-      <input name='fecha_nac_usuario' type="date" class="form-control" id="birthday" value="<?php 
-    if(isset($_SESSION["birthday_patient"])) {
-        echo $_SESSION["birthday_patient"];
-    }?>" required>
+      <input name='fecha_nac_usuario' type="date" class="form-control" id="birthday" value="{{ $user->fecha_nac }}" required>
   </div>
   <p>datos de nacimiento</p>
   <div class="form-group">
@@ -97,7 +94,7 @@
     <label for="exampleInputName2">provincia</label>
     
         <select name="provincia_usuario">
-      <option value='-1'>Seleccione</option>  
+      <option value='{{ $user->id_provincia }}'>{{ $user->nombre_provincia }}</option>  
 
       @foreach ($provincia as $provincia)
         <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
@@ -108,7 +105,7 @@
 
 <div class="form-group">
     <label for="exampleInputName2">Sexo</label>
-    <input type="text" class= "form-control"  id="sexoUsuario"  name="sexo_usuario" list="Sexo">
+    <input type="text" class= "form-control"  id="sexoUsuario"  name="sexo_usuario" list="Sexo" value="{{ $user->sexo }}">
     <datalist id="Sexo">
       <option value="Femenino">
       <option value="Masculino">
@@ -117,7 +114,7 @@
   <div class="form-group">
     <label for="exampleInputName2">Estado civil</label>
       <select name="estado_civil_usuario">
-      <option value='-1'>Seleccione</option>  
+      <option value='{{ $user->id_estado_civil }}'>{{ $user->estado_civil }}</option>  
 
       @foreach ($estado as $estado)
         <option value="{{$estado->id}}">{{$estado->estado_civil}}</option>
@@ -158,7 +155,7 @@
     <input type="text" class="form-control" id="exampleInputName2" placeholder="ingrese lugar de domicilio" name="barrio_usuario">
   </div>
 
-{{ Form::button('Crear Nuevo Usuario', array('type'=> 'submit')) }}
+{{ Form::button('editar Usuario', array('type'=> 'submit')) }}
 
   {{ Form::close() }}
   </div>
