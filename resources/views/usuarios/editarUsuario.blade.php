@@ -5,11 +5,12 @@
 @parent
 <div class="container">
   <div class="row">
-   {{ Form::open(array('route' =>array('usuarios.store'), 'method' => 'POST'), array('role'=> 'form')) }}
+   {{ Form::open(array('route' =>array('usuarios.update', $user->id), 'method' => 'POST'), array('role'=> 'form')) }}
+   {{ method_field('PUT') }}
     <div class="col-sm-2">
              <div class="form-group">
          <label for="exampleInputName2">Documento de identidad</label>
-         <input type="text" class="form-control" id="exampleInputName2" placeholder="ingrese su doc CI" name="numero_identidad_usuario">
+         <input type="text" class="form-control" id="exampleInputName2" value="" name="numero_identidad_usuario">
         </div>
     </div>
     <div class="col-sm-6">
@@ -53,7 +54,7 @@
    <div class="form-group">
     <label for="exampleInputName2" class="col-sm-2 control-label">Nombres</label>
     <div class="col-sm-10">
-      <input type="text" name="nombre_usuario" class="form-control" id="exampleInputName2">
+      <input type="text" name="nombre_usuario" class="form-control" id="exampleInputName2" value="{{ $user->nombres }}"  >
       @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>

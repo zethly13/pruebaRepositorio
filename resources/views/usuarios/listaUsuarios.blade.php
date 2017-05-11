@@ -18,10 +18,10 @@
 @foreach ($usuario as $user)
 <tr>
 	<td>{{ $user->id }}</td>
-	<td>{{ $user->nombres.' '.$user->nombres }}</td>
+	<td>{{ $user->nombres.' '.$user->apellidos }}</td>
 	<td>{{ $user->doc_identidad }}</td>
 	<td>{{ $user->id }} </td>
-	<td><a href="{{ route('sub_roles.edit', $user->id) }}">Modificar</a></td>
+	<td><a href="{{ route('usuarios.edit', $user->id) }}">Modificar</a></td>
 	<td>{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
                         <input type="submit"  value ="ELIMINAR" >
                         {!! Form::close() !!}</td>

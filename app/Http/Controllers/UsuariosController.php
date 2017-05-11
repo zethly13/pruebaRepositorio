@@ -59,24 +59,24 @@ class UsuariosController extends Controller
         
         try {
                $user=new Usuario();
-               $user->doc_identidad = $request->numeroIdentidad;
-               //$user->login = '';
-               //$user->clave = '';
-               $user->apellidos=$request->apellidos;
-               $user->nombres=$request->apellidos;
-               $user->sexo=$request->apellidos;
-               $user->fecha_nac=$request->apellidos;
+               $user->doc_identidad = $request->numero_identidad_usuario;
+               $user->login = $request->numero_identidad_usuario;
+               $user->clave = $request->numero_identidad_usuario;
+               $user->apellidos=$request->apellido_usuario;
+               $user->nombres=$request->nombre_usuario;
+               $user->sexo=$request->sexo_usuario;
+               $user->fecha_nac=$request->fecha_nac_usuario;
                $user->usuario_activo='SI';
                $user->inscribir_adm='SI';
                $user->estilo='Moderno';
-               $user->subir_foto=$request->apellidos;
-               $user->id_estado_civil=$request->estado_civil;
-               $user->id_provincia=$request->provincia;
-               $user->ciudad_expedido_doc=$request->expedido;
-               $user->id_tipo_Doc_identidad=$request->tipo_doc;
+               $user->subir_foto='NO';
+               $user->id_estado_civil=$request->estado_civil_usuario;
+               $user->id_provincia=$request->provincia_usuario;
+               $user->ciudad_expedido_doc=$request->expedido_usuario;
+               $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
                $user->save();
-                return $user;
-               //return redirect()->route($this->path.'.index');
+                //return $user;
+               return redirect()->route($this->path.'.index');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
            }
@@ -101,7 +101,15 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user=Usuario::join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->select('usuarios.id','usuarios.nombres','usuarios.apellidos', 'usuarios.sexo','usuarios.fecha_nac', 'estado_civiles.estado_civil')->where('usuarios.id','=',$id)->get()->first();
+        $pais=Pais::all();
+        $tipoDocId=Tipo_doc_identidad::all();
+        $ciudad=Ciudad::all();
+        $provincia=Provincia::all();
+        $estado=Estado_civil::all();
+
+        //return $user;
+        return view($this->path.'.editarUsuario', compact('pais','tipoDocId','ciudad','provincia','estado','user'));
     }
 
     /**
@@ -113,7 +121,24 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user=Usuario::findOrFail($id);
+        $user->doc_identidad = $request->numero_identidad_usuario;
+        $user->login = $request->numero_identidad_usuario;
+        $user->clave = $request->numero_identidad_usuario;
+        $user->apellidos=$request->apellido_usuario;
+        $user->nombres=$request->nombre_usuario;
+        $user->sexo=$request->sexo_usuario;
+        $user->fecha_nac=$request->fecha_nac_usuario;
+        $user->usuario_activo='SI';
+        $user->inscribir_adm='SI';
+        $user->estilo='Moderno';
+        $user->subir_foto='NO';
+        $user->id_estado_civil=$request->estado_civil_usuario;
+        $user->id_provincia=$request->provincia_usuario;
+        $user->ciudad_expedido_doc=$request->expedido_usuario;
+        $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
+        $user->save();
+        return redirect()->route($this->path.'.index');
     }
 
     /**
@@ -124,6 +149,13 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $user = Usuario::findOrFail($id);
+            $user->delete(); 
+            //return redirect()->route('rols.index');
+            return redirect()->route($this->path.'.index');
+        } catch (Exception $e) {
+            return "Fatal Error - ".$e->getMessage();
+        }
     }
 }
