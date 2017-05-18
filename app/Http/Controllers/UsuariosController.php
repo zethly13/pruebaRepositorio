@@ -15,6 +15,9 @@ use App\Ciudad;
 use App\Provincia;
 use App\Estado_civil;
 use App\Usuario;
+use App\Usuario_direccion;
+use App\usuario_email;
+
 class UsuariosController extends Controller
 {
     /**

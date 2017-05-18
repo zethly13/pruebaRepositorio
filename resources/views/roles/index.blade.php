@@ -1,3 +1,4 @@
+
 @extends('layout.master')
 @section('contenido')
 <h1>Lista de Roles creados</h1>

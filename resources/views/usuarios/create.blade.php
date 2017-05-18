@@ -2,7 +2,7 @@
 @extends('layout.master')
 
 @section('contenido') 
-@parent
+
 <div class="container">
   <div class="row">
    {{ Form::open(array('route' =>array('usuarios.store'), 'method' => 'POST'), array('role'=> 'form')) }}

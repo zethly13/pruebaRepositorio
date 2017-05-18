@@ -6,11 +6,13 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/estiloPropio.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <title>FCE-UMSS</title>
 </head>
 
 <body>
+   
+
 <!--cabecera d la pagina-->
 <header class="cabecera subhead" id="overview">
   <div class="container">
@@ -18,6 +20,9 @@
      <a class="navbar-brand" href="{{ url('') }}"><p>Facultad de ciencias economicas</p></a>
   </div>
 </header>
+
+
+
 
 <!--Cuerpo-->
 <!--menu navegacion-->
@@ -30,10 +35,18 @@
           <li><a href="/usuarios">Lista Usuario</a></li>
         </ul>
   </div>
+
+@if (Auth::check())
+   <li><a href="{{url()}}">{{Auth::user()->name}}</a></li>
+   <li><a href="{{url('auth/logout')}}">Salir</a></li>
+   @else
+            <li><a href="{{url('login/formularioLogin')}}">Iniciar sesión</a></li>
+   @endif
+
 </nav>
 
  <!--contenido-->
-<div class="container">
+<div class="container" style='margin-top: 50px;'>
    
     <div class="row">
     <!--submenu navegacion-->
