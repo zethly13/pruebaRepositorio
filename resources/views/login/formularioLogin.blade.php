@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layout.master')
 @section('content')
 {{ Form::open(array('route' => 'roles.store', 'method' => 'POST'), array('role'=> 'form')) }}
 {{ Form::label('login', 'Ingrese su Loguin') }}

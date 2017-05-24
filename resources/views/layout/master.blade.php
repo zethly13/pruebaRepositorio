@@ -40,7 +40,7 @@
    <li><a href="{{url()}}">{{Auth::user()->name}}</a></li>
    <li><a href="{{url('auth/logout')}}">Salir</a></li>
    @else
-            <li><a href="{{url('login/formularioLogin')}}">Iniciar sesión</a></li>
+            <li><a href="{{url('login/logeo')}}">Iniciar sesión</a></li>
    @endif
 
 </nav>
