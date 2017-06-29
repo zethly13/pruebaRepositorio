@@ -69,7 +69,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: url(../img/pagina.png) repeat center center;
+  background: url(../img/pagina4.png) repeat center center;
   opacity: .6;
 }
 
@@ -88,6 +88,14 @@ body {
 .subhead .navbar {
   display: none;
 }
+
+
+
+/* botones
+-------------------------------------------------- */
+
+
+
 
 
 /* Footer

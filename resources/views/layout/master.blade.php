@@ -2,17 +2,15 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-   <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/estiloPropio.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css" >
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" >
+    <link rel="stylesheet" href="/css/estiloPropio.css" >
+ 
     <title>FCE-UMSS</title>
 </head>
 
 <body>
-   
-
 <!--cabecera d la pagina-->
 <header class="cabecera subhead" id="overview">
   <div class="container">
@@ -21,44 +19,37 @@
   </div>
 </header>
 
-
-
-
 <!--Cuerpo-->
 <!--menu navegacion-->
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <ul class="navbar navbar-nav">
-          <li><a href="/roles">Lista roles</a></li>
-          <li><a href="/sub_roles">Lista sub-roles</a></li>          
-          <li><a href="/usuarios">Lista Usuario</a></li>
-        </ul>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-list"></span> Noticias</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>  Ingresasr al Sistema</a></li>
+      </ul>
+    </div>
   </div>
-
-@if (Auth::check())
-   <li><a href="{{url()}}">{{Auth::user()->name}}</a></li>
-   <li><a href="{{url('auth/logout')}}">Salir</a></li>
-   @else
-            <li><a href="{{url('login/logeo')}}">Iniciar sesión</a></li>
-   @endif
-
 </nav>
 
+
  <!--contenido-->
-<div class="container" style='margin-top: 50px;'>
-   
+<div class="container">
+
     <div class="row">
     <!--submenu navegacion-->
-      <div class="span2">
-        <ul>
-          <li><a href="">Inicio</a></li>
-          <li><a href="#">noticias</a></li>          
-          <li><a href="#">Ingresar al sistema</a></li>
+      <div class="col-sm-3  navbar navbar-inverse container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-list"></span> noticias</a></li>          
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Ingresar al sistema</a></li>
         </ul>
       </div>
+
+
     <!--seccion a cambiar-->
-        <div class="span10">
+        <div class="col-sm-9">
             <section>
                 <div>
                      @yield('contenido')
@@ -66,15 +57,15 @@
             </section>
         </div>
     </div>
+
+
 </div>
 <!--pie de pagina-->
 <footer class="footer">
     <div class="container">
         <p>facultad de Ciencias Económicas</p>
         <p>Direccion calle Calama Este - Edificio Prototipo </p>
-        <p>Fono: 591-4-4540261
-        Correo Electrónico: info@fce.umss.edu.bo
-        Cochabamba - Bolivia</p>
+        <p>Fono: 591-4-4540261 Correo Electrónico: info@fce.umss.edu.bo Cochabamba - Bolivia</p>
     </div>
 </footer>
 
