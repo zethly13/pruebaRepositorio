@@ -12,11 +12,11 @@ class Acceso extends Model
 
     public function sub_accesos()
 	{
-		return $this->hasMany('App\Sub_acceso');
+		return $this->hasMany('App\Sub_acceso', 'id_acceso', 'id');
 	}
 
-	public function sub_roles()
+	public function acceso_sub_roles()
 	{
-		return $this->belongsToMany('App\Sub_rol')->withTimestamps();
+		return $this->hasMany('App\Acceso_sub_rol', 'id_acceso' ,'id');
 	}
 }

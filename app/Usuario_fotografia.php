@@ -12,6 +12,6 @@ class Usuario_fotografia extends Model
 
     public function usuario()
 	{
-		return $this->belongsTo('App\Usuario');
+		return $this->belongsTo('App\Usuario', 'id_usuario', 'id');
 	}
 }

@@ -12,46 +12,46 @@ class Usuario extends Model
 
 	public function tipo_doc_identidad()
 	{
-		return $this->belongsTo('App\Tipo_doc_identidad');
+		return $this->belongsTo('App\Tipo_doc_identidad', 'id_tipo_doc_identidad','id');
 	}
 
 	public function ciudad()
 	{
-		return $this->belongsTo('App\Ciudad');
+		return $this->belongsTo('App\Ciudad', 'ciudad_expedido_doc','id');
 	}
 
 	public function estado_civil()
 	{
-		return $this->belongsTo('App\Estado_civil');
+		return $this->belongsTo('App\Estado_civil', 'id_estado_civil','id');
 	}
 
 	public function provincia()
 	{
-		return $this->belongsTo('App\Provincia');
+		return $this->belongsTo('App\Provincia', 'id_provincia', 'id');
 	}
 
 	public function usuario_direcciones()
 	{
-		return $this->hasMany('App\Usuario_direccion');
+		return $this->hasMany('App\Usuario_direccion','id_usuario','id');
 	}
 
 	public function usuario_fotografias()
 	{
-		return $this->hasMany('App\Usuario_fotografia');
+		return $this->hasMany('App\Usuario_fotografia', 'id_usuario','id');
 	}
 
 	public function usuario_telefonos()
 	{
-		return $this->hasMany('App\Usuario_telefono');
+		return $this->hasMany('App\Usuario_telefono', 'id_usuario','id');
 	}
 
 	public function usuario_emails()
 	{
-		return $this->hasMany('App\Usuario_email');
+		return $this->hasMany('App\Usuario_email','id_usuario', 'id');
 	}
 	public function usuario_asignar_sub_roles()
 	{
-		return $this->hasMany('App\Usuario_asignar_sub_rol');
+		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_usuario', 'id');
 	}
 
 }

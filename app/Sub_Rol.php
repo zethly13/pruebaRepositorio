@@ -13,17 +13,17 @@ class Sub_rol extends Model
   
     public function usuario_asignar_sub_roles()
 	{
-		return $this->hasMany('App\Usuario_asignar_sub_rol');
+		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_sub_rol', 'id');
 	}
 
 	public function rol()
 	{
-		return $this->belognsTo('App\Rol');
+		return $this->belongsTo('App\Rol', 'id_rol', 'id');
 	}
 
-	public function accesos()
+	public function acceso_sub_roles()
 	{
-		return $this->belongsToMany('App\Acceso');
+		return $this->hasMany('App\Acceso_sub_rol', 'id_sub_rol', 'id');
 	}
 
 }

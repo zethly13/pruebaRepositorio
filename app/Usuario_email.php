@@ -12,11 +12,11 @@ class Usuario_email extends Model
 
     public function tipo_email()
 	{
-		return $this->belongsTo('App\Tipo_email');
+		return $this->belongsTo('App\Tipo_email', 'id_tipo_email', 'id');
 	}
 
 	public function usuario()
 	{
-		return $this->belongsTo('App\Usuario');
+		return $this->belongsTo('App\Usuario', 'id_usuario', 'id');
 	}
 }

@@ -12,10 +12,10 @@ class Usuario_telefono extends Model
 
     public function tipo_telefono()
 	{
-		return $this->belongsTo('App\Tipo_telefono');
+		return $this->belongsTo('App\Tipo_telefono', 'id_tipo_telefono', 'id');
 	}
 	public function usuario()
 	{
-		return $this->belongsTo('App\Usuario');
+		return $this->belongsTo('App\Usuario', 'id_usuario', 'id');
 	}
 }

@@ -12,6 +12,6 @@ class Tipo_telefono extends Model
 
     public function usuario_telefonos()
 	{
-		return $this->hasMany('App\Usuario_telefono');
+		return $this->hasMany('App\Usuario_telefono', 'id_tipo_telefono','id');
 	}
 }

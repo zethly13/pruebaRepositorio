@@ -12,17 +12,17 @@ class Ciudad extends Model
 
     public function usuarios()
 	{
-		return $this->hasMany('App\Usuario');
+		return $this->hasMany('App\Usuario', 'ciudad_expedido_doc', 'id');
 	}
 
 	public function pais()
 	{
-		return $this->belongTo('App\Pais');
+		return $this->belongsTo('App\Pais', 'id_pais', 'id');
 	}
 
 	public function provincias()
 	{
-		return $this->hasMany('App\Provincia');
+		return $this->hasMany('App\Provincia', 'id_ciudad','id');//con que se relaciona
 	}
     
 }

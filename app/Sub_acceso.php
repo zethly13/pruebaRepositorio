@@ -12,6 +12,6 @@ class Sub_acceso extends Model
 
     public function acceso()
 	{
-		return $this->belongsTo('App\Acceso');
+		return $this->belongsTo('App\Acceso', 'id_acceso', 'id');
 	}
 }

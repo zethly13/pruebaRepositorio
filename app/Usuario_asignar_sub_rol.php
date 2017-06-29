@@ -12,20 +12,20 @@ class Usuario_asignar_sub_rol extends Model
 
     public function usuario()
 	{
-		return $this->belongsTo('App\Usuario');
+		return $this->belongsTo('App\Usuario', 'id_usuario', 'id');
 	}
 
 	public function sub_rol()
 	{
-		return $this->belongsTo('App\Sub_rol');
+		return $this->belongsTo('App\Sub_rol', 'id_sub_rol','id');
 	}
 	public function funcion()
 	{
-		return $this->belongsTo('App\Funcion');
+		return $this->belongsTo('App\Funcion', 'id_funcion','id');
 	}
 	public function unidad()
 	{
-		return $this->belongsTo('App\Unidad');
+		return $this->belongsTo('App\Unidad','id_unidad','id');
 	}
 
 }

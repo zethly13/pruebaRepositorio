@@ -128,4 +128,14 @@ $factory->define(App\Usuario_asignar_sub_rol::class, function (Faker\Generator $
         'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
     ];
 });
+$factory->define(App\Acceso_sub_rol::class, function (Faker\Generator $faker)
+{
 
+    return [
+        
+        'id_acceso'=>$faker->numberBetween($min = 1, $max = 3),
+        'id_sub_rol'=>$faker->numberBetween($min = 1, $max = 7),
+        
+        
+    ];
+});

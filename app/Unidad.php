@@ -12,6 +12,6 @@ class Unidad extends Model
 
     public function usuario_asignar_sub_roles()
 	{
-		return $this->hasMany('App\Usuario_asignar_sub_rol');
+		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_unidad','id');
 	}
 }

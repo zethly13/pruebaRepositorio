@@ -12,12 +12,12 @@ class Provincia extends Model
 
     public function usuarios()
 	{
-		return $this->hasMany('App\Usuario');
+		return $this->hasMany('App\Usuario', 'id_provincia','id');
 	}
 
 	public function ciudad()
 	{
-		return $this->belongsTo('App\Ciudad');
+		return $this->belongsTo('App\Ciudad', 'id_ciudad','id');
 	}
 }
 

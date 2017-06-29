@@ -12,6 +12,6 @@ class Tipo_email extends Model
 
     public function usuario_emails()
 	{
-		return $this->hasMany('App\Usuario_email');
+		return $this->hasMany('App\Usuario_email','id_tipo_email', 'id');
 	}
 }

@@ -12,6 +12,6 @@ class Tipo_doc_identidad extends Model
 
     public function usuarios()
     {
-    	return $this->hasmany('App\Usuario');
+    	return $this->hasMany('App\Usuario','id_tipo_doc_identidad','id');
     }
 }

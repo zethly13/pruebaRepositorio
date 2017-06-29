@@ -12,10 +12,10 @@ class Usuario_direccion extends Model
 
     public function tipo_direccion()
 	{
-		return $this->belongsTo('App\Tipo_direccion');
+		return $this->belongsTo('App\Tipo_direccion', 'id_tipo_direccion', 'id');
 	}
 	public function usuario()
 	{
-		return $this->belongsTo('App\Usuario');
+		return $this->belongsTo('App\Usuario', 'id_usuario', 'id');
 	}
 }

@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(usuarioAsignarSubRolSeeder::class);
         $this->call(accesoSeeder::class);
         $this->call(subAccesoSeeder::class);
+        $this->call(accesoSubRolSeeder::class);
 
     }
 }

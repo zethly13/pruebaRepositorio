@@ -12,7 +12,7 @@ class Rol extends Model
 
     public function sub_roles()
 	{
-		return $this->hasMany('App\Sub_rol');
+		return $this->hasMany('App\Sub_rol', 'id_rol','id');
 	}
     
 }

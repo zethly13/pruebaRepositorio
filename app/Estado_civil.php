@@ -12,6 +12,6 @@ class Estado_civil extends Model
 
     public function usuarios()
 	{
-		return $this->hasMany('App\Usuario');
+		return $this->hasMany('App\Usuario', 'id_estado_civil','id');
 	}
 }

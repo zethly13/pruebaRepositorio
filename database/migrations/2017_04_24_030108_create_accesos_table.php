@@ -25,18 +25,7 @@ class CreateAccesosTable extends Migration
             $table->timestamps();
 
         });
-        Schema::create('acceso_sub_rol', function (Blueprint $table) {
-            $table->increments('id');
-            
-            $table->integer('id_acceso')->unsigned();
-            $table->integer('id_sub_rol')->unsigned();
-
-            $table->foreign('id_acceso')->references('id')->on('accesos')->onDelete('cascade');
-            $table->foreign('id_sub_rol')->references('id')->on('sub_roles')->onDelete('cascade');
-
-            $table->timestamps();
-            
-        });
+        
     }
 
     /**

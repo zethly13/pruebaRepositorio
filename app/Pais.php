@@ -12,7 +12,7 @@ class Pais extends Model
 
     public function ciudades()
 	{
-		return $this->hasMany('App\Ciudad');
+		return $this->hasMany('App\Ciudad', 'id_pais','id');
 	}
 
 	
