@@ -1,6 +1,5 @@
 @extends('layout.master')
 @section('contenido')
-
 <h1>Lista de Usuarios</h1>
 <table border="1" width="1">
 <h2><a href="{{ URL::to('usuarios/create') }}">CREAR UN USUARIO</a></h2>

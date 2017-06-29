@@ -9,8 +9,7 @@
 		<thead>
 			<th class="col-lg-1">Nro</th>
         	<th class="col-lg-2">NOMBRE SUB-ROL</th>
-        	<th class="col-lg-2">DESCRIPCION</th>
-        	<th class="col-lg-2">Rol</th>
+        	<th class="col-lg-4">DESCRIPCION</th>
         	<th class="col-lg-2">MODIFICAR</th>
         	<th class="col-lg-1">ELIMINAR</th>
 		</thead>
