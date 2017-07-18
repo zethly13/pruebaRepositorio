@@ -15,7 +15,7 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('doc_identidad',20);
+            $table->string('doc_identidad',20)->unique();
             $table->string('login',30);
             $table->string('clave',200);
             $table->string('apellidos',50);
@@ -36,6 +36,7 @@ class CreateUsuariosTable extends Migration
             $table->foreign('id_provincia')->references('id')->on('provincias')->onDelete('cascade');
             $table->foreign('ciudad_expedido_doc')->references('id')->on('ciudades')->onDelete('cascade');
             $table->foreign('id_tipo_doc_identidad')->references('id')->on('tipo_doc_identidades')->onDelete('cascade');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

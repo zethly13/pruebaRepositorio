@@ -7,8 +7,8 @@
 <!--inicio de mi formulario-->
 
 <!--Documento de indentidad-->
-    {{ Form::label('numero_Identidad_usuario','Documento de indentidad')}}
-    {{ Form::text('numero_Identidad_usuario',null,array('placeholder' => 'ingrese su doc CI')) }}
+    {{ Form::label('numero_identidad_usuario','Documento de indentidad')}}
+    {{ Form::text('numero_identidad_usuario',null,array('placeholder' => 'ingrese su doc CI')) }}
     {{ Form::label('tipo_doc_usuario','Tipo documento') }}
     <select name="tipo_doc_usuario">
       <option value='-1'>Seleccione</option>  
@@ -38,7 +38,7 @@
                                 @endif
 
    {{ Form::label('fecha_nac_usuario','Fecha de nacimiento') }}
-      <input name='birthday' type="date" class="form-control" id="birthday" value="<?php 
+      <input name='fecha_nac_usuario' type="date" class="form-control" id="birthday" value="<?php 
          if(isset($_SESSION["birthday_patient"])) {
              echo $_SESSION["birthday_patient"];
            }?>" required>
@@ -64,7 +64,7 @@
     </select>
 
      {{ Form::label('provincia_usuario','Provincia:') }}
-     <select  class="form-control" name="provincia">
+     <select  class="form-control" name="provincia_usuario">
       <option value='-1'>Seleccione</option>  
         @foreach ($provincia as $provincia)
          <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>

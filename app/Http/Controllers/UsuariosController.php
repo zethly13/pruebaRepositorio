@@ -17,9 +17,11 @@ use App\Estado_civil;
 use App\Usuario;
 use App\Usuario_direccion;
 use App\usuario_email;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UsuariosController extends Controller
 {
+    use AuthenticatesUsers;
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +29,15 @@ class UsuariosController extends Controller
      */
 
     private $path = 'usuarios';
+    
+    public function __construct()
+    {
+        $this->middleware('autentificado', [
+            'except' => ['login', 'logear']
+            ]);
+
+    }
+
     public function index()
     {
         $usuario=Usuario::all();
@@ -64,7 +75,7 @@ class UsuariosController extends Controller
                $user=new Usuario();
                $user->doc_identidad = $request->numero_identidad_usuario;
                $user->login = $request->numero_identidad_usuario;
-               $user->clave = $request->numero_identidad_usuario;
+               $user->clave =bcrypt($request->numero_identidad_usuario);
                $user->apellidos=$request->apellido_usuario;
                $user->nombres=$request->nombre_usuario;
                $user->sexo=$request->sexo_usuario;
@@ -79,7 +90,7 @@ class UsuariosController extends Controller
                $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
                $user->save();
                 //return $user;
-               return redirect()->route($this->path.'.index');
+               return redirect()->route($this->path.'.index')->with('mensaje','se registro el usuario');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
            }
@@ -127,7 +138,7 @@ class UsuariosController extends Controller
         $user=Usuario::findOrFail($id);
         $user->doc_identidad = $request->numero_identidad_usuario;
         $user->login = $request->numero_identidad_usuario;
-        $user->clave = $request->numero_identidad_usuario;
+        $user->clave = Crypt::encrypt($request->numero_identidad_usuario);
         $user->apellidos=$request->apellido_usuario;
         $user->nombres=$request->nombre_usuario;
         $user->sexo=$request->sexo_usuario;
@@ -141,7 +152,8 @@ class UsuariosController extends Controller
         $user->ciudad_expedido_doc=$request->expedido_usuario;
         $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
         $user->save();
-        return redirect()->route($this->path.'.index');
+        return redirect()->route($this->path.'.index')->with(['mensaje' => 'Se ha registrado con exito'
+            ]);
     }
 
     /**
@@ -161,4 +173,46 @@ class UsuariosController extends Controller
             return "Fatal Error - ".$e->getMessage();
         }
     }
+
+    //Parte de Autenticacion
+    public function login()
+    {
+        return view('usuarios.login');
+    }
+
+    public function logear(Request $request)
+    {
+        $credenciales = $request->only([
+            'login', 'password'
+            ]);
+        //return $credenciales;
+        if(auth()->attempt($credenciales))
+            return redirect()
+                ->route('usuarios.index');
+        else return redirect()
+                ->route('login')
+                ->withErrors([
+                    'login' => 'Usuario o contraseña incorrectos'
+                    ])
+                ->withInput([
+                    'username' => $request->input('username'),
+                    ]);                
+       
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('usuarios.login');
+    }
+
+    
+
+    public function perfil()
+    {
+        $usuario = auth()->user();
+        return view('usuarios.perfil', compact('usuario'));
+    }
+    
+    
 }

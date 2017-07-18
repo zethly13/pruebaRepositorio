@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.css" >
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" >
     <link rel="stylesheet" href="/css/estiloPropio.css" >
- 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>FCE-UMSS</title>
 </head>
 
@@ -14,8 +14,8 @@
 <!--cabecera d la pagina-->
 <header class="cabecera subhead" id="overview">
   <div class="container">
-    <h1>TITULACIÓN FCE UMSS</h1>
-     <a class="navbar-brand" href="{{ url('') }}"><p>Facultad de ciencias economicas</p></a>
+    <h1>TITULACIÓN FCE UMSS SAMTE</h1>
+     <a class="navbar-brand" href="#"><p>Facultad de ciencias economicas</p></a>
   </div>
 </header>
 
@@ -24,10 +24,27 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-list"></span> Noticias</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span>  Ingresasr al Sistema</a></li>
+      <ul class="nav navbar-nav" >
+        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="#">Login</a></li>
+                           
+                        @else
+                            <li class="dropdown">
+                                <a href="#"></a>
+
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('usuarios.logout') }}"
+                                          >
+                                            salir
+                                        </a>
+
+                                        </form>
+                                    </li>
+                                  </ul>
+                                @endif
+
       </ul>
     </div>
   </div>
