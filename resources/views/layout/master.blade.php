@@ -85,7 +85,9 @@
 </footer>
 
 <!--scripts-->
-<script src="/js/bootstrap.js"></script>
 <script src="/js/jquery.js"></script>
+<script src="/js/dinamico.js"></script>
+<script src="/js/bootstrap.js"></script>
+
 </body>
 </html>

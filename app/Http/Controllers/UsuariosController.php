@@ -18,6 +18,7 @@ use App\Usuario;
 use App\Usuario_direccion;
 use App\usuario_email;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Response;
 
 class UsuariosController extends Controller
 {
@@ -60,6 +61,20 @@ class UsuariosController extends Controller
         $estado=Estado_civil::all();
 
         return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado'));
+    }
+
+    public function getCiudades($id){
+
+            $response = null;
+            $ciudad = Pais::find($id)->ciudades->pluck('nombre_ciudad','id');
+            return $response = Response::json($ciudad);
+    }
+
+    public function getProvincias($id){
+            
+            $response = null;
+            $provincias = Ciudad::find($id)->provincias->pluck('nombre_provincia','id');
+            return $response = Response::json($provincias);    
     }
 
     /**

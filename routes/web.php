@@ -19,6 +19,10 @@ Route::any('/','UsuariosController@login');
 Route::any('/login','UsuariosController@login')->name('usuarios.login');
 Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 Route::get('logout', 'UsuariosController@logout')->name('usuarios.logout');
+
+Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
+Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
+
 Route::group(['middleware'=>'autentificado'], function(){
 	Route::resource('roles', 'RolesController');
 	Route::resource('sub_roles', 'Sub_RolesController');
