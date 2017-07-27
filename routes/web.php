@@ -23,8 +23,5 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::resource('roles', 'RolesController');
 	Route::resource('sub_roles', 'Sub_RolesController');
 	Route::resource('usuarios', 'UsuariosController');
+	Route::GET('perfil', 'UsuariosController@perfil')->name('usuarios.perfil');
 });
-
-//Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');

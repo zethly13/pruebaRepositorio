@@ -4,8 +4,8 @@
 <table border="1" width="1">
 <h2><a href="{{ URL::to('sub_roles/create') }}">CREAR UN SUB-ROL</a></h2>
 
-<div class="table-responsive container-fluid">  
-	<table  class="table table-condensed table-striped table-bordered">
+<div class="table-responsive container-fluid ">  
+	<table  class="table table-condensed table-striped table-bordered table-hover">
 		<thead>
 			<th class="col-lg-1">Nro</th>
         	<th class="col-lg-2">NOMBRE SUB-ROL</th>

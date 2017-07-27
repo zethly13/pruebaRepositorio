@@ -1,117 +1,124 @@
 
 @extends('layout.master')
 @section('contenido')
-
-            <div class="row">  
- {{ Form::open(array('route' =>array('usuarios.store'), 'method' => 'POST', 'class'=>'form-horizontal'), array('role'=> 'form')) }}
-<!--inicio de mi formulario-->
-
-<!--Documento de indentidad-->
-    {{ Form::label('numero_identidad_usuario','Documento de indentidad')}}
-    {{ Form::text('numero_identidad_usuario',null,array('placeholder' => 'ingrese su doc CI')) }}
-    {{ Form::label('tipo_doc_usuario','Tipo documento') }}
-    <select name="tipo_doc_usuario">
-      <option value='-1'>Seleccione</option>  
-         @foreach ($tipoDocId as $tipoDoc)
-            <option value="{{$tipoDoc->id}}">{{$tipoDoc->nombre_tipo_doc_identidad}}</option>
-         @endforeach 
-    </select>
-    {{ Form::label('expedido_usuario','Expedido en:') }}
-        <select name="expedido_usuario">
-          <option value='-1'>Seleccione</option>
-             @foreach ($ciudad as $expedido)
-               <option value="{{$expedido->id}}">{{$expedido->nombre_ciudad}}</option>
-              @endforeach 
-        </select>
-        
-                    <hr class="star-primary">
-<!--nomnre apellido y fecha-->
-    {{ Form::label('apellido_usuario','Apellidos') }}
-    {{ Form::text('apellido_usuario',null,array('placeholder' => 'ingrese apellido','class'=>'form-control')) }}
-
-    {{ Form::label('nombre_usuario','Nombres') }}
-    {{ Form::text('nombre_usuario',null,array('placeholder' => 'ingrese Nombre','class'=>'form-control')) }}
-      @if ($errors->has('name'))
+<p>todos los campos es asterisco son de manera obligatoria</p>
+<div class="panel panel-default">  
+  <div class="panel-heading "><center>FORMULARIO DE REGISTRO</center></div>
+    <div class="panel-body"> 
+    {!! Form::open(array('route' =>array('usuarios.store'), 'method' => 'POST'), array('role'=> 'form')) !!}
+      <!--inicio de mi formulario-->
+       
+        <div class="form-group col-md-4">
+          {!! Form::label('numero_identidad_usuario','* Documento de indentidad:')!!}
+          {!! Form::text('numero_identidad_usuario',null,array('placeholder' => 'ingrese su doc CI', 'class'=>'form-control')) !!}
+        </div>
+        <div class="form-group col-md-4">
+          {!! Form::label('tipo_doc_usuario','* Tipo documento:') !!}
+          {!! Form::select('tipo_doc_usuario',$tipoDocId->pluck('nombre_tipo_doc_identidad','id'),null,['class'=>'form-control'])!!}
+        </div>
+        <div class="form-group col-md-4">
+          {!! Form::label('expedido_usuario','Expedido en:') !!}
+          {!! Form::select('expedido_usuario',$ciudad->pluck('nombre_ciudad','id'),null,['class'=>'form-control'])!!}
+        </div>
+    
+        <div class="form-group">
+          <div class="col-md-2">
+            {!! Form::label('apellido_usuario','* Apellidos:') !!}
+          </div>
+          <div class="col-md-10">
+            {!! Form::text('apellido_usuario',null,array('placeholder' => 'ingrese apellido','class'=>'form-control')) !!}
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <div class="col-md-2 ">
+            {!! Form::label('nombre_usuario','* Nombres:') !!}
+          </div>
+          <div class="col-md-10">
+            {!! Form::text('nombre_usuario',null,array('placeholder' => 'ingrese Nombre','class'=>'form-control')) !!}
+                @if ($errors->has('name'))
                                    <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+          </div>
+         </div>
 
-   {{ Form::label('fecha_nac_usuario','Fecha de nacimiento') }}
-      <input name='fecha_nac_usuario' type="date" class="form-control" id="birthday" value="<?php 
-         if(isset($_SESSION["birthday_patient"])) {
-             echo $_SESSION["birthday_patient"];
-           }?>" required>
+         <div class="form-group">
+          <div class="col-md-2">
+            {!! Form::label('fecha_nac_usuario','* Fecha de nacimiento:') !!}
+          </div>
+          <div class="col-md-10">
+            <input name='fecha_nac_usuario' type="date" class="form-control" id="birthday" value="<?php 
+                   if(isset($_SESSION["birthday_patient"])) {
+                      echo $_SESSION["birthday_patient"];
+                   }?>" required>
+          </div>          
+        </div>
+        
+        <div class=" form-group col-md-4">           
+          {!! Form::label('pais_usuario','* Pais:') !!}
+          {!! Form::select('pais_usuario',$pais->pluck('nombre_pais','id'),null,['class'=>'form-control'])!!}
+        </div>
+        <div class="form-group col-md-4">
+          {!! Form::label('ciudad_usuario','* Ciudad:') !!}
+          {!! Form::select('ciudad_usuario',$ciudad->pluck('nombre_ciudad','id'),null,['class'=>'form-control'])!!}
+        </div>
+        <div class="form-group col-md-4">
+          {!! Form::label('provincia_usuario','* Provincia:') !!}
+          {!! Form::select('provincia_usuario',$provincia->pluck('nombre_provincia','id'),null,['class'=>'form-control'])!!}
+        </div>
 
+        <div class="form-group col-md-6">
+          {!! Form::label('sexo_usuario','Genero:') !!}
+           {!! Form::select('sexo_usuario',array('Femenino','Masculino'),null,['class'=>'form-control'])!!}
+           
+        </div>
+        <div class="form-group col-md-6">
+          {!! Form::label('estado_civil_usuario','Estado civil:') !!}
+          {!! Form::select('estado_civil_usuario',$estado->pluck('estado_civil','id'),null,['class'=>'form-control'])!!}
+        </div>
 
-<!--datos nacimiento-->
-  <p>datos de nacimiento</p>
-    {{ Form::label('pais_usuario','Pais:') }}
-    <select class="form-control" name="pais_usuario">
-    <option value='-1'>Seleccione</option>  
-       @foreach ($pais as $paises)
-          <option value="{{$paises->id}}">{{$paises->nombre_pais}}</option>
-        @endforeach 
-    </select>
-
-    {{ Form::label('cuidad_usuario','Ciudad:') }}
-      <select class="form-control" name="ciudad">
-      <option value='-1'>Seleccione</option>  
-
-      @foreach ($ciudad as $expedido)
-        <option value="{{$expedido->id}}">{{$expedido->nombre_ciudad}}</option>
-       @endforeach 
-    </select>
-
-     {{ Form::label('provincia_usuario','Provincia:') }}
-     <select  class="form-control" name="provincia_usuario">
-      <option value='-1'>Seleccione</option>  
-        @foreach ($provincia as $provincia)
-         <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
-        @endforeach 
-     </select>
-<!--genero y esetado civil-->
-
-
-     {{ Form::label('sexo_usuario','Genero:') }}
-    <input type="text" class= "form-control"  id="exampleInputName2" name="sexo_usuario" list="Sexo">
-    <datalist id="Sexo">
-      <option value="femenino">
-      <option value="masculino">
-    </datalist>
-
-     {{ Form::label('estado_civil_usuario','Estado civil:') }}
-      <select name="estado_civil_usuario">
-      <option value='-1'>Seleccione</option>  
-      @foreach ($estado as $estado)
-        <option value="{{$estado->id}}">{{$estado->estado_civil}}</option>
-       @endforeach 
-      </select>
+       
+        <div class="form-group">
+          <div class="col-md-3"> 
+            {{ Form::label('email_usuario','Correo electronico:') }}
+          </div>
+          <div class="col-md-9">
+            {{ Form::email('email_usuario',null,array('placeholder' => 'example@gmail.com','class'=>'form-control')) }}
+          </div>
+        </div>
 
 
+        <div class="form-group col-md-6">
+          {{ Form::label('telefono_usuario','Telefono:') }}
+          {{ Form::text('telefono_usuario',null,array('placeholder' => 'ingrese su Telefono','class'=>'form-control')) }}
+        </div>
+        <div class="form-group col-md-6">
+          {{ Form::label('celular_usuario','Celular:') }}
+          {{ Form::text('celular_usuario',null,array('placeholder' => 'ingrese su celular','class'=>'form-control')) }}
+        </div>
 
 
-     {{ Form::label('email_usuario','Correo electronico:') }}
-      {{ Form::email('email_usuario',null,array('placeholder' => 'example@gmail.com','class'=>'form-control')) }}
+        <div class="form-group">
+          <div class="col-md-2"> 
+            {{ Form::label('direcion_usuario','* Direccion:') }}
+          </div>
+          <div class="col-md-10"> 
+            {{ Form::text('direcion_usuario',null,array('placeholder' => 'ingrese direccion','class'=>'form-control')) }}
+          </div>
+        </div>
+        
 
 
-     {{ Form::label('email_usuario','Re-escribir Correo electronico:') }}
-      {{ Form::email('email_usuario',null,array('placeholder' => 'example@gmail.com','class'=>'form-control')) }}
-    
-    
-      {{ Form::label('telefono_usuario','Telefono:') }}
-      {{ Form::text('telefono_usuario',null,array('placeholder' => 'ingrese su Telefono','class'=>'form-control')) }}
-  
-      {{ Form::label('celular_usuario','Celular:') }}
-      {{ Form::text('celular_usuario',null,array('placeholder' => 'ingrese su celular','class'=>'form-control')) }}
 
-       {{ Form::label('direcion_usuario','Direccion') }}
-       {{ Form::text('direcion_usuario',null,array('placeholder' => 'ingrese direccion','class'=>'form-control')) }}
+  </div><!--cierre panel body-->
+</div><!--cierre panel default-->
 
-{{ Form::button('Crear Nuevo Usuario', array('type'=> 'submit','class'=>'btn btn-primary'))}}
-
+    {!! Form::button('Crear Nuevo Usuario', array('type'=> 'submit','class'=>'btn btn-primary'))!!}
     {{ Form::button('Crear Sub Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
 
-  {{ Form::close() }}
+ 
+ {!! Form::close() !!}
 
 @endsection

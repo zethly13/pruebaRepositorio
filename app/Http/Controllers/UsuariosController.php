@@ -135,10 +135,10 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=Usuario::findOrFail($id);
+        $user=Usuario::where('usuarios.id',$id)->get()->first();
         $user->doc_identidad = $request->numero_identidad_usuario;
         $user->login = $request->numero_identidad_usuario;
-        $user->clave = Crypt::encrypt($request->numero_identidad_usuario);
+        $user->clave = bcrypt($request->numero_identidad_usuario);
         $user->apellidos=$request->apellido_usuario;
         $user->nombres=$request->nombre_usuario;
         $user->sexo=$request->sexo_usuario;
@@ -152,8 +152,7 @@ class UsuariosController extends Controller
         $user->ciudad_expedido_doc=$request->expedido_usuario;
         $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
         $user->save();
-        return redirect()->route($this->path.'.index')->with(['mensaje' => 'Se ha registrado con exito'
-            ]);
+        return redirect()->route($this->path.'.index');
     }
 
     /**
@@ -164,8 +163,9 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $user = Usuario::findOrFail($id);
+       try {
+            $user = Usuario::where('usuarios.id',$id)->get()->first();
+            //return $user;
             $user->delete(); 
             //return redirect()->route('rols.index');
             return redirect()->route($this->path.'.index');
@@ -190,7 +190,7 @@ class UsuariosController extends Controller
             return redirect()
                 ->route('usuarios.index');
         else return redirect()
-                ->route('login')
+                ->route('usuarios.login')
                 ->withErrors([
                     'login' => 'Usuario o contraseña incorrectos'
                     ])
@@ -206,13 +206,11 @@ class UsuariosController extends Controller
         return redirect()->route('usuarios.login');
     }
 
-    
-
     public function perfil()
     {
         $usuario = auth()->user();
-        return view('usuarios.perfil', compact('usuario'));
-    }
-    
-    
+        //return 'php artisan route:list';
+        return $usuario;
+        //return view('usuarios.perfil', compact('usuario'));
+    }   
 }
