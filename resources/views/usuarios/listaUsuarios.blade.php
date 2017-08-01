@@ -19,7 +19,6 @@
 	<td class="text-center">{{ $user->id }}</td>
 	<td>{{ $user->nombres.' '.$user->apellidos }}</td>
 	<td>{{ $user->doc_identidad }}</td>
-	<td>{{ $user->id }} </td>
 	<td><a href="{{ route('usuarios.edit', $user->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
 	<td>{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
         {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
