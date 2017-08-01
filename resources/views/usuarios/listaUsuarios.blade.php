@@ -7,23 +7,22 @@
 <div class="table-responsive container-fluid">  
 	<table  class="table table-condensed table-striped table-bordered">
 		<thead>
-			<th class="col-lg-1">Nro</th>
-        	<th class="col-lg-2">NOMBRE USUARIO</th>
-        	<th class="col-lg-2">DOC IDENTIDAD</th>
-        	<th class="col-lg-2">prueba</th>
-        	<th class="col-lg-2">MODIFICAR</th>
-        	<th class="col-lg-1">ELIMINAR</th>
+			<th class="text-center">Nro</th>
+        	<th class="text-center">NOMBRE USUARIO</th>
+        	<th class="text-center">DOC IDENTIDAD</th>
+        	<th class="text-center">MODIFICAR</th>
+        	<th class="text-center">ELIMINAR</th>
 		</thead>
 
 @foreach ($usuario as $user)
 <tr>
-	<td>{{ $user->id }}</td>
+	<td class="text-center">{{ $user->id }}</td>
 	<td>{{ $user->nombres.' '.$user->apellidos }}</td>
 	<td>{{ $user->doc_identidad }}</td>
 	<td>{{ $user->id }} </td>
-	<td><a href="{{ route('usuarios.edit', $user->id) }}">Modificar</a></td>
+	<td><a href="{{ route('usuarios.edit', $user->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
 	<td>{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
-                        <input type="submit"  value ="ELIMINAR" >
+        {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
                         {!! Form::close() !!}</td>
 </tr>
 @endforeach
