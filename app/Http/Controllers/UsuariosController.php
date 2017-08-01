@@ -63,7 +63,11 @@ class UsuariosController extends Controller
         return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado'));
     }
 
+<<<<<<< HEAD
  public function getCiudades($id){
+=======
+    public function getCiudades($id){
+>>>>>>> origin/master
 
             $response = null;
             $ciudad = Pais::find($id)->ciudades->pluck('nombre_ciudad','id');
@@ -76,6 +80,10 @@ class UsuariosController extends Controller
             $provincias = Ciudad::find($id)->provincias->pluck('nombre_provincia','id');
             return $response = Response::json($provincias);    
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     /**
      * Store a newly created resource in storage.
      *
