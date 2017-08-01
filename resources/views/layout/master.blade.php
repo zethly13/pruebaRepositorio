@@ -36,7 +36,7 @@
            @if (Auth::guest())
                 <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li>  
            @else
-                <li  role="menu">
+                <li  class="nav navbar-inverse" role="menu">
                   <ul>
                     <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
 

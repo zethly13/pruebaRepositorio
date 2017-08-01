@@ -24,4 +24,5 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::resource('sub_roles', 'Sub_RolesController');
 	Route::resource('usuarios', 'UsuariosController');
 	Route::GET('perfil', 'UsuariosController@perfil')->name('usuarios.perfil');
+Route::Get('/acceso','AccesoController@validar');
 });

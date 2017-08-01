@@ -22,16 +22,16 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class UsuariosController extends Controller
 {
     use AuthenticatesUsers;
+    
+    private $path = 'usuarios';
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    private $path = 'usuarios';
-    
     public function __construct()
     {
+
         $this->middleware('autentificado', [
             'except' => ['login', 'logear']
             ]);
