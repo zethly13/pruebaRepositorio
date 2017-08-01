@@ -36,7 +36,7 @@
            @if (Auth::guest())
                 <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li>  
            @else
-                <li  class="nav navbar-inverse" role="menu">
+                <li  role="menu">
                   <ul>
                     <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
 
@@ -85,7 +85,9 @@
 </footer>
 
 <!--scripts-->
-<script src="/js/bootstrap.js"></script>
 <script src="/js/jquery.js"></script>
+<script src="/js/dinamico.js"></script>
+<script src="/js/bootstrap.js"></script>
+
 </body>
 </html>

@@ -24,5 +24,10 @@ class Ciudad extends Model
 	{
 		return $this->hasMany('App\Provincia', 'id_ciudad','id');//con que se relaciona
 	}
+
+	public static function ciudades($id){
+
+    	return Ciudad::where('id_pais','=','$id')->get();
+    }
     
 }
