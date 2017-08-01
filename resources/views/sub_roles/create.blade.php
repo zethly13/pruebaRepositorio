@@ -23,6 +23,7 @@
 		{{ Form::text('desc_sub_rol',null, array('placeholder'=> 'Introduce  la Descripcion del nuevo Sub-Rol', 'class' => 'form-control')) }}
 		</br>
 		{!! Form::label('LISTA DE PERMISOS A ASIGNAR','LISTA DE PERMISOS A ASIGNAR') !!}
+		<h2><a href="{{ URL::to('sub_roles') }}" type="button" class="btn btn-primary">listar sub rol</a></h2>
  		</BR>       
 		{{ Form::button('Crear Sub Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
 	{{ Form::close() }}
