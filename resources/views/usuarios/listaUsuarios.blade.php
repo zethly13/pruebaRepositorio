@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('contenido')
-<h1>Lista de Usuarios</h1>
+<h1><center>LISTA DE USUARIOS</center></h1>
 <table border="1" width="1">
-<h2><a href="{{ URL::to('usuarios/create') }}">CREAR UN USUARIO</a></h2>
+<h3><a href="{{ URL::to('usuarios/create') }}">CREAR UN USUARIO</a></h3>
 
 <div class="table-responsive container-fluid">  
 	<table  class="table table-condensed table-striped table-bordered">
@@ -19,9 +19,11 @@
 	<td class="text-center">{{ $user->id }}</td>
 	<td>{{ $user->nombres.' '.$user->apellidos }}</td>
 	<td>{{ $user->doc_identidad }}</td>
-	<td><a href="{{ route('usuarios.edit', $user->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
-	<td>{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
-        {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
+	<td class="text-center"><a href="{{ route('usuarios.edit', $user->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
+	
+	<td class="text-center">{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
+        
+          {{ Form::button(' Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
                         {!! Form::close() !!}</td>
 </tr>
 @endforeach

@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('contenido')
-<h1>Lista de Sub-Roles</h1>
+<h1><center>LISTA DE SUB ROLES</center></h1>
 <table border="1" width="1">
-<h2><a href="{{ URL::to('sub_roles/create') }}">CREAR UN SUB-ROL</a></h2>
+<h3><a href="{{ URL::to('sub_roles/create') }}">CREAR UN SUB-ROL</a></h3>
 
 <div class="table-responsive container-fluid ">  
 	<table  class="table table-condensed table-striped table-bordered table-hover">

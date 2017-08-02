@@ -1,22 +1,23 @@
 
 @extends('layout.master')
-
 @section('contenido') 
  <div class="panel-heading "><center>EDICION FORMULARIO DE REGISTRO</center></div>
     <div class="panel-body">
-      {{ Form::open(array('route' =>array('usuarios.update', $user->id), 'method' => 'POST'), array('role'=> 'form')) }}
+   {{ Form::open(array('route' =>array('usuarios.update', $user->id), 'method' => 'POST'), array('role'=> 'form')) }}
    {{ method_field('PUT') }}
-        
-      {{ Form::label('numero_identidad_usuario','Documento de indentidad:')}}
-      {{ Form::text('numero_identidad_usuario',$user->doc_identidad, array('placeholder'=> $user->doc_identidad, 'class' => 'form-control')) }}
 
-      {{ Form::label('tipo_doc_usuario','Tipo documento:') }}
-      <select name="tipo_doc_usuario">
-        <option value='{{ $user->id_tipo_doc_identidad }}'>{{ $user->nombre_tipo_doc_identidad }}</option>  
+         {{ Form::label('numero_identidad_usuario','Documento de indentidad:')}}
+         {{ Form::text('numero_identidad_usuario',$user->doc_identidad, array('placeholder'=> $user->doc_identidad, 'class' => 'form-control')) }}
+
+        {!! Form::label('tipo_doc_usuario','Tipo documento:') !!}
+      
+        
+         <select name="tipo_doc_usuario">
+              <option value='{{ $user->id_tipo_doc_identidad }}'>{{ $user->nombre_tipo_doc_identidad }}</option>  
                 @foreach ($tipoDocId as $tipoDoc)
               <option value="{{$tipoDoc->id}}">{{$tipoDoc->nombre_tipo_doc_identidad}}</option>
                 @endforeach 
-      </select>
+         </select>
 
          {!! Form::label('expedido_usuario','Expedido en:') !!}
          <select name="expedido_usuario">
@@ -34,17 +35,17 @@
                 @if ($errors->has('name'))
                     <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
                 @endif
+         
          {!! Form::label('fecha_nac_usuario','Fecha de nacimiento:') !!}
          {!! form::text('fecha_nac_usuario',$user->fecha_nac,array('placeholder'=>$user->fecha_nac, 'class'=>'form-control')) !!}
   
-        {!! Form::label('pais_usuario','Pais:') !!}
+         {!! Form::label('pais_usuario','Pais:') !!}
          <select name="pais_usuario">
               <option value='-1'>Seleccione</option>  
                 @foreach ($pais as $paises)
               <option value="{{$paises->id}}">{{$paises->nombre_pais}}</option>
                 @endforeach 
          </select>
-
          {!! Form::label('ciudad_usuario','Ciudad:') !!}
          <select name="ciudad_usuario">
               <option value='-1'>Seleccione</option>  
@@ -52,7 +53,6 @@
          <option value="{{$expedido->id}}">{{$expedido->nombre_ciudad}}</option>
                 @endforeach 
          </select>
-
          {!! Form::label('provincia_usuario','Provincia:') !!}
          <select name="provincia_usuario">
               <option value='{{ $user->id_provincia }}'>{{ $user->nombre_provincia }}</option>  
@@ -60,8 +60,7 @@
               <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
                 @endforeach 
         </select>
-
-         {!! Form::label('sexo_usuario','Genero:') !!}
+        {!! Form::label('sexo_usuario','Genero:') !!}
         <input type="text" class= "form-control"  id="sexoUsuario"  name="sexo_usuario" list="Sexo" value="{{ $user->sexo }}">
           <datalist id="Sexo">
             <option value="Femenino">
@@ -74,6 +73,7 @@
               <option value="{{$estado->id}}">{{$estado->estado_civil}}</option>
                 @endforeach 
         </select>
+        
         {{ Form::label('email_usuario','Correo electronico:') }}
         {{ form::Email('email_usuario',null,['class'=>'form-control']) }}
         
@@ -84,10 +84,11 @@
         {{ form::text('celular_usuario',null,['class'=>'form-control']) }}
         
         {{ Form::label('direcion_usuario','Direccion:') }}
-        {{ form::text('direcion_usuario',null,['class'=>'form-control'])
+        {{ form::text('direcion_usuario',null,['class'=>'form-control']) }}
+        
 
   {{ Form::button('editar Usuario', array('type'=> 'submit')) }}
   {{ Form::close() }}
-</div><!--cierre panel body-->
+ </div><!--cierre panel body-->
 </div><!--cierre panel default-->
 @endsection
