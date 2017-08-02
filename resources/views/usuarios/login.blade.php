@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.inicio')
 @section('contenido')
 <div class="panel panel-default">  
   <div class="panel-heading "><center>REGISTRO</center></div>
