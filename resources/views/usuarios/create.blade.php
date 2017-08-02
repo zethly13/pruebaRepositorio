@@ -20,20 +20,15 @@
           {!! Form::label('expedido_usuario','Expedido en:') !!}
           {!! Form::select('expedido_usuario',$ciudad->pluck('nombre_ciudad','id'),null,['placeholder' => 'Seleccione','class'=>'form-control'])!!}
         </div>
-  
-
-    
-        <div class="form-group">
-          <div class="col-md-4">
+      
+          <div class="col-md-2">
             {!! Form::label('apellido_usuario','* Apellidos:') !!}
           </div>
           <div class="col-md-10">
             {!! Form::text('apellido_usuario',null,array('placeholder' => 'Ingrese apellido','class'=>'form-control')) !!}
           </div>
-        </div>
-       
-        <div class="form-group">
-          <div class="col-md-4 ">
+    
+          <div class="col-md-2 ">
             {!! Form::label('nombre_usuario','* Nombres:') !!}
           </div>
           <div class="col-md-10">
@@ -44,7 +39,7 @@
                                     </span>
                                 @endif
           </div>
-         </div>
+    
 
          <div class="form-group">
           <div class="col-md-4">
