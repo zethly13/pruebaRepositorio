@@ -28,6 +28,7 @@
 
 <!--Cuerpo-->
 <!--menu navegacion-->
+<div class="cuerpo">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -48,10 +49,9 @@
     </div>
   </div>
 </nav>
-
  <!--contenido-->
-<div class="container">
-     
+
+<div class="container">  
     <!--seccion a cambiar-->
   <section>
     <div>
@@ -59,15 +59,15 @@
     </div>
   </section>
 </div>
+
 <!--pie de pagina-->
 <footer class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <p>facultad de Ciencias Económicas</p>
-        <p>Direccion calle Calama Este - Edificio Prototipo </p>
-        <p>Fono: 591-4-4540261 Correo Electrónico: info@fce.umss.edu.bo Cochabamba - Bolivia</p>
+        <p>Direccion calle Calama Este - Edificio Prototipo Fono: 591-4-4540261 Correo Electrónico: info@fce.umss.edu.bo Cochabamba - Bolivia</p>
     </div>
 </footer>
-
+</div>
 <!--scripts-->
 <script src="/js/jquery.js"></script>
 <script src="/js/dinamico.js"></script>
