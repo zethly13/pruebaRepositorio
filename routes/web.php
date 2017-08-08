@@ -8,12 +8,7 @@
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
-*/
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
+|ss
 */
 Route::any('/','UsuariosController@login');
 Route::any('/login','UsuariosController@login')->name('usuarios.login');
@@ -27,6 +22,8 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::resource('roles', 'RolesController');
 	Route::resource('sub_roles', 'Sub_RolesController');
 	Route::resource('usuarios', 'UsuariosController');
-	Route::GET('perfil', 'UsuariosController@perfil')->name('usuarios.perfil');
-Route::Get('/acceso','AccesoController@validar');
+	Route::GET('usuario/perfil', 'UsuariosController@perfil')->name('usuarios.perfil');
+	Route::Get('acceso','AccesoController@validar');
+	Route::Get('acceso/{id}','AccesoController@validarSubAccesos')->name('accesos.listaSubAcceso');
+	Route::Get('permisos','AccesoController@listaSubAccesos');
 });

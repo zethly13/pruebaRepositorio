@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends User
 {
-	
+
     protected $table = 'usuarios';
 
 	protected $fillable = ['doc_identidad', 'login', 'clave', 'apellidos', 'nombres', 'sexo', 'fecha_nac', 'usuario_activo', 'inscribir_adm', 'estilo', 'subir_foto', 'id_estado_civil', 'id_provincia', 'id_ciudad', 'id_tipo_doc_identidad']; 

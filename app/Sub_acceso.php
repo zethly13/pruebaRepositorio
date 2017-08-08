@@ -14,4 +14,8 @@ class Sub_acceso extends Model
 	{
 		return $this->belongsTo('App\Acceso', 'id_acceso', 'id');
 	}
+	public function perteneceAcceso(int $id)
+	{
+		return Sub_acceso::where('id_acceso','$id')->get();
+	}
 }
