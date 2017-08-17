@@ -14,12 +14,8 @@ class Acceso_sub_rol extends Model
 	{
 		return $this->belongsTo('App\Sub_rol', 'id_sub_rol','id');
 	}
-
-	 public function sub_accesos()
+	public function sub_accesos()
 	{
 		return $this->belongsTo('App\Sub_acceso', 'id_sub_acceso','id');
 	}
-	
-
-
 }
