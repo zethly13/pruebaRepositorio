@@ -22,6 +22,7 @@ class AccesoController extends Controller
 	public function validarSubAccesos($id)
 	{
 		$subAcceso=Sub_acceso::where('id_acceso','=',$id)->get();
+		//$subAcceso=Sub_acceso::perteneceAcceso($id);
 		return $subAcceso;	
 	} 
 	public function listaSubAccesos()

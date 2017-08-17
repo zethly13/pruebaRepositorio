@@ -15,8 +15,5 @@ class Acceso extends Model
 		return $this->hasMany('App\Sub_acceso', 'id_acceso', 'id');
 	}
 
-	public function acceso_sub_roles()
-	{
-		return $this->hasMany('App\Acceso_sub_rol', 'id_acceso' ,'id');
-	}
+	
 }

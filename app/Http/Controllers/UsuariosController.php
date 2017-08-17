@@ -27,7 +27,7 @@ class UsuariosController extends Controller
     private $path = 'usuarios';
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function __construct()
@@ -210,8 +210,7 @@ class UsuariosController extends Controller
                     ])
                 ->withInput([
                     'username' => $request->input('username'),
-                    ]);                
-       
+                    ]);                  
     }
 
     public function logout()

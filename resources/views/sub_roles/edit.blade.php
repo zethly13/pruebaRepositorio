@@ -17,6 +17,9 @@
 		@endforeach
 		</select>
 		</br>
+		@include('accesos.sub_accesos_permitidos');
+		</br>
+
 		{{ Form::button('editar sub Rol', array('type'=> 'submit')) }}
 	{{ Form::close() }}
 

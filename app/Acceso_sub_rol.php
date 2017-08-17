@@ -8,16 +8,16 @@ class Acceso_sub_rol extends Model
 {
     protected $table = 'acceso_sub_roles';
 
-    protected $fillable = ['id_sub_rol', 'id_acceso'];
+    protected $fillable = ['id_sub_rol', 'id_sub_acceso'];
 
     public function sub_roles()
 	{
 		return $this->belongsTo('App\Sub_rol', 'id_sub_rol','id');
 	}
 
-	 public function accesos()
+	 public function sub_accesos()
 	{
-		return $this->belongsTo('App\Acceso', 'id_acceso','id');
+		return $this->belongsTo('App\Sub_acceso', 'id_sub_acceso','id');
 	}
 	
 

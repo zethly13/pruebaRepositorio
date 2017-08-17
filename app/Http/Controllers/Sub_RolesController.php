@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use DB;
 use App\Sub_rol;
 use App\Rol;
+use App\Sub_acceso;
+use App\Acceso_sub_rol;
+
 
 class Sub_RolesController extends Controller
 {
@@ -34,8 +37,9 @@ class Sub_RolesController extends Controller
     public function create()
     {
         $rol= Rol::all();
+        $subAcceso=Sub_acceso::all();
         //return $rol;
-        return view($this->path.'.create',compact('rol'));
+        return view($this->path.'.create',compact('rol','subAcceso'));
     }
 
     /**
@@ -46,6 +50,7 @@ class Sub_RolesController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
         try {
                $subRol = new Sub_rol();
                /*$this->validate($request,[
@@ -57,11 +62,21 @@ class Sub_RolesController extends Controller
                $subRol->descripcion_sub_rol = $request->desc_sub_rol;
                $subRol->id_rol=$request->rol_seleccionado;
                $subRol->save();
+               foreach ($request->permisos as $id_sub_acceso) 
+               {
+                    $subAcceso=new Acceso_sub_rol();
+                    $subAcceso->id_sub_rol=$subRol->id;
+                    $subAcceso->id_sub_acceso=$id_sub_acceso;
+              
+                    $subAcceso->save();
+               }
+                   # code...
+
                // return $subRol;
                return redirect()->route($this->path.'.index');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
-           } 
+           }
     }
 
     /**
@@ -86,8 +101,11 @@ class Sub_RolesController extends Controller
         //$sRol = Sub_rol::findOrFail($id);
         $sRol=Sub_rol::join('roles','roles.id','=','sub_roles.id_rol')->select('sub_roles.id','sub_roles.nombre_sub_rol','sub_roles.descripcion_sub_rol', 'sub_roles.id_rol','roles.nombre_rol')->where('sub_roles.id','=',$id)->get()->first();
         $rol=Rol::all();
-        //return $sRol;
-        return view($this->path.'.edit', compact('sRol','rol'));
+        $subAcceso=Sub_acceso::all();
+        //$subAccesoDefinidos=Acceso_sub_rol::join('acceso_sub_roles','acceso_sub_roles.id_sub_acceso','=','sub_accesos.id')->join('acceso_sub_roles','acceso_sub_roles.id_sub_rol','=','sub_roles.id')->select('sub_roles.nombre_sub_rol')->where('acceso_sub_roles.id_sub_rol','=',$id)->get();
+        $subAccesoDefinidos=Acceso_sub_rol::join('sub_roles','sub_roles.id','=','acceso_sub_roles.id')->select('acceso_sub_roles.id_sub_acceso')->where('acceso_sub_roles.id_sub_rol','=',$id)->get();
+        //return $subAccesoDefinidos;
+        return view($this->path.'.edit', compact('sRol','rol','subAcceso','subAccesoDefinidos'));
     }
 
     /**
