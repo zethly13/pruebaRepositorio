@@ -62,17 +62,18 @@ class Sub_RolesController extends Controller
                $subRol->descripcion_sub_rol = $request->desc_sub_rol;
                $subRol->id_rol=$request->rol_seleccionado;
                $subRol->save();
-               foreach ($request->permisos as $id_sub_acceso) 
-               {
+               $sub_accesos=$request->permiso;
+               if(is_array($sub_accesos))
+                {
+                    foreach ($sub_accesos as $id_sub_acceso) 
+                    {
+                     
                     $subAcceso=new Acceso_sub_rol();
-                    $subAcceso->id_sub_rol=$subRol->id;
-                    $subAcceso->id_sub_acceso=$id_sub_acceso;
-              
+                    $subAcceso->id_sub_rol =    $subRol->id;
+                    $subAcceso->id_sub_acceso = $id_sub_acceso;
                     $subAcceso->save();
+                    }
                }
-                   # code...
-
-               // return $subRol;
                return redirect()->route($this->path.'.index');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
