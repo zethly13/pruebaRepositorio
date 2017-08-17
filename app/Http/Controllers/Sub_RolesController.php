@@ -49,7 +49,7 @@ class Sub_RolesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         //return $request;
         try {
                $subRol = new Sub_rol();
