@@ -32,4 +32,4 @@
 	</div><!--cierre panel body-->
 </div><!--cierre panel default-->
 
-@endsection 
+@endsection
