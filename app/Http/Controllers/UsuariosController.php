@@ -17,6 +17,7 @@ use App\Estado_civil;
 use App\Usuario;
 use App\Usuario_direccion;
 use App\usuario_email;
+use App\Usuario_telefono;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Response;
 
@@ -27,7 +28,7 @@ class UsuariosController extends Controller
     private $path = 'usuarios';
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function __construct()
@@ -41,7 +42,7 @@ class UsuariosController extends Controller
 
     public function index()
     {
-        $usuario=Usuario::all();
+        $usuario=Usuario::paginate();
         //return $user;
         return view($this->path.'.listaUsuarios', compact('usuario'));
     }
@@ -210,7 +211,7 @@ class UsuariosController extends Controller
                     ])
                 ->withInput([
                     'username' => $request->input('username'),
-                    ]);                  
+                    ]);                
     }
 
     public function logout()
@@ -221,9 +222,26 @@ class UsuariosController extends Controller
 
     public function perfil()
     {
-        $usuario = auth()->user();
-        //return 'php artisan route:list';
-        return $usuario;
-        //return view('usuarios.perfil', compact('usuario'));
-    }   
+       //$tipoDoc = auth()->user()->id_tipo_doc_identidad;
+        //$usuarioTipo = Tipo_doc_identidad::where('id','=',auth()->user()->id_tipo_doc_identidad)->select('nombre_tipo_doc_identidad')->get()->first();
+      
+       $usuario=auth()->user();
+       $usuarioInfo=Usuario::join('tipo_doc_identidades','tipo_doc_identidades.id','=','usuarios.id_tipo_doc_identidad')->join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->join('provincias','provincias.id','=','usuarios.id_provincia')->join('ciudades','ciudades.id','=','usuarios.ciudad_expedido_doc')->select('tipo_doc_identidades.nombre_tipo_doc_identidad','estado_civiles.estado_civil','provincias.nombre_provincia','ciudades.nombre_ciudad')->where('usuarios.id','=',auth()->user()->id)->get()->first();
+
+       $usuarioPais=Ciudad::join('paises','paises.id','=','ciudades.id_pais')->select('paises.nombre_pais')->where('ciudades.id','=',auth()->user()->ciudad_expedido_doc)->get()->first();
+
+       $usuarioEmail=Usuario_email::join('tipo_emails','tipo_emails.id','=','usuario_emails.id_tipo_email')->select('tipo_emails.nombre_tipo_email','usuario_emails.email')->where('usuario_emails.id_usuario','=',auth()->user()->id)->get()->first();
+       
+       //$usuarioEmail=2;
+       $usuarioTelf=Usuario_telefono::join('tipo_telefonos','tipo_telefonos.id','=','usuario_telefonos.id_tipo_telefono')->select('tipo_telefonos.nombre_tipo_telefono', 'usuario_telefonos.numero_telefono')->where('usuario_telefonos.id_usuario','=',auth()->user()->id)->get()->first();
+
+       $usuarioDir=Usuario_direccion::join('tipo_direcciones','tipo_direcciones.id','=','Usuario_direcciones.id_tipo_direccion')->select('tipo_direcciones.nombre_tipo_direccion','Usuario_direcciones.nombre_direccion')->where('Usuario_direcciones.id_usuario','=',auth()->user()->id)->get()->first();
+
+        //$usuario=Usuario::where('id','=',auth()->user());
+        //return $usuarioDir;
+      return view('usuarios.perfil', compact('usuario','usuarioInfo','usuarioPais','usuarioEmail','usuarioTelf','usuarioDir'));
+       
+        //return view('usuarios.perfil')->with('usuario',$usuario);
+    }
+
 }
