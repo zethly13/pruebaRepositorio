@@ -4,7 +4,8 @@
 <table border="1" width="1">
 <h3><a href="{{ URL::to('usuarios/create') }}">CREAR UN USUARIO</a></h3>
 
-<div class="table-responsive container-fluid">  
+<div class="table-responsive container-fluid">
+ <center>{{ $usuario->links() }}</center>
 	<table  class="table table-condensed table-striped table-bordered">
 		<thead>
 			<th class="text-center">Nro</th>
@@ -23,6 +24,7 @@
 	
 	<td class="text-center">{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
         
+
           {{ Form::button(' Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
                         {!! Form::close() !!}</td>
 </tr>
@@ -30,4 +32,5 @@
 </table>
 </div>
 @endsection
+
 {{-- URL::to('/rols/'.$roles->id.'/edit') --}}
