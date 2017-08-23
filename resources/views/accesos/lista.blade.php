@@ -1,19 +1,8 @@
-@extends('layout.master')
-@section('contenido')
-<table border=1>
-@foreach($acceso as $accesos)
-<tr >
-	<td>{{ $accesos->id }}</td>
-	<td>{{ $accesos->nombre_acceso}}</td>
-	<td>{{ $accesos->sub_accesos}}</td>
-	<td><a href="{{ route($accesos->ruta_acceso) }}">{{ $accesos->nombre_acceso}}</a></td>
-	<td><a href="{{ route('accesos.listaSubAcceso', $accesos->id) }}">prueba</a></td>
-	<td>{{ route('accesos.listaSubAcceso', $accesos->id) }}</td>
-	
-	
-</tr>
+{!! Form::open(array('route' => array('usuarios.store'), 'method' =>'POST'), array('role'=>'form')) !!}
+	{!! Form::label('ci','Documento de Identidad') !!}
+	{!! Form::text('ci',@yield('ci'),array('placeholder'=>'Ingrese Doc de Identidad','class'=>'form-control')) !!}
 
-@endforeach
-</table>
-
-@endsection
+	{!! Form::label('nombre','Nombre de Usuario') !!}
+	{!! Form::text('nombre',@yield('nombre'),array('placeholder'=>'Nombre de Usuario','class'=>'form-control')) !!}<br>
+	{!! Form::button('Buscar', array('type'=> 'submit','class'=>'btn btn-primary'))!!}
+{!! Form::close() !!}
