@@ -82,5 +82,38 @@ class Usuario extends User
 	{
 		return $this->clave;
 	}
+	//Buscador de Usuario
+	public function scopeBuscador($query,$nombreUsuario)
+	{
+		return $query->where('nombres','like','%'.$nombreUsuario.'%')
+						->orwhere('apellidos','like','%'.$nombreUsuario.'%')
+						->orwhere('doc_identidad','like','%'.$nombreUsuario.'%');	
+	}
+	public function scopeBuscador2($query,$ci,$nombreUsuario,$apellido)
+	{
+		if($ci!=null && $nombreUsuario!=null && $apellido!=null)
+		{		
+			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['apellidos','like','%'.$apellido.'%'],['doc_identidad','=',$ci]]);
+		}elseif ($ci==null) {
+			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['apellidos','like','%'.$apellido.'%']]);
+		}elseif ($nombreUsuario==null) {
+			$resultado=$query->where([['apellidos','like','%'.$apellido.'%'],['doc_identidad','=',$ci]]);
+		}elseif ($apellido==null) {
+			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['doc_identidad','=',$ci]]);
+		}elseif($ci!=null && $nombreUsuario!=null){
+			$resultado=$query->where('apellidos','like','%'.$apellido.'%');
+		}elseif($ci!=null && $apellido!=null){
+			$resultado=$query->where('nombres','like','%'.$nombreUsuario.'%');
+
+		}elseif($nombreUsuario!=null && $apellido!=null)
+			$resultado=$query->where('doc_identidad','=',$ci);
+
+		return $resultado;
+	}
+
+	public function getNombreCompletoAttribute()
+	{
+		return $this->nombres." ".$this->apellidos;
+	}
 
 }
