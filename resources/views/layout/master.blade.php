@@ -39,6 +39,7 @@
                 <li  role="menu">
                   <ul>
                     <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
+                    <li>{{ Auth::user()->nombre_completo }}</li>
 
                     <li><a href="{{ route('usuarios.logout') }}">salir</a></li>
                   </ul>
