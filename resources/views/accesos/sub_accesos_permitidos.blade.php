@@ -16,6 +16,7 @@
 	{!! $input !!}
 	</td>
 	</tr>
+	tatii estuvo aqui
 	@endforeach
 	</tbody>
 	</table>
