@@ -27,7 +27,9 @@
 				Unidad: {{ $permisos->unidad->nombre_unidad	 }}<br>
 				Funcion: {{ $permisos->funcion->nombre_funcion	 }}<br>
 				Periodo: desde {{ $permisos->fecha_inicio	 }} hasta {{ $permisos->fecha_fin	 }} <br>
-				Activo: {{ $permisos->activo	 }}</td>
+				Activo: {{ $permisos->activo	 }}
+				<td><a href="{{ route('accesos.nuevaAsignacion', $permisos->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
+				</td>
 				@endif
 				</tr>
 				</table>

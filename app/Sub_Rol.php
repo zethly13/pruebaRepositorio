@@ -26,4 +26,10 @@ class Sub_rol extends Model
 		return $this->hasMany('App\Acceso_sub_rol', 'id_sub_rol', 'id');
 	}
 
+	//Devolviendo Roles-SubRoles
+	public function getRolSubRolAttribute()
+	{
+		return $this->rol->nombre_rol."	-->  ".$this->nombre_sub_rol;
+	}
+
 }

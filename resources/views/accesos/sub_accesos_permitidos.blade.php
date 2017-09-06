@@ -5,7 +5,7 @@
 	<td>{{ $permisos->acceso->nombre_acceso }}</td>
 	<td>{{ $permisos->nombre_sub_acceso}}</td>
 	@foreach($subAccesoDefinidos as $existe)
-		{{ $existe ->id_sub_acceso }}
+		{{ $existe ->id_sub_acceso }}prueba
 	@endforeach
 </tr>
 

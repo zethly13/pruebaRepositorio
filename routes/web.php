@@ -25,6 +25,7 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::GET('usuario/perfil', 'UsuariosController@perfil')->name('usuarios.perfil');
 	Route::Get('usuario/acceso','AccesoController@index')->name('accesos.index');
 	Route::Get('usuario/acceso/{id}','AccesoController@nuevaAsignacion')->name('accesos.nuevaAsignacion');
+	Route::Get('usuario/acceso/{id}/validar','AccesoController@validarNuevaAsignacion')->name('accesos.validarNuevaAsignacion');
 	//Route::Get('usuario/acceso/{id}','AccesoController@validarSubAccesos')->name('accesos.listaSubAcceso');
 	Route::Get('usuario/permisos','AccesoController@listaSubAccesos');
 });

@@ -103,7 +103,6 @@ class Sub_RolesController extends Controller
         $sRol=Sub_rol::join('roles','roles.id','=','sub_roles.id_rol')->select('sub_roles.id','sub_roles.nombre_sub_rol','sub_roles.descripcion_sub_rol', 'sub_roles.id_rol','roles.nombre_rol')->where('sub_roles.id','=',$id)->get()->first();
         $rol=Rol::all();
         $subAcceso=Sub_acceso::all();
-        //$subAccesoDefinidos=Acceso_sub_rol::join('acceso_sub_roles','acceso_sub_roles.id_sub_acceso','=','sub_accesos.id')->join('acceso_sub_roles','acceso_sub_roles.id_sub_rol','=','sub_roles.id')->select('sub_roles.nombre_sub_rol')->where('acceso_sub_roles.id_sub_rol','=',$id)->get();
         $subAccesoDefinidos=Sub_rol::join('acceso_sub_roles','acceso_sub_roles.id_sub_rol','=','sub_roles.id')->select('acceso_sub_roles.id_sub_acceso')->where('sub_roles.id','=',$id)->get();
         //return $subAccesoDefinidos;
         return view($this->path.'.edit', compact('sRol','rol','subAcceso','subAccesoDefinidos'));
