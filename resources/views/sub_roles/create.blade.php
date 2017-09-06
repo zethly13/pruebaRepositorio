@@ -24,7 +24,7 @@
 		</br>
 		{!! Form::label('LISTA DE PERMISOS A ASIGNAR','LISTA DE PERMISOS A ASIGNAR') !!}
 		<h2><a href="{{ URL::to('sub_roles') }}" type="button" class="btn btn-primary">listar sub rol</a></h2>
-		@include('accesos.prueba');
+		@include('accesos.prueba')
  		</BR>       
 		{{ Form::button('Crear Sub Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
  		</BR>       
