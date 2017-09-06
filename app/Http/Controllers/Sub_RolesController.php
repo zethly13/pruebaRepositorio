@@ -9,6 +9,7 @@ use App\Sub_rol;
 use App\Rol;
 use App\Sub_acceso;
 use App\Acceso_sub_rol;
+use App\Acceso;
 
 
 class Sub_RolesController extends Controller
@@ -38,8 +39,9 @@ class Sub_RolesController extends Controller
     {
         $rol= Rol::all();
         $subAcceso=Sub_acceso::all();
+        $acceso = Acceso::all();
         //return $rol;
-        return view($this->path.'.create',compact('rol','subAcceso'));
+        return view($this->path.'.create',compact('rol','subAcceso','acceso'));
     }
 
     /**
