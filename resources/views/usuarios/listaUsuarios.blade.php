@@ -1,9 +1,9 @@
 @extends('layout.master')
 @section('contenido')
 <h1><center>LISTA DE USUARIOS</center></h1>
-<table border="1" width="1">
 <h3><a href="{{ URL::to('usuarios/create') }}">CREAR UN USUARIO</a></h3>
-
+<div class="panel panel-default">  
+<div class="panel-heading text-center">LISTA DE USUARIOS</div>
 <!--BUSCADOR DE USUARIO-->
 {!! Form::open(['route' => 'usuarios.index','method' =>'GET','class'=>'navbar-form pull-rigth']) !!}
 	<div class="input-group">
@@ -42,6 +42,8 @@
 @endforeach
 </table>
 </div>
+</div><!--cierre panel body-->
+</div><!--cierre panel default-->
 @endsection
 
 {{-- URL::to('/rols/'.$roles->id.'/edit') --}}
