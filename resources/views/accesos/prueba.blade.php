@@ -1,26 +1,27 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
 @foreach($acceso as $accesos)
-<tr class="info">
-<th>{{ $accesos->nombre_acceso }}</th>
-<th class="info"></th>
-@foreach($subAcceso as $subAccesos)
-<tr >
-	<!--<td>{{ $subAccesos->id }}</td>-->
-	@if($subAccesos->acceso->id==$accesos->id)
-	<td>{{ $subAccesos->nombre_sub_acceso }}</td>
+	<tr class="info">
+	<th>{{ $accesos->nombre_acceso }}</th>
+	<th class="info"></th>
+	@foreach($subAcceso as $subAccesos)
+		<tr >
+		<!--<td>{{ $subAccesos->id }}</td>-->
+		@if($subAccesos->acceso->id==$accesos->id)
+			<td>{{ $subAccesos->nombre_sub_acceso }}</td>
 
-	@if($subAccesos->acceso->nombre_acceso=='Menu usuario')
-	{{--<td>{{ Form::checkbox('subAcceso[]',$subAccesos->id,true)}}</td>--}}
-	<td><input name="permiso[]" type="checkbox" checked = "checked" value="{{ $subAccesos->id }}"</td>
+			@if($subAccesos->acceso->nombre_acceso=='Menu usuario')
+				{{--<td>{{ Form::checkbox('subAcceso[]',$subAccesos->id,true)}}</td>--}}
+				<td><input name="permiso[]" type="checkbox" checked = "checked" value="{{ $subAccesos->id }}"</td>
 	 
-	@else
-	<td>{{ Form::checkbox('subAcceso',$subAccesos->id,null) }}</td>
-	@endif
+			@else
+				<!--td>{{-- Form::checkbox('subAcceso',$subAccesos->id,null) --}}</td-->
+				<td><input name="permiso[]" type="checkbox" value="{{ $subAccesos->id }}"</td>
+			@endif
 
-	@endif
+		@endif
 
-</tr>
-@endforeach
+		</tr>
+	@endforeach
 
 @endforeach 
 </table>
