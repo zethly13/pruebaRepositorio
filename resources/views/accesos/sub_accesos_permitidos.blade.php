@@ -5,15 +5,17 @@
 				<td colspan="2" class="info">{{ $acceso->nombre_acceso }}</td>
 			</tr>
 			@foreach($subAcceso as $permisos)
-				@if($permisos->acceso->nombre_acceso == $acceso->nombre_acceso)
+				@if($permisos->acceso->id == $acceso->id)
 					<tr>
 						<td>{{ $permisos->nombre_sub_acceso}}</td>
 						<td>
-						<?php $input = '<input type="checkbox">'; ?>
+						
+						<?php $input = '<input name="permiso[]" type="checkbox" value="'.$permisos->id.'">'; ?>
 						@foreach($subAccesoDefinidos as $existe)
 							@if($permisos->id==$existe->id_sub_acceso)
 								{{-- <td>{{ $existe->id_sub_acceso}}</td> --}}
-								<?php $input = '<input type="checkbox" checked="checked">'; ?>
+								
+								<?php $input = '<input  name="permiso[]"type="checkbox" checked="checked" value="'.$permisos->id.'">'; ?>
 							@endif	 
 						@endforeach
 						{!! $input !!}

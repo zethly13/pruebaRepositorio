@@ -125,6 +125,33 @@ class Sub_RolesController extends Controller
         $sRol_editar->descripcion_sub_rol= $request->desc_sub_rol;
         $sRol_editar->id_rol= $request->rol_seleccionado;
         $sRol_editar->save();
+        
+        $sub_accesos=$request->permiso;
+            $id_eliminar=Acceso_sub_rol::select('id')->where('id_sub_rol','=',$sRol_editar->id)->get();
+
+            //return $id_eliminar;
+
+        foreach($id_eliminar as $eliminar){
+            $delete[]= $eliminar->id;
+        }
+        $eliminados = Acceso_sub_rol::destroy($delete);
+
+        foreach($sub_accesos as $id_sub_acceso) 
+        {
+            $subAccesoModificado=new Acceso_sub_rol();
+            $subAccesoModificado->id_sub_acceso = $id_sub_acceso;
+
+            $subAccesoModificado->id_sub_rol =    $sRol_editar->id;
+            $subAccesoModificado->save();
+        /*
+            $subAcceso->id_sub_rol =    $subRol->id;
+        return $request->permiso;
+        
+        $registros=Modelo::where('condicion','tal')->get();
+
+        */
+        }
+
         return redirect()->route($this->path.'.index');
     }
 

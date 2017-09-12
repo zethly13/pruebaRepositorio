@@ -11,11 +11,11 @@
 
 			@if($subAccesos->acceso->nombre_acceso=='Menu usuario')
 				{{--<td>{{ Form::checkbox('subAcceso[]',$subAccesos->id,true)}}</td>--}}
-				<td><input name="permiso[]" type="checkbox" checked = "checked" value="{{ $subAccesos->id }}"</td>
+				<td><input name="permiso[]" type="checkbox" checked = "checked" value="{{ $subAccesos->id }}"></td>
 	 
 			@else
 				<!--td>{{-- Form::checkbox('subAcceso',$subAccesos->id,null) --}}</td-->
-				<td><input name="permiso[]" type="checkbox" value="{{ $subAccesos->id }}"</td>
+				<td><input name="permiso[]" type="checkbox" value="{{ $subAccesos->id }}"></td>
 			@endif
 
 		@endif
