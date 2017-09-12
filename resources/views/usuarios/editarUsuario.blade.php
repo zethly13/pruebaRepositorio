@@ -52,11 +52,12 @@
         {!! Form::label('fecha_nac_usuario','Fecha de nacimiento:',['class'=>'col-md-3']) !!}
         <div class="col-md-9">{!! form::text('fecha_nac_usuario',$user->fecha_nac,array('placeholder'=>$user->fecha_nac, 'class'=>'form-control')) !!}</div>
     </div>
+
     <div class=" form-group">
         <div class="col-md-4">
         {!! Form::label('pais_usuario','Pais:') !!}
-         <select name="pais_usuario" class="form-control">
-              <option value='-1'>Seleccione</option>  
+         <select name="pais_usuario" class="form-control" id="id_pais">
+              <option value='{{ $user->id_provincia }}'>{{ $user->provincia->ciudad->pais->nombre_pais}}</option>  
                 @foreach ($pais as $paises)
               <option value="{{$paises->id}}">{{$paises->nombre_pais}}</option>
                 @endforeach 
@@ -64,20 +65,16 @@
          </div>
          <div class="col-md-4">
         {!! Form::label('ciudad_usuario','Ciudad:') !!}
-         <select name="ciudad_usuario" class="form-control">
-              <option value='-1'>Seleccione</option>  
-                @foreach ($ciudad as $expedido)
-         <option value="{{$expedido->id}}">{{$expedido->nombre_ciudad}}</option>
-                @endforeach 
+         <select name="ciudad_usuario" class="form-control" id="id_ciudad">
+              <option value='{{ $user->id_provincia }}'>{{ $user->provincia->ciudad->nombre_ciudad,$user->nombre_provincia}}</option>  
+              
          </select>
          </div>
          <div class="col-md-4">
          {!! Form::label('provincia_usuario','Provincia:') !!}
-         <select name="provincia_usuario" class="form-control">
+         <select name="provincia_usuario" class="form-control" id="id_provincia">
               <option value='{{ $user->id_provincia }}'>{{ $user->nombre_provincia }}</option>  
-                @foreach ($provincia as $provincia)
-              <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
-                @endforeach 
+               
         </select>
         </div>
     </div>
