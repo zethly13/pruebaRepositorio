@@ -17,6 +17,7 @@ use App\Estado_civil;
 use App\Usuario;
 use App\Usuario_direccion;
 use App\usuario_email;
+use Auth;
 use App\Usuario_telefono;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Response;
@@ -250,4 +251,37 @@ class UsuariosController extends Controller
         //return view('usuarios.perfil')->with('usuario',$usuario);
     }
 
+    public function loginModificar()
+    {
+         $usuario=Auth::user();  
+        return view($this->path.'.loginModificar',compact('usuario'));
+        //return $usuario;
+    }
+    public function validarModLogin(Request $request,$id)
+    {
+
+      $usuario=Auth::User();
+      if(Auth::user()->login==$request->nuevo_login)
+        return "mismo login";
+      else
+        $usuario->login = $request->nuevo_login;
+        $usuario->save();   
+        return redirect()->route($this->path.'.index');
+        
+        //return "es diferente login";
+    }
+
+    public function contrasenaModificar()
+    {
+      $usuario=Auth::user();
+        
+    }
+    public function ValidarModContrasena()
+    {
+
+
+            
+           // $modActivo->activo = $request->;
+            //$modActivo->save();
+    }
 }

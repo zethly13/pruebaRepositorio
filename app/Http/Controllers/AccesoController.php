@@ -65,6 +65,58 @@ class AccesoController extends Controller
            }
 	}
 
+	public function modificarAsignacion($id)
+	{
+		
+		$permisoUsuario=Usuario_asignar_sub_rol::findOrFail($id);
+		$subRol=Sub_rol::all();
+		$unidad=Unidad::all();
+		$funcion=Funcion::all();
+
+		
+		return view('accesos.modificarAsignacion',compact('permisoUsuario','subRol','unidad','funcion'));
+		/* 	
+		return $permisoUsuario." id del sistema ".$id;
+		return $id;
+		*/
+		//return view('usuarios.perfil')->with('usuario',$usuario);
+	}
+	
+	public function validarModAsignacion(Request $request,$id)
+	{ 	
+	
+		$permisoUsuario_mod=Usuario_asignar_sub_rol::findOrFail($id);
+      $permisoUsuario_mod->id_sub_rol = $request->subRol;
+      $permisoUsuario_mod->id_funcion = $request->funcion;
+      $permisoUsuario_mod->id_unidad = $request->unidad;
+		  $permisoUsuario_mod->cod_sis = $request->sis;
+      $permisoUsuario_mod->fecha_inicio = $request->fecha_inicio;
+      $permisoUsuario_mod->fecha_fin = $request->fecha_fin;
+      $permisoUsuario_mod->activo = $request->activo;
+      $permisoUsuario_mod->save();
+      return redirect()->route('accesos.index');     
+		/*
+      return $id;
+      return $permisoUsuario_mod;
+			$permisoUsuario_mod=Usuario_asignar_sub_rol::where('Usuario_asignar_sub_roles.id',$id)->get()->first();
+
+	*/
+	}
+	public function modActivo($id)
+	{
+		
+            $modActivo = Usuario_asignar_sub_rol::findOrFail($id);
+			if ($modActivo->activo=='SI') {
+				$modActivo->activo='NO';
+			}else{
+				$modActivo->activo='SI';
+			}
+			$modActivo->save();
+           // $modActivo->activo = $request->;
+            //$modActivo->save();
+            return redirect()->route('accesos.index');
+	}
+
 	public function validar()
 	{
 	//	$acceso=Acceso::join('sub_accesos','sub_accesos.id_acceso','=','accesos.id')->select('accesos.id','accesos.nombre_acceso','accesos.ruta_acceso','nombre_sub_acceso')->get();
