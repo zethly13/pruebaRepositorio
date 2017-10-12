@@ -12,7 +12,6 @@ use App\Usuario_asignar_sub_rol;
 use App\Sub_rol;
 use App\Funcion;
 use App\Unidad;
-use App\Acceso_sub_rol;
 
 class AccesoController extends Controller
 {
@@ -138,5 +137,4 @@ class AccesoController extends Controller
 		$subAcceso=Sub_acceso::all();
 		return view('accesos.listaPermisos',compact('subAcceso'));
 	}   
-	
 }

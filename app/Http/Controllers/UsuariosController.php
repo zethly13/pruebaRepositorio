@@ -67,6 +67,7 @@ class UsuariosController extends Controller
         $ciudad=Ciudad::all();
         $provincia=Provincia::all();
         $estado=Estado_civil::all();
+
         return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado'));
     }
 
@@ -249,14 +250,6 @@ class UsuariosController extends Controller
        
         //return view('usuarios.perfil')->with('usuario',$usuario);
     }
-<<<<<<< HEAD
-    //funcion que recupera accesos de subRoles
-    public function subRolesAsignadosMenu($id)
-    {
-        //$consulta = "select a.nom_app,tp.descrip, a.id_app from usuario u,user_rol ur,rol r,app a,rol_app ra,tipo_app tp where u.id_usuario=ur.id_usuario and r.id_rol=ur.id_rol and r.id_rol=ra.id_rol and ra.id_app=a.id_app and a.id_tip_app=tp.id_tip_app and u.id_usuario='$usuario' order by a.id_app asc";
-        $subAcceso=Usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')->join('usuario_asignar_sub_roles','usuario_asignar_sub_roles.id_sub_rol','=','sub_roles.id')->join('sub_roles','sub_roles.id','=','acceso_sub_roles.id_sub_rol')->join('acceso_sub_roles','acceso_sub_roles.id_sub_acceso','=','sub_accesos.id')->where('usuarios.id',$id)->get();
-        return $subAcceso;
-=======
 
     public function loginModificar()
     {
@@ -290,6 +283,5 @@ class UsuariosController extends Controller
             
            // $modActivo->activo = $request->;
             //$modActivo->save();
->>>>>>> e24dc089c55e348df818a7c8723ca9973d497598
     }
 }
