@@ -2,6 +2,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="myNavbar">
+<<<<<<< HEAD
       <ul class="nav navbar-nav navbar-form navbar-right" >
         <!-- Authentication Links -->
          @if (Auth::guest())
@@ -31,6 +32,23 @@
 	     		</ul>
       			        
          @endif  
+=======
+      <ul class="nav navbar-nav" >
+        <!-- Authentication Links -->
+          @if (Auth::guest())
+                          <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li>  
+                     @else
+                          <li  role="menu">
+                            <ul>
+                              <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
+                              <li>{{ Auth::user()->nombre_completo }}</li>
+
+                              <li><a href="{{ route('usuarios.logout') }}">salir</a></li>
+                            </ul>
+                            </li>
+          @endif
+           
+>>>>>>> e24dc089c55e348df818a7c8723ca9973d497598
       </ul>
     </div>
   </div>

@@ -17,6 +17,7 @@ use App\Estado_civil;
 use App\Usuario;
 use App\Usuario_direccion;
 use App\usuario_email;
+use Auth;
 use App\Usuario_telefono;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Response;
@@ -248,11 +249,47 @@ class UsuariosController extends Controller
        
         //return view('usuarios.perfil')->with('usuario',$usuario);
     }
+<<<<<<< HEAD
     //funcion que recupera accesos de subRoles
     public function subRolesAsignadosMenu($id)
     {
         //$consulta = "select a.nom_app,tp.descrip, a.id_app from usuario u,user_rol ur,rol r,app a,rol_app ra,tipo_app tp where u.id_usuario=ur.id_usuario and r.id_rol=ur.id_rol and r.id_rol=ra.id_rol and ra.id_app=a.id_app and a.id_tip_app=tp.id_tip_app and u.id_usuario='$usuario' order by a.id_app asc";
         $subAcceso=Usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')->join('usuario_asignar_sub_roles','usuario_asignar_sub_roles.id_sub_rol','=','sub_roles.id')->join('sub_roles','sub_roles.id','=','acceso_sub_roles.id_sub_rol')->join('acceso_sub_roles','acceso_sub_roles.id_sub_acceso','=','sub_accesos.id')->where('usuarios.id',$id)->get();
         return $subAcceso;
+=======
+
+    public function loginModificar()
+    {
+         $usuario=Auth::user();  
+        return view($this->path.'.loginModificar',compact('usuario'));
+        //return $usuario;
+    }
+    public function validarModLogin(Request $request,$id)
+    {
+
+      $usuario=Auth::User();
+      if(Auth::user()->login==$request->nuevo_login)
+        return "mismo login";
+      else
+        $usuario->login = $request->nuevo_login;
+        $usuario->save();   
+        return redirect()->route($this->path.'.index');
+        
+        //return "es diferente login";
+    }
+
+    public function contrasenaModificar()
+    {
+      $usuario=Auth::user();
+        
+    }
+    public function ValidarModContrasena()
+    {
+
+
+            
+           // $modActivo->activo = $request->;
+            //$modActivo->save();
+>>>>>>> e24dc089c55e348df818a7c8723ca9973d497598
     }
 }
