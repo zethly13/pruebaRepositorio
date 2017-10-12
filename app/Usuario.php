@@ -116,4 +116,10 @@ class Usuario extends User
 		return $this->nombres." ".$this->apellidos;
 	}
 
+	//funcion que recupera accesos de subRoles
+	public function getSubRolesAsignadosAttribute()
+	{
+		return $hola=['1','2','3',auth()->id];
+	}
+	
 }

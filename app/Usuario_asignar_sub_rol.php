@@ -27,5 +27,5 @@ class Usuario_asignar_sub_rol extends Model
 	{
 		return $this->belongsTo('App\Unidad','id_unidad','id');
 	}
-
+	
 }

@@ -17,6 +17,7 @@ Route::get('logout', 'UsuariosController@logout')->name('usuarios.logout');
 
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
+Route::any('usuarios/acceso/{id}','UsuariosController@subRolesAsignadosMenu')->name('usuarios.subRolesAsignadosMenu');
 
 Route::group(['middleware'=>'autentificado'], function(){
 	Route::resource('roles', 'RolesController');
