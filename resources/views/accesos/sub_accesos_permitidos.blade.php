@@ -9,11 +9,11 @@
 					<tr>
 						<td>{{ $permisos->nombre_sub_acceso}}</td>
 						<td>
-						<?php $input = '<input type="checkbox">'; ?>
+						<?php $input = '<input name="permiso[]" value="'.$permisos->id.'" type="checkbox">'; ?>
 						@foreach($subAccesoDefinidos as $existe)
 							@if($permisos->id==$existe->id_sub_acceso)
 								{{-- <td>{{ $existe->id_sub_acceso}}</td> --}}
-								<?php $input = '<input type="checkbox" checked="checked">'; ?>
+								<?php $input = '<input type="checkbox" name="permiso[]" checked="checked" value="'.$permisos->id.'">'; ?>
 							@endif	 
 						@endforeach
 						{!! $input !!}

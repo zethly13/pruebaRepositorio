@@ -132,9 +132,9 @@ class Sub_RolesController extends Controller
             //return $id_eliminar;
 
         foreach($id_eliminar as $eliminar){
-            $delete[]= $eliminar->id;
+            $borrarAcceso= Acceso_sub_rol::findorfail($eliminar->id);
+            $borrarAcceso->delete();
         }
-        $eliminados = Acceso_sub_rol::destroy($delete);
 
         foreach($sub_accesos as $id_sub_acceso) 
         {
