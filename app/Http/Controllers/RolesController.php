@@ -10,6 +10,13 @@ use App\Rol;
 class RolesController extends Controller
 {
     private $path = 'roles';
+    public function __construct()
+    {
+        // Filtrar todos los métodos
+        $this->middleware('permisos:3', ['only' => 'index','create','store']);
+        $this->middleware('permisos:4', ['only' => 'index','update','edit','delete']);
+        
+    }
     /**
      * Display a listing of the resource.
      *

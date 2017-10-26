@@ -45,7 +45,8 @@ class UsuariosController extends Controller
         $this->middleware('autentificado', [
             'except' => ['login', 'logear']
             ]);
-
+        $this->middleware('permisos:1', ['only' => 'create','store','index']);
+        $this->middleware('permisos:2', ['only' => 'edit','delete','update']);
     }
 
     public function index(Request $request)
@@ -193,14 +194,31 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
        try {
+
             $user = Usuario::where('usuarios.id',$id)->get()->first();
             //return $user;
-            $user->delete(); 
-            //return redirect()->route('rols.index');
-            return redirect()->route($this->path.'.index');
+            $user->delete();
+                flash()->success('Usuario ha sido eliminado'); 
+            
+
+            return redirect()->back();
+            //return redirect()->route($this->path.'.index');
         } catch (Exception $e) {
             return "Fatal Error - ".$e->getMessage();
         }
+
+        /*
+        if ( Auth::user()->id == $id ) {
+        flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
+        return redirect()->back();
+    }
+
+    if( User::findOrFail($id)->delete() ) {
+        flash()->success('User has been deleted');
+    } else {
+        flash()->success('User not deleted');
+    }
+        */
     }
 
     //Parte de Autenticacion
@@ -217,7 +235,7 @@ class UsuariosController extends Controller
         //return $credenciales;
         if(auth()->attempt($credenciales))
             return redirect()
-                ->route('usuarios.index');
+                ->route('home.index');
         else return redirect()
                 ->route('usuarios.login')
                 ->withErrors([
@@ -233,12 +251,13 @@ class UsuariosController extends Controller
         auth()->logout();
         return redirect()->route('usuarios.login');
     }
+    public function home()
+    {
+        return view('home');
+    }
 
     public function perfil()
     {
-       //$tipoDoc = auth()->user()->id_tipo_doc_identidad;
-        //$usuarioTipo = Tipo_doc_identidad::where('id','=',auth()->user()->id_tipo_doc_identidad)->select('nombre_tipo_doc_identidad')->get()->first();
-      
        $usuario=auth()->user();
        $usuarioInfo=Usuario::join('tipo_doc_identidades','tipo_doc_identidades.id','=','usuarios.id_tipo_doc_identidad')->join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->join('provincias','provincias.id','=','usuarios.id_provincia')->join('ciudades','ciudades.id','=','usuarios.ciudad_expedido_doc')->select('tipo_doc_identidades.nombre_tipo_doc_identidad','estado_civiles.estado_civil','provincias.nombre_provincia','ciudades.nombre_ciudad')->where('usuarios.id','=',auth()->user()->id)->get()->first();
 

@@ -20,13 +20,17 @@ class Sub_RolesController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $path = 'sub_roles';
+    public function __construct()
+    {
+        // Filtrar todos los métodos
+    
+        $this->middleware('permisos:5', ['only' => 'index','create','store']);
+        $this->middleware('permisos:6', ['only' => 'index','edit','update','delete']);
+    }
     public function index()
     {
         $subroles=Sub_rol::all();
         $sRoles=Sub_rol::join('roles','roles.id','=','sub_roles.id_rol')->select('sub_roles.id','sub_roles.nombre_sub_rol','sub_roles.descripcion_sub_rol', 'roles.nombre_rol')->get();
-//        $rol_sub_rol = $subroles->rol();
-        //$rol = Rol::where($id,'=',$sub_rol->id_rol)->get();
-        //return $sRoles;
         return view($this->path.'.index',compact('sRoles'));
     }
 

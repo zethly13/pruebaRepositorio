@@ -22,10 +22,11 @@ class MenuDinamicoServiceProvider extends ServiceProvider
             ->join('sub_roles','sub_roles.id','=','acceso_sub_roles.id_sub_rol')
             ->join('usuario_asignar_sub_roles','usuario_asignar_sub_roles.id_sub_rol','=','sub_roles.id')
             ->join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
-            ->where('usuarios.id',Auth::user()->id)->where('usuario_asignar_sub_roles.activo','SI')
+            ->where('usuarios.id','=',Auth::user()->id)
+            ->where('usuario_asignar_sub_roles.activo','SI')
             ->where('usuario_asignar_sub_roles.fecha_fin','>',Carbon::now()->format('y-m-d'))
-            ->select('sub_accesos.id','sub_accesos.nombre_sub_acceso','sub_accesos.id_acceso','sub_accesos.ruta_sub_acceso','sub_accesos.descripcion_sub_acceso')
-            ->groupBy('sub_accesos.id', 'sub_accesos.nombre_sub_acceso')->get();
+            ->select('sub_accesos.id','sub_accesos.nombre_sub_acceso','sub_accesos.id_acceso','sub_accesos.ruta_sub_acceso')
+            ->groupBy('sub_accesos.id', 'sub_accesos.nombre_sub_acceso','sub_accesos.ruta_sub_acceso')->get();
             
             $acceso=Acceso::whereIn('id',function($query){
                 $query->select('sub_accesos.id_acceso')
@@ -38,7 +39,8 @@ class MenuDinamicoServiceProvider extends ServiceProvider
                 ->where('usuario_asignar_sub_roles.activo','SI')
                 ->where('usuario_asignar_sub_roles.fecha_fin','>',Carbon::now()->format('y-m-d'))
                 ->groupBy('sub_accesos.id_acceso');
-            })->get();
+            })->orderBy('peso_acceso','asc')
+            ->get();
             $view->with('subAccesosUsuario', $subAccesosUsuario)->with('acceso',$acceso);
         });
     }

@@ -10,7 +10,9 @@
             <li role="presentation" class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->nombre_completo }}<span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><a href="{{ route('usuarios.perfil') }}">Perfil</a></li>
+            <li><a href="{{ route('usuarios.perfil') }}">Perfil Usuario</a></li>
+            <li><a href="{{ route('usuarios.loginModificar') }}">Modificar Login</a></li>
+            <li><a href="{{ route('usuarios.contrasenaModificar') }}">Modificar Contraseña</a></li>
             <li><a href="{{ route('usuarios.logout') }}">Salir del Sistema</a></li>
           </ul>
             </li>
@@ -21,7 +23,7 @@
               <ul class="dropdown-menu">
                 @foreach($subAccesosUsuario as $subAccesos)
                   @if($subAccesos->id_acceso == $accesos->id)
-                    <li><a href="{{ route('usuarios.logout') }}">{{ $subAccesos->nombre_sub_acceso }}</a></li>
+                    <li><a href="{{ route($subAccesos->ruta_sub_acceso) }}">{{ $subAccesos->nombre_sub_acceso }}</a></li>
                   @endif
                 @endforeach
               </ul>

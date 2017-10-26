@@ -146,7 +146,7 @@ $factory->define(App\Acceso_sub_rol::class, function (Faker\Generator $faker)
 
     return [
         
-        'id_sub_acceso'=>$faker->numberBetween($min = 1, $max = 7),
+        'id_sub_acceso'=>$faker->numberBetween($min = 1, $max = 5),
         'id_sub_rol'=>$faker->numberBetween($min = 1, $max = 7),
         
         

@@ -16,19 +16,20 @@ use App\Unidad;
 class AccesoController extends Controller
 {
 	
-	public function index(Request $request)
+	public function index()
 	{
+		return view('accesos.asignarUsuarioSubRol');
+	}
+	public function index2(Request $request)
+	{
+		if($request->ci==null && $request->nombre==null && $request->apellido==null)
+			back();
+		else
+		{
 		$usuarios=Usuario::Buscador2($request->ci,$request->nombre,$request->apellido)->get();
 		$permisosAsignados=Usuario_asignar_sub_rol::all();
-		/*$permisosAsignados->each(function($permisosAsignados){
-			$permisosAsignados->funcion;
-			$permisosAsignados->usuario;
-			$permisosAsignados->unidad;
-			//$permisosAsignados->sub_rol;
-			$permisosAsignados->sub_rol->rol;
-
-		});*/
-		return view('accesos.asignarUsuarioSubRol',compact('usuarios','permisosAsignados'));
+		return view('accesos.asignarUsuarioSubRolUsuario',compact('usuarios','permisosAsignados'));
+		}
 	}
 //Formulario de asignacion de nuevos subroles a un usuario
 	public function nuevaAsignacion($id)
@@ -84,23 +85,21 @@ class AccesoController extends Controller
 	
 	public function validarModAsignacion(Request $request,$id)
 	{ 	
-	
 		$permisoUsuario_mod=Usuario_asignar_sub_rol::findOrFail($id);
-      $permisoUsuario_mod->id_sub_rol = $request->subRol;
-      $permisoUsuario_mod->id_funcion = $request->funcion;
-      $permisoUsuario_mod->id_unidad = $request->unidad;
-		  $permisoUsuario_mod->cod_sis = $request->sis;
-      $permisoUsuario_mod->fecha_inicio = $request->fecha_inicio;
-      $permisoUsuario_mod->fecha_fin = $request->fecha_fin;
-      $permisoUsuario_mod->activo = $request->activo;
-      $permisoUsuario_mod->save();
-      return redirect()->route('accesos.index');     
+	    $permisoUsuario_mod->id_sub_rol = $request->subRol;
+	    $permisoUsuario_mod->id_funcion = $request->funcion;
+	    $permisoUsuario_mod->id_unidad = $request->unidad;
+		$permisoUsuario_mod->cod_sis = $request->sis;
+	    $permisoUsuario_mod->fecha_inicio = $request->fecha_inicio;
+	    $permisoUsuario_mod->fecha_fin = $request->fecha_fin;
+	    $permisoUsuario_mod->activo = $request->activo;
+	    $permisoUsuario_mod->save();
+	    return redirect()->route('accesos.index');     
 		/*
-      return $id;
-      return $permisoUsuario_mod;
-			$permisoUsuario_mod=Usuario_asignar_sub_rol::where('Usuario_asignar_sub_roles.id',$id)->get()->first();
-
-	*/
+	    return $id;
+	    return $permisoUsuario_mod;
+		$permisoUsuario_mod=Usuario_asignar_sub_rol::where('Usuario_asignar_sub_roles.id',$id)->get()->first();
+		*/
 	}
 	public function modActivo($id)
 	{
@@ -132,9 +131,4 @@ class AccesoController extends Controller
 		return $subAcceso;	
 	} 
 
-	public function listaSubAccesos()
-	{
-		$subAcceso=Sub_acceso::all();
-		return view('accesos.listaPermisos',compact('subAcceso'));
-	}   
 }

@@ -1,5 +1,5 @@
 <div class="form-horizontal">
-{!! Form::open(array('route' => array('accesos.index'), 'method' =>'get'), array('role'=>'form')) !!}
+{!! Form::open(array('route' => array('accesos.index2'), 'method' =>'get'), array('role'=>'form')) !!}
 	<div class="form-group">
 		{!! Form::label('ci','Documento de Identidad:',['class'=>'col-md-3']) !!}
 		<div class="col-md-9">{!! Form::text('ci',null,array('placeholder'=>'Ingrese Doc de Identidad','class'=>'form-control')) !!}</div>
