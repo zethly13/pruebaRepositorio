@@ -22,6 +22,13 @@ use App\Usuario_telefono;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Response;
 
+use Hash;//tati para contraseña
+use Illuminate\Support\Facades\Input;//tati contraseña
+use Illuminate\Support\Facades\Redirect;//tati contraseña
+Use Laracasts\Flash\Flash;//mensajes  tati
+
+use Validator; 
+
 class UsuariosController extends Controller
 {
     use AuthenticatesUsers;
@@ -253,35 +260,71 @@ class UsuariosController extends Controller
 
     public function loginModificar()
     {
-         $usuario=Auth::user();  
+        $usuario=Auth::user();  
         return view($this->path.'.loginModificar',compact('usuario'));
-        //return $usuario;
     }
     public function validarModLogin(Request $request,$id)
     {
 
+      $this->validate($request,[
+            'nuevo_login'=>['required','max:15','min:5']
+        ]);
+
       $usuario=Auth::User();
       if(Auth::user()->login==$request->nuevo_login)
-        return "mismo login";
+        {
+        //Flash::error('misma contraseña');
+        return redirect()->route($this->path.'.loginModificar')->with('mensaje', 'usted a ingresado su mismo login.');
+        }
       else
+        {
         $usuario->login = $request->nuevo_login;
-        $usuario->save();   
-        return redirect()->route($this->path.'.index');
-        
-        //return "es diferente login";
+        $usuario->save();
+        return redirect()->route($this->path.'.loginModificar')->with('mensaje2', '   Nuevo login guardado correctamente.');
+        }
     }
 
     public function contrasenaModificar()
     {
       $usuario=Auth::user();
+      return view($this->path.'.contrasenaModificar',compact('usuario'));
         
     }
-    public function ValidarModContrasena()
+    public function validarModContrasena(Request $request,$id)
     {
-
-
-            
-           // $modActivo->activo = $request->;
-            //$modActivo->save();
+      $rules = array(
+            'contrasena' => 'required',
+            'nueva_contrasena' => 'required|min:5',
+            'reescribir_contrasena' => 'required|same:nueva_contrasena');
+      $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'min' => 'El campo :attribute no puede tener menos de :min carácteres.');
+      $validation = \Validator::make(Input::all(), $rules, $messages);
+      if ($validation->fails())
+        {
+          return redirect()->route($this->path.'.contrasenaModificar')->withErrors($validation)->withInput();
+        }
+      else
+        {
+          if (Hash::check(Input::get('contrasena'), Auth::user()->clave))
+            {
+              $usuario = Auth::user();
+              $usuario->clave = Hash::make(Input::get('nueva_contrasena'));
+              $usuario->save();  
+              if($usuario->save())
+                {
+                return redirect()->route($this->path.'.contrasenaModificar')->with('mensaje2', '  Nueva contraseña guardada correctamente');
+                        //return redirect()->route($this->path.'.index');
+                }
+              else
+                {
+                return redirect()->route($this->path.'.contrasenaModificar')->with('mensaje', 'No se ha podido guardar la nueva contaseña');
+                }
+            }
+          else
+            {
+            return redirect()->route($this->path.'.contrasenaModificar')->with('mensaje', 'La contraseña actual no es correcta')->withInput();
+            }
+        }
     }
 }
