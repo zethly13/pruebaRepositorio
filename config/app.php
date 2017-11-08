@@ -181,6 +181,7 @@ return [
          * Application Service Personales...
          */
         Laracasts\Flash\FlashServiceProvider::class,
+        App\Providers\MenuDinamicoServiceProvider::class,
 
     ],
 

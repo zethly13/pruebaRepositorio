@@ -25,7 +25,7 @@ class Sub_RolesController extends Controller
         // Filtrar todos los métodos
     
         $this->middleware('permisos:5', ['only' => 'index','create','store']);
-        $this->middleware('permisos:6', ['only' => 'index','edit','update','delete']);
+        $this->middleware('permisos:6', ['only' => 'index','edit','update','destroy']);
     }
     public function index()
     {

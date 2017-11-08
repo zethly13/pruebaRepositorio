@@ -14,7 +14,7 @@ class RolesController extends Controller
     {
         // Filtrar todos los métodos
         $this->middleware('permisos:3', ['only' => 'index','create','store']);
-        $this->middleware('permisos:4', ['only' => 'index','update','edit','delete']);
+        $this->middleware('permisos:4', ['only' => 'index','update','edit','destroy']);
         
     }
     /**

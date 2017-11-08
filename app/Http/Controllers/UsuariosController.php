@@ -26,7 +26,6 @@ use Hash;//tati para contraseña
 use Illuminate\Support\Facades\Input;//tati contraseña
 use Illuminate\Support\Facades\Redirect;//tati contraseña
 Use Laracasts\Flash\Flash;//mensajes  tati
-
 use Validator; 
 
 class UsuariosController extends Controller
@@ -46,7 +45,7 @@ class UsuariosController extends Controller
             'except' => ['login', 'logear']
             ]);
         $this->middleware('permisos:1', ['only' => 'create','store','index']);
-        $this->middleware('permisos:2', ['only' => 'edit','delete','update']);
+        $this->middleware('permisos:2', ['only' => 'edit','destroy','update','index']);
     }
 
     public function index(Request $request)

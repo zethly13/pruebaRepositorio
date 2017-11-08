@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('contenido')
 <div class="panel panel-default">  
-  <div class="panel-heading text-center">FORMULARIO MODIFICAR LOGIN DE USUARIO</div>
+  <div class="panel-heading text-center">FORMULARIO MODIFICAR CONTRASEÑA DE USUARIO</div>
     <div class="panel-body">
     	<div class="form-horizontal">
         <!--panel de errores-->

@@ -28,7 +28,7 @@ class MenuDinamicoServiceProvider extends ServiceProvider
             ->select('sub_accesos.id','sub_accesos.nombre_sub_acceso','sub_accesos.id_acceso','sub_accesos.ruta_sub_acceso')
             ->groupBy('sub_accesos.id', 'sub_accesos.nombre_sub_acceso','sub_accesos.ruta_sub_acceso')->get();
             
-            $acceso=Acceso::whereIn('id',function($query){
+            $acceso = Acceso::whereIn('id',function($query){
                 $query->select('sub_accesos.id_acceso')
                 ->from('sub_accesos')
                 ->join('acceso_sub_roles as a','a.id_sub_acceso','=','sub_accesos.id' )

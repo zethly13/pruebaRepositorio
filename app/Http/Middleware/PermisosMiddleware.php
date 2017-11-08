@@ -31,12 +31,12 @@ class PermisosMiddleware
         if($roles<=0)
 //         \Auth::check() && \Auth::user()->role === $role )
         {
-            echo $role;
+//            echo $role;
             return abort(403,"Acceso no Autorizado");
         }
         else
         {
-            echo "logueado con rol: ", $roles;
+            //echo "logueado con rol: ", $roles;
             return $next($request);
         }
 
