@@ -20,8 +20,7 @@
 
           <div class="form-group">
             {!! Form::label('nuevo_login', 'Ingrese su nuevo login:',['class'=>'control-label col-sm-4']) !!}
-            <div class="col-sm-7">{!! Form::password('nuevo_login', ['placeholder'=>'Introduce su nuevo login','class' => 'form-control', 'id'=>'password']) !!}</div>
-            <div class="col-sm-1"><input name ="mostrar" type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'"> Ver </input></div>
+            <div class="col-sm-8">{!! Form::text('nuevo_login',null, array('class' => 'form-control','placeholder'=>'Introduce su nuevo login', 'id'=>'password')) !!}</div>
           </div>
 
           <div class="text-center">{{ Form::button('editar Login', array('type'=> 'submit','class'=>'btn btn-primary')) }}</div>

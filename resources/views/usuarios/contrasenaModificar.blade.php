@@ -14,14 +14,13 @@
         		{!! Form::password('contrasena', array('placeholder'=> 'Introduce su contraseña', 'class' => 'form-control')) !!}
         		</div>
     		 	</div>
-
-     			<div class="form-group">
-        		{!! Form::label('nueva_contrasena', 'Ingrese su nueva contraseña:',['class'=>'control-label col-sm-4']) !!}
-        		<div class="col-sm-8">
-        		{!! Form::password('nueva_contrasena', ['placeholder'=>'Introduce su nueva contraseña','class' => 'form-control']) !!}
-        		</div>
-     			</div>
-
+          
+          <div class="form-group">
+            {!! Form::label('nueva_contrasena', 'Ingrese su nueva contraseña:',['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-7">{!! Form::password('nueva_contrasena', ['placeholder'=>'Introduce su nueva contraseña','class' => 'form-control', 'id'=>'nuevaContrasena']) !!}</div>
+            <div class="col-sm-1"><input name ="mostrar" type="checkbox" onchange="document.getElementById('nuevaContrasena').type = this.checked ? 'text' : 'password'"> Ver </input></div>
+          </div>
+          
      			<div class="form-group">
         		{!! Form::label('reescribir_contrasena', 'Reescriba su nueva contraseña:',['class'=>'control-label col-sm-4']) !!}
         		<div class="col-sm-8">
