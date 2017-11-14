@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
   <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" >
   <link rel="stylesheet" href="/css/estiloPropio.css" >
+   <link rel="stylesheet" href="/css/login.css" >
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>FCE-UMSS</title>
 </head>
@@ -25,49 +26,42 @@
   </div>
   </div>
 </header>
-
 <!--Cuerpo-->
-<!--menu navegacion-->
 <div class="cuerpo">
-<nav class="navbar navbar-inverse">
+<!--menu navegacion-->
+<nav class="navbar navbar-default">
   <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/login">LOGO</a>
+    </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav" >
-        <!-- Authentication Links -->
-           @if (Auth::guest())
-                <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li>  
-           @else
-                <li  role="menu">
-                  <ul>
-                    <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
-
-                    <li><a href="{{ route('usuarios.logout') }}">salir</a></li>
-                  </ul>
-                  </li>
-           @endif
+      <ul class="nav navbar-nav navbar-right">
+        @if (Auth::guest())
+          <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">LOGIN</a></li>  
+        @else
+          <li  role="MENU">
+            <ul>
+              <span class="caret"></span>
+              <li>{{ Auth::user()->apellidos.' '.Auth::user()->nombres }}</li>
+              <li><a href="{{ route('usuarios.logout') }}">SALIR</a></li>
+            </ul>
+          </li>
+        @endif
       </ul>
     </div>
   </div>
-</nav>
- <!--contenido-->
-
-<div class="container">  
-    <!--seccion a cambiar-->
-  <section>
-    <div>
-       @yield('contenido')
-    </div>
-  </section>
-</div>
-
+</nav> 
+<!--seccion a cambiar-->
+  @yield('contenido')
 <!--pie de pagina-->
-<footer class="footer">
-    <div class="container-fluid">
-        <p>facultad de Ciencias Económicas</p>
-        <p>Direccion calle Calama Este - Edificio Prototipo Fono: 591-4-4540261 Correo Electrónico: info@fce.umss.edu.bo Cochabamba - Bolivia</p>
-    </div>
-</footer>
+
 </div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>facultad de Ciencias Económicas</p>
+        <p>Direccion calle Calama Este - Edificio Prototipo Fono: 591-4-4540261 Correo Electrónico: info@fce.umss.edu.bo Cochabamba - Bolivia</p>
+</footer>
+
 <!--scripts-->
 <script src="/js/jquery.js"></script>
 <script src="/js/dinamico.js"></script>
@@ -75,3 +69,5 @@
 
 </body>
 </html>
+
+

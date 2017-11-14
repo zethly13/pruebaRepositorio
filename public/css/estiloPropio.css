@@ -16,7 +16,7 @@ body {
 }
 .cabecera {
   position: relative;
-  padding: 40px 0;
+  padding: 10px 0;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
@@ -98,9 +98,6 @@ body {
 -------------------------------------------------- */
 
 
-
-
-
 /* Footer
 -------------------------------------------------- */
 .footer {
@@ -118,7 +115,10 @@ body {
 
 /* inicio de logeo
 -------------------------------------------------- */
-
+  
+ /*.form-control {
+      border-radius: 0;
+  }*/
 
 /* inicio de logeo fondo
 -------------------------------------------------- */
@@ -133,3 +133,39 @@ body {
   display: flex;
 
 }
+
+/* navegacion
+-------------------------------------------------- */
+
+.navbar {
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 0;
+      background-color:#121647;
+      border: 0;
+      font-size: 11px !important;
+      letter-spacing: 4px;
+      opacity: 0.9;
+  }
+  .navbar li a, .navbar .navbar-brand { 
+      color: #d5d5d5 !important;
+  }
+  .navbar-nav li a:hover {
+      color: #fff !important;
+  }
+  .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #29292c !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+  }
+  .open .dropdown-toggle {
+      color: #fff;
+      background-color: #555 !important;
+  }
+  .dropdown-menu li a {
+      color: #000 !important;
+  }
+  .dropdown-menu li a:hover {
+      background-color: red !important;
+  } 
