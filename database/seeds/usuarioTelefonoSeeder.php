@@ -11,6 +11,6 @@ class usuarioTelefonoSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Usuario_telefono::class, 50)->create();
+        factory(App\Usuario_telefono::class, 15)->create();
     }
 }

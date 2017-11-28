@@ -74,5 +74,12 @@ class ciudadSeeder extends Seeder
             'id_pais' => '1'
 
          ]);
+       App\Ciudad::create([
+
+            'nombre_ciudad' => 'EXTRANJERO',
+            'peso_ciudad' => '91',
+            'id_pais' => '2'
+
+         ]);
     }
 }

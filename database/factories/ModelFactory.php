@@ -38,25 +38,14 @@ $factory->define(App\Usuario::class, function (Faker\Generator $faker)
 
     ];
 });
-/*
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
 
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
-});
-*/
 
 $factory->define(App\Usuario_telefono::class, function (Faker\Generator $faker)
 {
 
     return [
         'numero_telefono' =>$faker->ean8,
-        'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
+        'id_usuario' =>$faker->numberBetween($min = 1, $max = 15),
         'id_tipo_telefono' =>$faker->numberBetween($min = 1, $max = 8),
     ];
 });
@@ -68,7 +57,7 @@ $factory->define(App\Usuario_email::class, function (Faker\Generator $faker)
        
         'email'=>$faker->email,
         'email_activo' =>$faker->randomElement(['SI', 'NO']),
-        'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
+        'id_usuario' =>$faker->numberBetween($min = 1, $max = 15),
         'id_tipo_email' =>$faker->numberBetween($min = 1, $max = 4),
     ];
 });
@@ -93,14 +82,6 @@ $factory->define(App\Unidad::class, function (Faker\Generator $faker)
     ];
 });
 
-$factory->define(App\Pais::class, function (Faker\Generator $faker)
-{
-
-    return [
-        'nombre_pais' =>$faker->country,
-        'peso_pais'   =>$faker->randomDigit,
-    ];
-});
 
 
 $factory->define(App\Usuario_fotografia::class, function (Faker\Generator $faker)
@@ -111,7 +92,7 @@ $factory->define(App\Usuario_fotografia::class, function (Faker\Generator $faker
         'fecha_subida' =>$faker->date,
         'valida' =>$faker->randomElement(['SI']),
         'observacion' =>$faker->randomElement(['NINGUNA']),
-        'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
+        'id_usuario' =>$faker->numberBetween($min = 1, $max = 15),
     ];
 });
 
@@ -120,7 +101,7 @@ $factory->define(App\Usuario_direccion::class, function (Faker\Generator $faker)
 
     return [
         'nombre_direccion' =>$faker->address,
-        'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
+        'id_usuario' =>$faker->numberBetween($min = 1, $max = 15),
         'id_tipo_direccion' =>$faker->numberBetween($min = 1, $max = 3),
     ];
 });
@@ -138,7 +119,7 @@ $factory->define(App\Usuario_asignar_sub_rol::class, function (Faker\Generator $
         'id_funcion' =>$faker->numberBetween($min = 1, $max = 30),
         'id_sub_rol' =>$faker->numberBetween($min = 1, $max = 7),
         'id_unidad' =>$faker->numberBetween($min = 1, $max = 20),
-        'id_usuario' =>$faker->numberBetween($min = 1, $max = 50),
+        'id_usuario' =>$faker->numberBetween($min = 1, $max = 15),
     ];
 });
 $factory->define(App\Acceso_sub_rol::class, function (Faker\Generator $faker)
@@ -153,3 +134,29 @@ $factory->define(App\Acceso_sub_rol::class, function (Faker\Generator $faker)
     ];
 });
 
+$factory->define(App\Gestion::class, function (Faker\Generator $faker)
+{
+
+    return [
+
+        'anio' =>$faker->year,
+        'periodo'=>$faker->numberBetween($min = 1, $max = 4),
+        'fecha-inicio'=>$faker->date,
+        'fecha_fin'=>$faker->date,
+        'activo'=>$faker->randomElement(['SI','NO']),
+        'peso_gestion' =>$faker->buildingNumber,
+        'id_tipo_gestion'=>$faker->numberBetween($min = 1, $max = 6),
+    ];
+});
+
+$factory->define(App\Plan_gestion_unidad::class, function (Faker\Generator $faker)
+{
+
+    return [
+    
+        'id_gestion' =>$faker->numberBetween($min = 1, $max = 20),
+        'id_plan'=>$faker->numberBetween($min = 1, $max = 5),
+        'id_unidad'=>$faker->numberBetween($min = 1, $max = 20),
+
+    ];
+});

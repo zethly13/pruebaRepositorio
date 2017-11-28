@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
         $this->call(accesoSeeder::class);
         $this->call(subAccesoSeeder::class);
         $this->call(accesoSubRolSeeder::class);
-
+        $this->call(tipoGestionSeeder::class);
+        $this->call(planSeeder::class);
+        $this->call(gestionSeeder::class);
+        $this->call(planGestionUnidadSeeder::class);
     }
 }

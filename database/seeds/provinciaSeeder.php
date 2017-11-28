@@ -340,5 +340,12 @@ class provinciaSeeder extends Seeder
             'id_ciudad' => '9'
 
          ]);
+        App\Provincia::create([
+
+            'nombre_provincia' => 'EXTRANJERO',
+            'peso_provincia' => '56',
+            'id_ciudad' => '10'
+
+         ]);
     }
 }

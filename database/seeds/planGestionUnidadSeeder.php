@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class usuarioEmailSeeder extends Seeder
+class planGestionUnidadSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class usuarioEmailSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Usuario_email::class, 15)->create();
+        factory(App\Plan_gestion_unidad::class, 20)->create();
     }
 }

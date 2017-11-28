@@ -1,8 +1,8 @@
 <?php
-
+ 
 use Illuminate\Database\Seeder;
 
-class usuarioEmailSeeder extends Seeder
+class gestionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class usuarioEmailSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Usuario_email::class, 15)->create();
+        factory(App\Gestion::class, 20)->create();
     }
 }

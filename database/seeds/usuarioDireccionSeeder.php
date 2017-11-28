@@ -11,6 +11,6 @@ class usuarioDireccionSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Usuario_direccion::class, 50)->create();
+        factory(App\Usuario_direccion::class, 15)->create();
     }
 }

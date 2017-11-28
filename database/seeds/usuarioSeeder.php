@@ -31,7 +31,7 @@ class usuarioSeeder extends Seeder
 			'id_tipo_doc_identidad' => '1'
 
          ]);
-        factory(App\Usuario::class, 49)->create();
+        factory(App\Usuario::class, 15)->create();
         
     }
 }
