@@ -2,7 +2,7 @@
 	<tbody>
 		@foreach($accesos as $acceso)
 			<tr>
-				<td colspan="2" class="info">{{ $acceso->nombre_acceso }}</td>
+				<td colspan="2" class="table-info">{{ $acceso->nombre_acceso }}</td>
 			</tr>
 			@foreach($subAcceso as $permisos)
 				@if($permisos->acceso->nombre_acceso == $acceso->nombre_acceso)

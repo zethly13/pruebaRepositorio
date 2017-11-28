@@ -1,13 +1,14 @@
 @extends('layout.master')
 @section('contenido')
-<div class="panel panel-default">
-	<div class="panel-heading text-center"></div>
-		<div class="panel-body">
+
+<div class="card border-info mb-2">
+  <div class="card-header text-center text-muted"><strong>ACCESOS DE USUARIO</strong></div>
+  <div class="card-body">
 			@include('accesos.lista')
 			<div class="table-responsive">
-				<table class="table table-condensed table-striped table-bordered">
+				<table class="table table-condensed table-bordered  table-sm">
 					<thead>
-						<tr class="info">
+						<tr class=" table-info">
 							<th class="text-center">ID</th>
 								<th class="text-center">DOC INDENTIDAD</th>
 								<th class="text-center">USUARIO</th>
@@ -34,11 +35,10 @@
 														Periodo: desde {{ $permisos->fecha_inicio	 }} hasta {{ $permisos->fecha_fin  }} <br>
 														Activo:{{ $permisos->activo}} 
 															@if($permisos->activo=='SI')
-                								<a href="{{ route('accesos.modActivo',$permisos->id)}}" type="button" class="btn btn-danger btn-responsive btn-xs">Desactivar</a>
+                								<a href="{{ route('accesos.modActivo',$permisos->id)}}" type="button" class="btn btn-danger btn-responsive btn-sm">Desactivar</a>
              									@else
-																<a href="{{ route('accesos.modActivo',$permisos->id)}}" type="button" class="btn btn-success btn-responsive btn-xs">Activar</a>
+																<a href="{{ route('accesos.modActivo',$permisos->id)}}" type="button" class="btn btn-success btn-responsive btn-sm">Activar</a>
               								@endif 
-													<hr>
 													<td><a href="{{ route('accesos.modificarAsignacion',$permisos->id)}}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
 													</td>
 												@endif
@@ -46,7 +46,7 @@
 										</table>
 									@endforeach
 								</td>
-								<td rowspan="1"><a href="{{ route('accesos.nuevaAsignacion', $usuario->id) }}" type="button" class="btn btn-success btn-responsive glyphicon glyphicon-edit">Nueva Asignacion</a></td>
+								<td class="text-center rowspan="1"><a href="{{ route('accesos.nuevaAsignacion', $usuario->id) }}" type="button" class="btn btn-success btn-responsive glyphicon glyphicon-edit">Nueva Asignacion</a></td>
 							</tr>
 						@endforeach
 					</tbody>

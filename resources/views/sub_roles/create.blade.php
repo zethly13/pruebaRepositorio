@@ -1,35 +1,47 @@
 @extends('layout.master')
 
 @section('contenido')
-<div class="panel panel-default">  
-  	<div class="panel-heading "><center>REGISTRO DE SUB-ROL</div>
-    <div class="panel-body">  
+<div class="card border-info mb-2">
+  <div class="card-header text-center text-muted"><strong>CREAR NUEVO SUB-ROLES</strong></div>
+  <div class="card-body">
+	<h2><a href="{{ URL::to('sub_roles') }}">listar sub rol</a></h2></br>
 	{{ Form::open(array('route' =>array('sub_roles.store','rol_seleccionado'), 'method' => 'POST'), array('role'=> 'form')) }}
 		{{-- ingresar token ejemplo; input type="hidden" name="_token" value="{{ csrf_token() }}" --}}
+		<form>
+			<div class="form-group row">
+				{{ Form::label('nombre_rol', 'Seleccione Rol:',['class'=>'col-md-3']) }}
+				<div class="col-md-9">
+					<select name="rol_seleccionado" class="form-control">
+						<option value='-1'>Seleccione</option>	
+						@foreach ($rol as $roles)
+							<option value="{{$roles->id}}">{{$roles->nombre_rol}}</option>
+						@endforeach	
+					</select>
+				</div>
+			</div>
+			<hr>
+			
+			<div class="form-group row">
+				{{ Form::label('nombre_sub_rol', 'Nombre del Nuevo Sub-Rol',['class'=>'col-md-3']) }}
+				<div class="col-md-9">
+					{{ Form::text('nombre_sub_rol',null, array('placeholder'=> 'Introduce el nuevo Sub Rol', 'class' => 'form-control')) }}
+				</div>
+			</div>
+			<div class="form-group row">
+				{{ Form::label('desc_sub_rol', 'Descripcion del Sub-Rol',['class'=>'col-md-3']) }}
+				<div class="col-md-9">
+					{{ Form::text('desc_sub_rol',null, array('placeholder'=> 'Introduce  la Descripcion del nuevo Sub-Rol', 'class' => 'form-control')) }}
+				</div>
+			</div>
 
-		<select name="rol_seleccionado" class="form-control">
-		<option value='-1'>Seleccione</option>	
-		@foreach ($rol as $roles)
-			<option value="{{$roles->id}}">{{$roles->nombre_rol}}</option>
-		@endforeach	
-		</select>
-		</br>
-		
-
-		{{ Form::label('nombre_sub_rol', 'Nombre del Nuevo Sub-Rol') }}
-		{{ Form::text('nombre_sub_rol',null, array('placeholder'=> 'Introduce el nuevo Sub Rol', 'class' => 'form-control')) }}
-		</br>
-		{{ Form::label('desc_sub_rol', 'Descripcion del Sub-Rol') }}
-		{{ Form::text('desc_sub_rol',null, array('placeholder'=> 'Introduce  la Descripcion del nuevo Sub-Rol', 'class' => 'form-control')) }}
-		</br>
-		{!! Form::label('LISTA DE PERMISOS A ASIGNAR','LISTA DE PERMISOS A ASIGNAR') !!}
-		<h2><a href="{{ URL::to('sub_roles') }}" type="button" class="btn btn-primary">listar sub rol</a></h2>
-		@include('accesos.prueba')
- 		</BR>       
-		{{ Form::button('Crear Sub Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
- 		</BR>       
-	{{ Form::close() }}
-	</div><!--cierre panel body-->
-</div><!--cierre panel default-->
+			<h2><center>LISTA DE PERMISOS A ASIGNAR</center></h2></br>
+			@include('accesos.prueba')      
+			<div class="text-center">
+				{{ Form::button('Crear Sub Rol', array('type'=> 'submit','class'=>'btn btn-primary')) }}
+			</div>    
+		{{ Form::close() }}
+		</form>
+	</div><!--cierre card body-->
+</div><!--cierre card-->
 
 @endsection

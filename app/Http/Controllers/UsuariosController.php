@@ -50,7 +50,7 @@ class UsuariosController extends Controller
 
     public function index(Request $request)
     {
-        $usuario=Usuario::Buscador($request->nombre)->paginate();
+        $usuario=Usuario::Buscador($request->nombre)->paginate(20);
         $usuario->each(function($usuario){
             $usuario->tipo_doc_identidad;
             $usuario->ciudad;

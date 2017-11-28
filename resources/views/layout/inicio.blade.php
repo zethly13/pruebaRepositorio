@@ -17,17 +17,20 @@
   <div class="container">
   <div class="row">
     <div class="col-md-2">
-    <p>logoooo</p>
+    <img src="/img/logo_umss.png" class="rounded float-left" width="90" height="100">
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
     <h1>TITULACIÓN FCE UMSS SAMTE</h1>
      <a class="navbar-brand" href="#"><p>Facultad de ciencias economicas</p></a>
+    </div>
+    <div class="col-md-1">
+      <img src="/img/logoFCE.png" class="rounded float-right" width="110" height="90">
     </div>
   </div>
   </div>
 </header>
 <!--Cuerpo-->
-<div class="cuerpo">
+
 <!--menu navegacion-->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -51,6 +54,7 @@
     </div>
   </div>
 </nav> 
+<div class="cuerpo">
 <!--seccion a cambiar-->
   @yield('contenido')
 <!--pie de pagina-->
@@ -63,9 +67,10 @@
 </footer>
 
 <!--scripts-->
-<script src="/js/jquery.js"></script>
-<script src="/js/dinamico.js"></script>
+<script src="/js/jquery-3.2.1.js"></script>
+<script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.js"></script>
+<script src="/js/dinamico.js"></script>
 
 </body>
 </html>

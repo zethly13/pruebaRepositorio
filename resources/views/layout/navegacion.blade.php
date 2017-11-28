@@ -1,83 +1,58 @@
-<!--menu navegacion-->
+
 @if (Auth::guest())
-    <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li> 
+  <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">LOGO</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ route('usuarios.login') }}">LOGIN<span class="sr-only">(current)</span></a>
+        </li>     
+      </ul>
+  </nav>
 @else
-<!--menu toggle-->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-<!---->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          @foreach($acceso as $accesos)
-            <li role="presentation" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ $accesos->nombre_acceso }}<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                @foreach($subAccesosUsuario as $subAccesos)
-                  @if($subAccesos->id_acceso == $accesos->id)
-                    <li><a href="{{ route($subAccesos->ruta_sub_acceso) }}">{{ $subAccesos->nombre_sub_acceso }}</a></li>
-                  @endif
-                @endforeach
-              </ul>
-            </li>
-          @endforeach
-        </li>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMINISTRACION tati<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/roles">Listar Roles</a></li>
-            <li><a href="/roles">Crear Rol</a></li>
-            <li class="divider"></li>
-            <li><a href="/sub_roles">Listar SubRoles</a></li>
-            <li><a href="/sub_roles/create">Crear SubRol</a></li>
-            <li class="divider"></li>
-            <li><a href="/usuario/acceso">Listar permisos</a></li>
-          </ul>
-        </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        @if (Auth::guest())
-          <li class="nav navbar-inverse"><a href="{{ route('usuarios.login') }}">Login</a></li>
-        @else
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->nombre_completo }}<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="{{ route('usuarios.perfil') }}">Perfil Usuario</a></li>
-                <li><a href="{{ route('usuarios.loginModificar') }}">Modificar Login</a></li>
-                <li><a href="{{ route('usuarios.contrasenaModificar') }}">Modificar Contraseña</a></li>
-                <li><a href="{{ route('usuarios.logout') }}">Salir del Sistema</a></li>
+<nav class="navbar navbar-expand-xl navbar-dark sticky-top" style="background-color: #161a45;">
+  <a class="navbar-brand" href="#">LOGO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarsExample06">
+      <ul class="navbar-nav mr-auto">
+        @foreach($acceso as $accesos)
+          <li class="nav-item">
+              <a class="nav-link" href="#">{{ $accesos->nombre_acceso }}</a>
           </li>
-          @endif
+        @endforeach
       </ul>
-
-    </div>
-  </div>
-</nav>
-@endif 
-<br> 
- <!--contenido-->
-<div class="container">
-    <!--submenu navegacion-->
-    <div class="row">
-      <div class="col-md-3">
-        <div class="navbar navbar-inverse">
-        <ul class="nav navbar-nav">
-          <li><a href="/usuarios/create"><span class="glyphicon glyphicon-user"></span> Crear Usuario</a></li><br>
-          <li><a href="/roles/create"><span class="glyphicon glyphicon-list"></span> crear rol</a></li><br>          
-          <li><a href="/sub_roles/create"><span class="glyphicon glyphicon-user"></span> Crear sub-rol</a></li>
+    
+      <form class="form-inline my-2 my-md-0">
+        <ul class="navbar-nav mr-auto">      
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{ Auth::user()->nombre_completo }}</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">Perfil Usuario</a>
+                <a class="dropdown-item" href="{{ route('usuarios.loginModificar') }}">Modificar Login</a>
+                <a class="dropdown-item" href="{{ route('usuarios.contrasenaModificar') }}">Modificar Contraseña</a>
+                <a class="dropdown-item" href="{{ route('usuarios.logout') }}">Salir del Sistema</a>
+              </div>          
+          </li>
         </ul>
-        </div>
-      </div>
+      </form>
     </div>
+    </nav>
+
+<div class="container-fluid">
+    <div class="row">
+      <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light" style="background-color: #e6e7f7;">
+          <ul class="nav nav-pills flex-column">
+            @foreach($subAccesosUsuario as $subAccesos)
+              <li class="nav-item">
+              @if($subAccesos->id_acceso == $accesos->id)
+                  <a class="nav-link" href="{{ route($subAccesos->ruta_sub_acceso) }}">{{ $subAccesos->nombre_sub_acceso }}</a>
+                </li>
+              @endif
+            @endforeach
+          </ul>
+      </nav>
+@endif
+<!--contenido-->
+

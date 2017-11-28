@@ -182,6 +182,7 @@ return [
          */
         Laracasts\Flash\FlashServiceProvider::class,
         App\Providers\MenuDinamicoServiceProvider::class,
+        
 
     ],
 
