@@ -14,4 +14,9 @@ class Unidad extends Model
 	{
 		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_unidad','id');
 	}
+
+	public function plan_gestion_unidades()
+	{
+		return $this->hasMany('App\Plan_gestion_unidad', 'id_unidad','id');
+	}
 }
