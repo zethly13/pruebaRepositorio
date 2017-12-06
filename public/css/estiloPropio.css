@@ -61,13 +61,13 @@
   padding-top: 9px;
   padding-bottom: 10px;
   text-align: center;
-  margin-top: 186px;
+  /*margin-top: 186px;*/
   border-top: 1px solid #e5e5e5;
-  background-color: #0f1333;
+  background-color: #161a45;
   }
   .footer p {
   margin-bottom: 0;
-  color: #777;
+  color: #838c9c;
 }
 
 /* inicio de logeo

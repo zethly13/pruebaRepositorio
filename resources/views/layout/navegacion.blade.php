@@ -19,7 +19,7 @@
       <ul class="navbar-nav mr-auto">
         @foreach($acceso as $accesos)
           <li class="nav-item">
-              <a class="nav-link" href="#">{{ $accesos->nombre_acceso }}</a>
+              <a class="nav-link" href="#" id="id_menu" class="enviar">{{ $accesos->nombre_acceso }}</a>
           </li>
         @endforeach
       </ul>
@@ -53,6 +53,12 @@
             @endforeach
           </ul>
       </nav>
+
+
+     
+         
+     
+
 @endif
 <!--contenido-->
 

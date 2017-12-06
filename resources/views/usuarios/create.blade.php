@@ -58,9 +58,10 @@
             {{ csrf_field()}}           
             {!! Form::label('pais_usuario','* Pais:') !!}
             {!! Form::select('pais_usuario',$pais->pluck('nombre_pais','id'),null,['id'=>'id_pais','placeholder' => 'Seleccione','class'=>'form-control'])!!}
+            <select name="pais_usuario">{{ $pais->pluck('nombre_pais','id') }}</select>
           </div>
           <div class="form-group col-md-4">
-            {!! Form::label('ciudad_usuario','* Ciudad:') !!}
+             {!! Form::label('ciudad_usuario','* Ciudad:') !!}
             {!! Form::select('ciudad_usuario',['placeholder' => 'Seleccione'],null,['id'=>'id_ciudad','class'=>'form-control'])!!}
           </div>
 
