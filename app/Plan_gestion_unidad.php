@@ -24,4 +24,8 @@ class Plan_gestion_unidad extends Model
 	{
 		return $this->belongsTo('App\Unidad', 'id_unidad', 'id');
 	}
+	public function materia_plan_gestion_unidades()
+	{
+		return $this->hasMany('App\Materia_plan_gestion_unidad', 'id_plan_gestion_unidad','id');
+	}
 }

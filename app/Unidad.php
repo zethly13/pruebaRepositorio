@@ -19,4 +19,8 @@ class Unidad extends Model
 	{
 		return $this->hasMany('App\Plan_gestion_unidad', 'id_unidad','id');
 	}
+	public function unidad_materias()
+	{
+		return $this->hasMany('App\Unidad_materia', 'id_unidad','id');
+	}
 }

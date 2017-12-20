@@ -27,5 +27,8 @@ class Usuario_asignar_sub_rol extends Model
 	{
 		return $this->belongsTo('App\Unidad','id_unidad','id');
 	}
-	
+	public function grupo_doc_mat_plan_gestion_unidades()
+	{
+		return $this->hasMany('App\grupo_doc_mat_plan_gestion_unidad', 'id_usuasigsubrol','id');
+	}
 }

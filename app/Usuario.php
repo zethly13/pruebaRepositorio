@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -61,6 +61,10 @@ class Usuario extends User
 	public function usuario_asignar_sub_roles()
 	{
 		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_usuario', 'id');
+	}
+	public function usuario_titulos()
+	{
+		return $this->hasMany('App\Usuario_titulo', 'id_usuario', 'id');
 	}
 
 	/**
