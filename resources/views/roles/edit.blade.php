@@ -8,7 +8,7 @@
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>EDITAR ROLES</strong></div>
   <div class="card-body">
-
+	@include('errores.msjError')
 	{!! Form::open(array('route' =>  array('roles.update', $rol->id), 'method' => 'POST'), array('role'=> 'form')) !!}
 	{{ method_field('PUT') }}
 		{{-- ingresar token ejemplo; input type="hidden" name="_token" value="{{ csrf_token() }}" --}}

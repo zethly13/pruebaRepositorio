@@ -27,7 +27,10 @@
 				</td>
 				<td class="text-center">
 					{!! Form::open(array('route' =>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
-			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}			</tr>
+			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash','onclick' => 'return confirm("¿Estas Seguro que desea eliminar el sub rol?")')) }}			
+			 {!! Form::close() !!}
+        	</td>
+			</tr>
 			@endforeach
 		</tbody>
 	</table>

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Rol;
-
+use Illuminate\Support\Facades\Input; //tati validacion
+use App\Http\Requests\rolesRequest;//msj validaction tati
 
 class RolesController extends Controller
 {
@@ -46,7 +47,7 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(rolesRequest $request)
     {
         try {
                 $role = new Rol();
@@ -58,6 +59,8 @@ class RolesController extends Controller
                $role->nombre_rol = $request->nombre_rol;
                $role->descripcion_rol = $request->desc_rol;
                $role->save();
+               $notification= array('mensaje3'=>'Guardado correctamente!','alert-type'=>'success');
+                return redirect()->route('roles.index')->with($notification);
                //return $rol;
                return redirect()->route('roles.index');
            } catch (Exception $e) {
@@ -99,13 +102,14 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(rolesRequest $request, $id)
     {
         $rol_editar=Rol::findOrFail($id);
         $rol_editar->nombre_rol     = $request->nombre_rol;
         $rol_editar->descripcion_rol= $request->desc_rol;
         $rol_editar->save();
-        return redirect()->route('roles.index');
+        $notification= array('mensaje3'=>'Guardado correctamente!','alert-type'=>'success');
+        return redirect()->route('roles.index')->with($notification);
     }
 
     /**
@@ -119,8 +123,9 @@ class RolesController extends Controller
         try {
             $rolEliminar = Rol::findOrFail($id);
             $rolEliminar->delete(); 
-            //return redirect()->route('rols.index');
-            return redirect()->route('roles.index');
+            $notification = array('mensaje3' =>' Eliminado exitosamente !',
+            'alert-type'=>'success');
+            return redirect()->route('roles.index')->with($notification);
         } catch (Exception $e) {
             return "Fatal Error - ".$e->getMessage();
         }

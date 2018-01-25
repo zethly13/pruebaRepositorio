@@ -5,6 +5,7 @@
   <div class="card-header text-center text-muted"><strong>CREAR NUEVO SUB-ROLES</strong></div>
   <div class="card-body">
 	<h2><a href="{{ URL::to('sub_roles') }}">listar sub rol</a></h2></br>
+	 @include('errores.msjError')
 	{{ Form::open(array('route' =>array('sub_roles.store','rol_seleccionado'), 'method' => 'POST'), array('role'=> 'form')) }}
 		{{-- ingresar token ejemplo; input type="hidden" name="_token" value="{{ csrf_token() }}" --}}
 		<form>
