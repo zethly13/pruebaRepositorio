@@ -43,7 +43,6 @@
 		</div>
 	</div><!--panel card body-->
 </div><!--panel card-->
-
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>NUEVA ASIGNACION USUARIO</strong></div>
   <div class="card-body">
@@ -53,7 +52,7 @@
 			{!! Form::label('nombre','Nombre de Usuario:') !!}
 			{!! Form::label('nombre',$permisoUsuario->usuario->nombre_completo) !!}
 			<hr>
-
+		@include('errores.msjError')
     <form>
 			<div class="form-group row">
 				{!! Form::label('subRol','ROL/SUB-ROL:',['class'=>'col-md-2']) !!}
@@ -98,7 +97,9 @@
     		{!! Form::label('activo','SUB-GRUPO ACTIVO PARA EL USUARIO',['class'=>'col-md-5']) !!}
     		<div class="col-md-2">
     			{!! Form::select('activo',['SI'=>'SI','NO'=>'NO'],'SI',array('class'=>'form-control'))!!}
+
     		</div>
+				
 				<div class="text-center col-md-5">
 					{!! Form::button('Asignar Nuevo Sub-Rol', array('type'=> 'submit','class'=>'btn btn-primary'))!!}
 				</div>

@@ -16,6 +16,8 @@ use App\Acceso_sub_rol;
 use Response;
 use Auth;
 use Carbon\carbon;
+use App\Http\Requests\accesosRequest;//msj validacion tati
+use Illuminate\Support\Facades\Input; //tati validacion
 
 class AccesoController extends Controller
 {
@@ -48,12 +50,12 @@ class AccesoController extends Controller
 		return view('accesos.nuevaAsignacion',compact('permisosAsignados','permisoUsuario','subRol','unidad','funcion'));
 	}
 
-	public function validarNuevaAsignacion(Request $request, $id)
+	public function validarNuevaAsignacion(accesosRequest $request, $id)
 	{ 	
 		//return $id;
 		try {
 
-                $asignar = new Usuario_asignar_sub_rol();              
+                $asignar = new Usuario_asignar_sub_rol();           
                	$asignar->cod_sis = $request->sis;
                	$asignar->fecha_inicio = $request->fecha_inicio;
                	$asignar->fecha_fin = $request->fecha_fin;
@@ -63,8 +65,9 @@ class AccesoController extends Controller
                	$asignar->id_unidad = $request->unidad;
                	$asignar->id_usuario = $id;
                	$asignar->save();
-               //return $asignar;
-               	return redirect()->route('accesos.index');
+               	$notification = array('mensaje3' =>'nueva asignacion guardado correctamente',
+            'alert-type'=>'success');
+               	return redirect()->route('accesos.index')->with($notification);
            } catch (Exception $e) {
                	return "Fatal Error -".$e->getMessage();
            }
@@ -87,7 +90,7 @@ class AccesoController extends Controller
 		//return view('usuarios.perfil')->with('usuario',$usuario);
 	}
 	
-	public function validarModAsignacion(Request $request,$id)
+	public function validarModAsignacion(accesosRequest $request,$id)
 	{ 	
 		$permisoUsuario_mod=Usuario_asignar_sub_rol::findOrFail($id);
 	    $permisoUsuario_mod->id_sub_rol = $request->subRol;
