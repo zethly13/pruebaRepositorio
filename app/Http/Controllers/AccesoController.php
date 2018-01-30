@@ -101,7 +101,9 @@ class AccesoController extends Controller
 	    $permisoUsuario_mod->fecha_fin = $request->fecha_fin;
 	    $permisoUsuario_mod->activo = $request->activo;
 	    $permisoUsuario_mod->save();
-	    return redirect()->route('accesos.index');     
+	    $notification = array('mensaje3' =>'nueva asignacion guardado correctamente',
+            'alert-type'=>'success');
+        return redirect()->route('accesos.index')->with($notification);     
 		/*
 	    return $id;
 	    return $permisoUsuario_mod;
