@@ -10,6 +10,7 @@
 			{!! Form::label('nombre',$permisoUsuario->usuario->nombre_completo) !!}
 			</br>
 			<hr>
+			@include('errores.msjError')
 			<form>
 				<div class="form-group row">
 				  {!! Form::label('subRol','ROL/SUB-ROL:',['class'=>'col-md-2']) !!}
