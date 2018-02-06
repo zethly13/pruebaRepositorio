@@ -3,6 +3,7 @@
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>EDITAR SUB-ROLES</strong></div>
   <div class="card-body">
+  	 @include('errores.msjError')
 	{!! Form::open(array('route' =>  array('sub_roles.update', $sRol->id), 'method' => 'POST'), array('role'=> 'form')) !!}
 	{!! method_field('PUT') !!}
 	<form>

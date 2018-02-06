@@ -33,11 +33,7 @@ class UsuariosController extends Controller
     use AuthenticatesUsers;
     
     private $path = 'usuarios';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function __construct()
     {
 
@@ -61,11 +57,7 @@ class UsuariosController extends Controller
         return view($this->path.'.listaUsuarios', compact('usuario'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         
@@ -78,7 +70,7 @@ class UsuariosController extends Controller
         return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado'));
     }
 
- public function getCiudades($id){
+    public function getCiudades($id){
 
             $response = null;
             $ciudad = Pais::find($id)->ciudades->pluck('nombre_ciudad','id');
@@ -91,12 +83,7 @@ class UsuariosController extends Controller
             $provincias = Ciudad::find($id)->provincias->pluck('nombre_provincia','id');
             return $response = Response::json($provincias);    
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         
@@ -125,7 +112,7 @@ class UsuariosController extends Controller
            }
     }
 
-    /**
+     /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -192,20 +179,23 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-       try {
-
-            $user = Usuario::where('usuarios.id',$id)->get()->first();
-            //return $user;
-            $user->delete();
-                flash()->success('Usuario ha sido eliminado'); 
-            
-
-            return redirect()->back();
-            //return redirect()->route($this->path.'.index');
-        } catch (Exception $e) {
-            return "Fatal Error - ".$e->getMessage();
-        }
-
+       try{
+          $user = Usuario::where('usuarios.id',$id)->get()->first();
+          if(Auth::user()->id!== $user->id)
+            {
+              $user->delete();
+              $notification = array('mensaje3' =>' Eliminado exitosamente !','alert-type'=>'success');
+              return redirect()->back()->with($notification);
+            }
+          else
+            {
+              $notification = array('mensaje3' =>'no puede eliminarse a si mismo','alert-type'=>'warning');
+              return redirect()->back()->with($notification);
+            }
+          }
+        catch (Exception $e){
+    }   
+    }
         /*
         if ( Auth::user()->id == $id ) {
         flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
@@ -218,7 +208,6 @@ class UsuariosController extends Controller
         flash()->success('User not deleted');
     }
         */
-    }
 
     //Parte de Autenticacion
     public function login()
@@ -298,7 +287,11 @@ class UsuariosController extends Controller
         {
         $usuario->login = $request->nuevo_login;
         $usuario->save();
-        return redirect()->route($this->path.'.loginModificar')->with('mensaje2', '   Nuevo login guardado correctamente.');
+        $notification = array('mensaje3' =>'Login guardado correctamente !',
+            'alert-type'=>'success'
+         );
+        return back()->with($notification);
+        //return redirect()->route($this->path.'.loginModificar')->with('mensaje2', '   Nuevo login guardado correctamente.');
         }
     }
 

@@ -23,7 +23,7 @@
 {!! Form::text('fecha_fin',$gestionModificar->fecha_fin, array('placeholder'=>'Fecha Fin Gestion','id' => 'fecha-fin', 'data-date-format' => "dd-mm-yyyy",'readonly'=>'readonly')) !!}
 <br>
 {!! Form::label('habilitar_plan','*HABILITAR PLAN:',['class'=>'col-md-3']) !!}
-{!! csrf_field() !!}
+{{-- {!! csrf_field() !!} --}}
 <table class="table table-striped table-bordered table-hover table-condensed">
 	<tr class="table-info">
 		<th class="table-info">Nro</th>

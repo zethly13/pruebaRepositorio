@@ -5,6 +5,7 @@
   <div class="card-header text-center text-muted"><strong>CREAR ROLES</strong></div>
   <div class="card-body">
   <h4><a href="{{ route('roles.index') }}">LISTAR ROLES</a></h4></br>
+  @include('errores.msjError')
 	{!! Form::open(array('route' => 'roles.store', 'method' => 'POST'), array('role'=> 'form')) !!}
 	
 	<form>

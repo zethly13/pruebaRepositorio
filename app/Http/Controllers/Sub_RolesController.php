@@ -10,15 +10,12 @@ use App\Rol;
 use App\Sub_acceso;
 use App\Acceso_sub_rol;
 use App\Acceso;
-
+use Illuminate\Support\Facades\Input; //tati validacion
+use App\Http\Requests\subRolesRequest;//msj validacion tati
 
 class Sub_RolesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     private $path = 'sub_roles';
     public function __construct()
     {
@@ -35,11 +32,7 @@ class Sub_RolesController extends Controller
         return view($this->path.'.index',compact('sRoles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $rol= Rol::all();
@@ -55,16 +48,11 @@ class Sub_RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(subRolesRequest $request)
     {
         //return $request;
         try {
                $subRol = new Sub_rol();
-               /*$this->validate($request,[
-                'nombre_rol' => 'required|max:100',
-                'desc_rol'=>'required|max:100',
-                ]);
-*/
                $subRol->nombre_sub_rol = $request->nombre_sub_rol;
                $subRol->descripcion_sub_rol = $request->desc_sub_rol;
                $subRol->id_rol=$request->rol_seleccionado;
@@ -81,7 +69,9 @@ class Sub_RolesController extends Controller
                     $subAcceso->save();
                     }
                }
-               return redirect()->route($this->path.'.index');
+               $notification = array('mensaje3' =>'sub Rol guardado correctamente',
+            'alert-type'=>'success');
+               return redirect()->route($this->path.'.index')->with($notification);
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
            }
@@ -123,7 +113,7 @@ class Sub_RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(subRolesRequest $request, $id)
     {
         $sRol_editar=Sub_rol::findOrFail($id);
         $sRol_editar->nombre_sub_rol     = $request->nombre_sub_rol;
@@ -132,7 +122,7 @@ class Sub_RolesController extends Controller
         $sRol_editar->save();
         
         $sub_accesos=$request->permiso;
-            $id_eliminar=Acceso_sub_rol::select('id')->where('id_sub_rol','=',$sRol_editar->id)->get();
+        $id_eliminar=Acceso_sub_rol::select('id')->where('id_sub_rol','=',$sRol_editar->id)->get();
 
             //return $id_eliminar;
 
@@ -148,16 +138,11 @@ class Sub_RolesController extends Controller
 
             $subAccesoModificado->id_sub_rol =    $sRol_editar->id;
             $subAccesoModificado->save();
-        /*
-            $subAcceso->id_sub_rol =    $subRol->id;
-        return $request->permiso;
-        
-        $registros=Modelo::where('condicion','tal')->get();
-
-        */
         }
 
-        return redirect()->route($this->path.'.index');
+        $notification = array('mensaje3' =>'sub Rol cambiado correctamente',
+            'alert-type'=>'success');
+        return redirect()->route($this->path.'.index')->with($notification);
     }
 
     /**
@@ -168,11 +153,15 @@ class Sub_RolesController extends Controller
      */
     public function destroy($id)
     {
+        
         try {
             $sRolEliminar = Sub_rol::findOrFail($id);
             $sRolEliminar->delete(); 
             //return redirect()->route('rols.index');
-            return redirect()->route($this->path.'.index');
+            $notification = array('mensaje3' =>' Eliminado exitosamente !',
+            'alert-type'=>'success');
+            //return back()->with($notification);
+            return redirect()->route($this->path.'.index')->with($notification);
         } catch (Exception $e) {
             return "Fatal Error - ".$e->getMessage();
         }

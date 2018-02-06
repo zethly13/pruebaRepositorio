@@ -17,7 +17,7 @@
 			</div>
 		{!! Form::close() !!}
 			<!--FIN DE BUSCADOR-->
-
+		@include('errores.msjError')
  		<ul class="pagination justify-content-center">{{ $usuario->render("pagination::bootstrap-4") }}</ul>
 					
 		<table class="table table-sm table-hover table-bordered table-condensed table-striped table-responsive-lg">
@@ -42,7 +42,7 @@
 				</td>
 				<td class="text-center">
 					{!! Form::open(array('route' =>array('usuarios.destroy',$user->id),'method'=>'delete')) !!}
-          	{{ Form::button(' Eliminar', array('type'=> 'submit','class'=>'btn btn-danger btn-sm')) }}
+          	{{ Form::button(' Eliminar', array('type'=> 'submit','class'=>'btn btn-danger btn-sm','onclick' => 'return confirm("¿Estas Seguro que desea eliminar el usuario?")')) }}
           {!! Form::close() !!}
         </td>
 			</tr>

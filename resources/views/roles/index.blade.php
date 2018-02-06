@@ -23,7 +23,7 @@
 				<td class="text-center"><a href="{{ route('roles.edit', $roles->id) }}" " type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a></td>
 				<td class="text-center">
 					{!! Form::open(array('route' =>array('roles.destroy',$roles->id),'method'=>'delete')) !!}
-          {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
+          {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash','onclick' => 'return confirm("¿Estas Seguro que desea eliminar el rol?")')) }}
           {!! Form::close() !!}
         </td>
 			</tr>
