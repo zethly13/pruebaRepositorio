@@ -26,22 +26,22 @@
 					<a href="{{ route('sub_roles.edit', $roles->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a>
 				</td>
 				<td class="text-center">
-<<<<<<< HEAD
-					{!! Form::open(array('route'=>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
+{{-- <<<<<<< HEAD --}}
+				{{-- 	{!! Form::open(array('route'=>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
 			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
 			    {!! Form::close() !!}
-			    </td>
-			    </tr>
-=======
+			    </td> --}}
+			    {{-- </tr> --}}
+{{-- ======= --}}
 					{!! Form::open(array('route' =>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
 			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash','onclick' => 'return confirm("¿Estas Seguro que desea eliminar el sub rol?")')) }}			
 			 {!! Form::close() !!}
         	</td>
 			</tr>
->>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac
+{{-- >>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac --}}
 			@endforeach
 		</tbody>
 	</table>
 </div>
 @endsection
-{{-- URL::to('/rols/'.$roles->id.'/edit') --}}
+{{-- URL::to('/rols/'.$roles->id.'/edit') --}} 	

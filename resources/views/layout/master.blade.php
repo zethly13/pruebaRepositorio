@@ -9,13 +9,13 @@
   <link href="/css/font-awesome.css" rel="stylesheet">
   <link href="/css/estiloPropio.css" rel="stylesheet">
   <link href="/css/dashboard.css" rel="stylesheet">
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD --}}
    <link href="/css/navbar.css" rel="stylesheet">
    <link rel="stylesheet" href="/css/jquery-ui.min.css">
-=======
+{{-- ======= --}}
   <link href="/css/navbar.css" rel="stylesheet">
   <link href="/css/toastr.css" rel="stylesheet">
->>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac
+{{-- >>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac --}}
   <title>FCE-UMSS</title>
 </head>
 <body>
@@ -58,14 +58,14 @@
 <script src="/js/bootstrap.js"></script>
 <script src="/js/toastr.js"></script>
 <script src="/js/dinamico.js"></script>
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD --}}
 <script src="/js/jquery.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <script src="/js/datepicker-es.js"></script>
 <script src="/js/liz.js"></script>
   {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
   @yield('script')
-=======
+{{-- ======= --}}
 <script src="/js/tati.js"></script>
 <script>
 @if(\Session::has('mensaje3'))
@@ -86,5 +86,5 @@
       }
   @endif
 </script>
->>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac
+{{-- >>>>>>> 5124918adb3fa56f49af1791bedecfb072b061ac --}}
 </html>
