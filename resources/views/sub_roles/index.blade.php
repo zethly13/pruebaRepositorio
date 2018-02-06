@@ -16,9 +16,9 @@
       </tr>
 		</thead>
 		<tbody>
-			@foreach ($sRoles as $roles)
+			@foreach ($sRoles as $key=>$roles)
 			<tr>
-				<td class="text-center">{{ $roles->id }}</td>
+				<td class="text-center">{{ ++$key }}</td>
 				<td>{{ $roles->nombre_sub_rol }}</td>
 				<td>{{ $roles->descripcion_sub_rol }}</td>
 				<td>{{ $roles->nombre_rol }}</td>
@@ -26,8 +26,11 @@
 					<a href="{{ route('sub_roles.edit', $roles->id) }}" type="button" class="btn btn-success glyphicon glyphicon-edit">Modificar</a>
 				</td>
 				<td class="text-center">
-					{!! Form::open(array('route' =>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
-			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}			</tr>
+					{!! Form::open(array('route'=>array('sub_roles.destroy',$roles->id),'method'=>'delete')) !!}
+			    {{ Form::button('Eliminar', array('type'=> 'submit','class'=>'btn btn-danger glyphicon glyphicon-trash')) }}
+			    {!! Form::close() !!}
+			    </td>
+			    </tr>
 			@endforeach
 		</tbody>
 	</table>

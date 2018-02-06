@@ -141,7 +141,7 @@ $factory->define(App\Gestion::class, function (Faker\Generator $faker)
 
         'anio' =>$faker->year,
         'periodo'=>$faker->numberBetween($min = 1, $max = 4),
-        'fecha-inicio'=>$faker->date,
+        'fecha_inicio'=>$faker->date,
         'fecha_fin'=>$faker->date,
         'activo'=>$faker->randomElement(['SI','NO']),
         'peso_gestion' =>$faker->buildingNumber,
@@ -157,6 +157,6 @@ $factory->define(App\Plan_gestion_unidad::class, function (Faker\Generator $fake
         'id_gestion' =>$faker->numberBetween($min = 1, $max = 20),
         'id_plan'=>$faker->numberBetween($min = 1, $max = 5),
         'id_unidad'=>$faker->numberBetween($min = 1, $max = 20),
-
+        'activo'=>$faker->randomElement(['SI','NO']),
     ];
 });

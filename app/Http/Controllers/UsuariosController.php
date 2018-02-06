@@ -44,10 +44,10 @@ class UsuariosController extends Controller
         $this->middleware('autentificado', [
             'except' => ['login', 'logear']
             ]);
-        $this->middleware('permisos:1', ['only' => 'create','store','index']);
-        $this->middleware('permisos:2', ['only' => 'edit','destroy','update','index']);
-    }
-
+        $this->middleware('permisos:1', ['only' => 'create','store']);
+        $this->middleware('permisos:2', ['only' => 'edit','destroy','update']);
+        $this->middleware('permisos:1,2',['only' => 'index']);
+}
     public function index(Request $request)
     {
         $usuario=Usuario::Buscador($request->nombre)->paginate(20);
@@ -57,7 +57,7 @@ class UsuariosController extends Controller
             $usuario->estado_civil;
             $usuario->provincia;
         });
-        //return $user;
+        
         return view($this->path.'.listaUsuarios', compact('usuario'));
     }
 

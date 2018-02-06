@@ -97,20 +97,20 @@ class Usuario extends User
 	{
 		if($ci!=null && $nombreUsuario!=null && $apellido!=null)
 		{		
-			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['apellidos','like','%'.$apellido.'%'],['doc_identidad','=',$ci]]);
+			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['apellidos','like','%'.$apellido.'%'],['doc_identidad','like','%'.$ci.'%']]);
 		}elseif ($ci==null) {
 			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['apellidos','like','%'.$apellido.'%']]);
 		}elseif ($nombreUsuario==null) {
-			$resultado=$query->where([['apellidos','like','%'.$apellido.'%'],['doc_identidad','=',$ci]]);
+			$resultado=$query->where([['apellidos','like','%'.$apellido.'%'],['doc_identidad','like','%'.$ci.'%']]);
 		}elseif ($apellido==null) {
-			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['doc_identidad','=',$ci]]);
+			$resultado=$query->where([['nombres','like','%'.$nombreUsuario.'%'],['doc_identidad','like','%'.$ci.'%']]);
 		}elseif($ci!=null && $nombreUsuario!=null){
 			$resultado=$query->where('apellidos','like','%'.$apellido.'%');
 		}elseif($ci!=null && $apellido!=null){
 			$resultado=$query->where('nombres','like','%'.$nombreUsuario.'%');
 
 		}elseif($nombreUsuario!=null && $apellido!=null)
-			$resultado=$query->where('doc_identidad','=',$ci);
+			$resultado=$query->where('doc_identidad','like','%'.$ci.'%');
 
 		return $resultado;
 	}

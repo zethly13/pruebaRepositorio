@@ -8,7 +8,7 @@ class Gestion extends Model
 {
     protected $table = 'gestiones';
 
-    protected $fillable = [ 'anio', 'periodo', 'fecha-inicio', 'fecha_fin', 'activo', 'peso_gestion', 'id_tipo_gestion'];
+    protected $fillable = [ 'anio', 'periodo', 'fecha_inicio', 'fecha_fin', 'activo', 'peso_gestion', 'id_tipo_gestion'];
 
     public function tipo_gestiones()
 	{
@@ -18,5 +18,9 @@ class Gestion extends Model
 	public function plan_gestion_unidades()
 	{
 		return $this->hasMany('App\Plan_gestion_unidad', 'id_gestion', 'id');
+	}
+	public function getAnioGestionTipoAttribute()
+	{
+		return $this->periodo." ".$this->anio." -> ".$this->tipo_gestiones->nombre_tipo_gestion;
 	}
 }

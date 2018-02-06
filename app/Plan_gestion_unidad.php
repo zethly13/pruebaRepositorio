@@ -8,7 +8,7 @@ class Plan_gestion_unidad extends Model
 {
     protected $table = 'plan_gestion_unidades';
 
-    protected $fillable = [ 'id_gestion','id_plan','id_unidad'];
+    protected $fillable = [ 'id_gestion','id_plan','id_unidad','activo'];
 
     public function planes()
 	{

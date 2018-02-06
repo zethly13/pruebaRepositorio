@@ -13,8 +13,9 @@ class RolesController extends Controller
     public function __construct()
     {
         // Filtrar todos los métodos
-        $this->middleware('permisos:3', ['only' => 'index','create','store']);
-        $this->middleware('permisos:4', ['only' => 'index','update','edit','destroy']);
+        $this->middleware('permisos:3', ['only' => 'create','store']);
+        $this->middleware('permisos:3,4', ['only' => 'index']);
+        $this->middleware('permisos:4', ['only' => 'update','edit','destroy']);
         
     }
     /**
