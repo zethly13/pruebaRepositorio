@@ -17,7 +17,7 @@ class CreateGestionesTable extends Migration
             $table->increments('id');
             $table->string('anio',10);
             $table->string('periodo',10);
-            $table->date('fecha_inicio');
+            $table->date('fecha-inicio');
             $table->date('fecha_fin');
             $table->enum('activo',['SI','NO']);
             $table->integer('peso_gestion');
