@@ -26,7 +26,8 @@
 					<th>Nro</th>
 	        <th>NOMBRE USUARIO</th>
 	        <th>DOC IDENTIDAD</th>
-	        <th>provincia</th>
+	        <th>PROVINCIA</th>
+	        <th>VER PERFIL</th>
 	        <th>MODIFICAR</th>
 	        <th>ELIMINAR</th>
       	</tr>
@@ -37,6 +38,9 @@
 				<td>{{ $user->nombres.' '.$user->apellidos }}</td>
 				<td>{{ $user->doc_identidad }}</td>
 				<td>{{ $user->provincia->nombre_provincia }}</td>
+				<td class="text-center">
+					<a href="{{ route('usuarios.show', $user->id) }}" role="button" class="btn btn-primary btn-sm">Ver Perfil</a>
+				</td>
 				<td class="text-center">
 					<a href="{{ route('usuarios.edit', $user->id) }}" role="button" class="btn btn-success btn-sm">Modificar</a>
 				</td>

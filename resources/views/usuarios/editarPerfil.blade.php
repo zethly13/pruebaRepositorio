@@ -1,9 +1,9 @@
-@extends('layout.master')  
-@section('contenido')  
+@extends('layout.master') 
+@section('contenido')    
 
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>INFORMACION BIOGRAFICA DE USUARIO</strong></div>
-  <div class="card-body">
+  <div class="card-body"> 
     <div class="row">
       <div class="col-md-4 text-center">
         <img src="/img/img_avatar3.png" class="img-thumbnail img-responsive img-raised" width="220" height="150">
@@ -12,8 +12,8 @@
         <table class="table table-sm table-hover table-condensed table-bordered">
           <tbody>
             <tr>
-              <th class="table-info"  WIDTH="255">CI</th>
-              <td>{{ $usuario->doc_identidad }}</td>
+              <th class="table-info"  WIDTH="255">CI:</th>
+                <td>{{ $usuario->doc_identidad }}</td>  
             </tr>
             <tr>
               <th class="table-info">TIPO DE DOCUMENTO:</th>
@@ -24,11 +24,11 @@
               <td class="text-uppercase">{{ $usuario->ciudad->nombre_ciudad }}</td>
             </tr>
             <tr>
-              <th class="table-info">NOMBRE:</th>
+              <th class="table-info">NOMBRES:</th>
               <td class="text-uppercase">{{ $usuario->nombres }}</td>
             </tr>
             <tr>
-              <th class="table-info">APELLIDOS</th>
+              <th class="table-info">APELLIDOS:</th>
               <td class="text-uppercase">{{ $usuario->apellidos }}</td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
             </tr>
             <tr>
               <th class="table-info">PROVINCIA NACIMIENTO:</th>
-              <td class="text-uppercase">{{ $usuario->provincia->nombre_provincia }}</td>
+              <td class="text-uppercase">{{ $usuario->provincia->nombre_provincia }}</td> 
             </tr>
             <tr>
               <th class="table-info">GENERO:</th>
@@ -77,33 +77,32 @@
       </thead>
       <tbody>
         <tr>
-         @foreach($usuarioEmail as $usuarioEmail)
+        @foreach($usuarioEmail as $usuarioEmail)
           <td class="text-uppercase">
-            @if(!is_null($usuarioEmail))  
-              {{ $usuarioEmail->nombre_tipo_email }}
+             @if(!is_null($usuarioEmail))  
+               {{ $usuarioEmail->nombre_tipo_email }} 
+            @else
+            <h4>SIN TIPO CORREO</h4>
+            @endif
+          </td>
+          <td>
+            @if(!is_null($usuarioEmail)) 
+               {{ $usuarioEmail->email }} 
+            @else
+              <h4>USUARIO SIN CORREO</h4>
+            @endif 
+          </td>  
+          <td>
+             @if(!is_null($usuarioEmail))  
+               {{ $usuarioEmail->email_activo}} 
             @else
             <h4>SIN TIPO CORREO</h4>
             @endif 
           </td>
-          <td>
-            @if(!is_null($usuarioEmail)) 
-              {{ $usuarioEmail->email }}
-            @else
-              <h4>USUARIO SIN CORREO</h4>
-            @endif
-          </td>  
-          <td>
-            @if(!is_null($usuarioEmail))  
-               {{ $usuarioEmail->email_activo}} 
-            @else
-            <h4>SIN TIPO CORREO</h4>
-            @endif
-          </td>
-
           <td class="text-center"><a class="btn btn-success btn-sm" href="#modificarEmail"  data-target="#modificarEmail{{ $usuarioEmail->id }}" data-toggle="modal" ><i class="fa fa-pencil"></i>Modificar</a> </td>
-
-
-       <div class="modal fade" id="modificarEmail{{ $usuarioEmail->id }}">
+          
+          
+                <div class="modal fade" id="modificarEmail{{ $usuarioEmail->id }}">
                 <div class="modal-dialog">
                   <div class="modal-content">
                       <div class="modal-header">
@@ -143,7 +142,7 @@
                  {{ Form::close() }}
                           
                 </div>
-          <td class="text-center"> {!! Form::open(array('route' =>array('usuarios.eliminarEmail',$usuarioEmail->id),'method'=>'delete')) !!}
+          <td class="text-center">{!! Form::open(array('route' =>array('usuarios.eliminarEmail',$usuarioEmail->id),'method'=>'delete')) !!}
           {{ Form::button(' Eliminar', array('type'=> 'submit','class'=>'btn btn-danger fa fa-trash')) }}
           {!! Form::close() !!}</td>
           
@@ -152,7 +151,7 @@
         @endforeach
       </tbody>
     </table>
-     <a class="btn btn-primary" href="#ventanaEmail" data-toggle="modal" ><i class="fa fa-plus fa-fw"></i> NUEVO EMAIL</a>
+    <a class="btn btn-primary" href="#ventanaEmail" data-toggle="modal" ><i class="fa fa-plus fa-fw"></i> NUEVO EMAIL</a>
 
         <div class="modal fade" id="ventanaEmail">
           <div class="modal-dialog">
@@ -196,6 +195,8 @@
 </div><!--cierre panel card-->
 
 
+
+
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>TELEFONO USUARIO</strong></div>
   <div class="card-body">
@@ -208,22 +209,23 @@
       </thead>
       <tbody>
         <tr>
-         @foreach($usuarioTelf as $usuarioTelf)
+        @foreach($usuarioTelf as $usuarioTelf)
           <td>
-            @if(!is_null($usuarioTelf))
+           @if(!is_null($usuarioTelf))
               {{ $usuarioTelf->nombre_tipo_telefono }} 
             @else
               <h4>SIN TIPO TELEFONO</h4>
             @endif  
           </td>
-          <td>
+          <td >
             @if(!is_null($usuarioTelf))
-              {{ $usuarioTelf->numero_telefono }}   
+               {{ $usuarioTelf->numero_telefono }}  
             @else
               <h4>USUARIO SIN TELEFONO</h4>
-            @endif
+            @endif 
           </td>  
-         <td class="text-center"><a class="btn btn-success btn-sm" href="#modificarTelefono"  data-target="#modificarTelefono{{ $usuarioTelf->id }}" data-toggle="modal" ><i class="fa fa-pencil"></i> Modificar</a></td>
+          
+          <td class="text-center"><a class="btn btn-success btn-sm" href="#modificarTelefono"  data-target="#modificarTelefono{{ $usuarioTelf->id }}" data-toggle="modal" ><i class="fa fa-pencil"></i> Modificar</a></td>
           
           
                 <div class="modal fade" id="modificarTelefono{{ $usuarioTelf->id }}">
@@ -309,9 +311,11 @@
                </div>              
            </div> 
            {{ Form::close() }}
-      </div> 
+      </div>
+
   </div><!--cierre panel body-->
-</div><!--cierre panel card-->
+</div><!--cierre card-->
+
 <div class="card border-info mb-2">
   <div class="card-header text-center text-muted"><strong>DIRECCION DE USUARIO</strong></div>
   <div class="card-body">
@@ -435,4 +439,11 @@
         </div>
   </div><!--cierre panel body-->
 </div><!--cierre panel card-->
+
 @endsection
+
+
+
+
+
+

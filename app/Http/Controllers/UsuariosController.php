@@ -16,17 +16,21 @@ use App\Provincia;
 use App\Estado_civil;
 use App\Usuario;
 use App\Usuario_direccion;
-use App\usuario_email;
-use Auth;
+use App\Usuario_email;
 use App\Usuario_telefono;
+use App\Tipo_email;
+use App\Tipo_telefono;
+use App\Tipo_direccion;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Response;
-
 use Hash;//tati para contraseña
 use Illuminate\Support\Facades\Input;//tati contraseña
 use Illuminate\Support\Facades\Redirect;//tati contraseña
 Use Laracasts\Flash\Flash;//mensajes  tati
 use Validator; 
+use Response;
+use App\Http\Requests\usuarioRequest;
+use Illuminate\Http\Requests;
 
 class UsuariosController extends Controller
 {
@@ -61,13 +65,16 @@ class UsuariosController extends Controller
     public function create()
     {
         
-        $pais=Pais::all();
+       $pais=Pais::all();
         $tipoDocId=Tipo_doc_identidad::all();
         $ciudad=Ciudad::all();
         $provincia=Provincia::all();
         $estado=Estado_civil::all();
+        $tipo_email=Tipo_email::all()->pluck('nombre_tipo_email','id');
+        $tipo_telefono=Tipo_telefono::all()->pluck('nombre_tipo_telefono', 'id');
+        $tipo_direccion=Tipo_direccion::all()->pluck('nombre_tipo_direccion', 'id');    
 
-        return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado'));
+        return view($this->path.'.create', compact('pais','tipoDocId','ciudad','provincia','estado','tipo_email','tipo_telefono','tipo_direccion'));
     }
 
     public function getCiudades($id){
@@ -86,7 +93,6 @@ class UsuariosController extends Controller
    
     public function store(Request $request)
     {
-        
         try {
                $user=new Usuario();
                $user->doc_identidad = $request->numero_identidad_usuario;
@@ -105,50 +111,169 @@ class UsuariosController extends Controller
                $user->ciudad_expedido_doc=$request->expedido_usuario;
                $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
                $user->save();
-                //return $user;
+                
+               $usuario_email = new Usuario_email();
+               $usuario_email->email = $request->email_usuario;
+               $usuario_email->email_activo ='SI';
+               $usuario_email->id_usuario = $user->doc_identidad;
+               $usuario_email->id_tipo_email= $request->tipo_email;
+               $usuario_email->save();
+
+                $usuario_telefono = new Usuario_telefono();
+                $usuario_telefono->numero_telefono = $request->telefono_usuario;
+                $usuario_telefono->id_usuario = $user->doc_identidad;
+                $usuario_telefono->id_tipo_telefono= $request->tipo_telefono;
+                $usuario_telefono->save();
+
+                $usuario_direccion = new Usuario_direccion();
+                $usuario_direccion->nombre_direccion = $request->direccion_usuario;
+                $usuario_direccion->id_usuario = $user->doc_identidad;
+                $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
+                $usuario_direccion->save();
+
                return redirect()->route($this->path.'.index')->with('mensaje','se registro el usuario');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
-           }
+           }     
     }
 
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+     public function show($id)
     {
-        //
+        
+       $usuario=Usuario::where('usuarios.id','=',$id)->get()->first();
+
+       $usuarioEmail=Usuario_email::join('tipo_emails','tipo_emails.id','=','usuario_emails.id_tipo_email')->select('tipo_emails.nombre_tipo_email','usuario_emails.email','usuario_emails.email_activo','usuario_emails.id','tipo_emails.id as id_tipo_email')->where('usuario_emails.id_usuario',$id)->get();
+
+       $usuarioTelf=Usuario_telefono::join('tipo_telefonos','tipo_telefonos.id','=','usuario_telefonos.id_tipo_telefono')->select('tipo_telefonos.nombre_tipo_telefono', 'usuario_telefonos.numero_telefono','usuario_telefonos.id', 'tipo_telefonos.id as id_tipo_telefono')->where('usuario_telefonos.id_usuario','=',$id)->get();
+
+       $usuarioDir=Usuario_direccion::join('tipo_direcciones','tipo_direcciones.id','=','Usuario_direcciones.id_tipo_direccion')->select('tipo_direcciones.nombre_tipo_direccion','Usuario_direcciones.nombre_direccion','usuario_direcciones.id','tipo_direcciones.id as id_tipo_direccion')->where('Usuario_direcciones.id_usuario','=',$id)->get();
+       $tipo_email=Tipo_email::all()->pluck('nombre_tipo_email','id');
+       $tipo_telefono=Tipo_telefono::all()->pluck('nombre_tipo_telefono', 'id');
+       $tipo_direccion=Tipo_direccion::all()->pluck('nombre_tipo_direccion', 'id'); 
+
+        return view('usuarios.editarPerfil', compact('usuario','usuarioEmail','usuarioTelf','usuarioDir','tipo_email','tipo_direccion','tipo_telefono','modificarEmail'));
+    } 
+
+    public function addEmail(Request $request, $id){
+
+               $usuario_email = new Usuario_email();
+               $usuario_email->email = $request->email_usuario;
+               $usuario_email->email_activo ='SI';
+               $usuario_email->id_usuario = $id;
+               $usuario_email->id_tipo_email= $request->tipo_email;
+               $usuario_email->save();
+               return redirect::back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function addTelefono(Request $request, $id){
+
+               
+                $usuario_telefono = new Usuario_telefono();
+                $usuario_telefono->numero_telefono = $request->telefono_usuario;
+                $usuario_telefono->id_usuario = $id;
+                $usuario_telefono->id_tipo_telefono= $request->tipo_telefono;
+                $usuario_telefono->save();
+                return redirect::back();
+    }
+   
+    public function addDireccion(Request $request, $id){
+
+                $usuario_direccion = new Usuario_direccion();
+                $usuario_direccion->nombre_direccion = $request->direccion_usuario;
+                $usuario_direccion->id_usuario = $id;
+                $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
+                $usuario_direccion->save();
+                return redirect::back();
+    }
+
+    public function eliminarEmail($id)
+
+    {
+       try {
+
+            $email = Usuario_email::where('id',$id)->get()->first();
+            $email->delete();
+                 flash()->success('Email ha sido eliminado'); 
+            return redirect()->back();
+           
+        } catch (Exception $e) {
+            return "Fatal Error - ".$e->getMessage();
+        }   
+    }
+
+    public function eliminarTelefono($id)
+
+    {
+       try {
+
+            $telefono = Usuario_telefono::where('id',$id)->get()->first();
+            $telefono->delete();
+                 flash()->success('Telefono ha sido eliminado'); 
+            return redirect()->back();
+           
+        } catch (Exception $e) {
+            return "Fatal Error - ".$e->getMessage();
+        }  
+    }
+
+    public function eliminarDireccion($id)
+
+    {
+       try {
+
+            $direccion = Usuario_direccion::where('id',$id)->get()->first();
+            $direccion->delete();
+                 flash()->success('Direccion ha sido eliminado'); 
+            return redirect()->back();
+           
+        } catch (Exception $e) {
+            return "Fatal Error - ".$e->getMessage();
+        }
+    }
+
+    public function modificarEmail(Request $request, $id)
+    {
+               $usuario_email = Usuario_email::where('id',$id)->get()->first();
+               $usuario_email->email = $request->email_usuario;
+               $usuario_email->email_activo ='SI';
+               $usuario_email->id_tipo_email= $request->tipo_email;
+               $usuario_email->save();
+               return redirect::back();
+    }
+
+    public function modificarTelefono(Request $request, $id)
+    {
+                $usuario_telefono = Usuario_telefono::where('id',$id)->get()->first();
+                $usuario_telefono->numero_telefono = $request->telefono_usuario;
+                $usuario_telefono->id_tipo_telefono= $request->tipo_telefono;
+                $usuario_telefono->save();
+                return redirect::back();
+    }
+
+    public function modificarDireccion(Request $request, $id)
+    {
+                $usuario_direccion = Usuario_direccion::where('id',$id)->get()->first();
+                $usuario_direccion->nombre_direccion = $request->direccion_usuario;
+                $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
+                $usuario_direccion->save();
+                return redirect::back();
+    }
+
     public function edit($id)
     {
-        $user=Usuario::join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->join('tipo_doc_identidades','tipo_doc_identidades.id','=','usuarios.id_tipo_doc_identidad')->join('provincias','provincias.id','=','usuarios.id_provincia')->join('ciudades','ciudades.id','=','usuarios.ciudad_expedido_doc')->select('usuarios.id','usuarios.nombres','usuarios.apellidos','doc_identidad','tipo_doc_identidades.nombre_tipo_doc_identidad','usuarios.id_tipo_doc_identidad','provincias.nombre_provincia', 'usuarios.id_provincia','usuarios.ciudad_expedido_doc','ciudades.nombre_ciudad', 'usuarios.fecha_nac', 'usuarios.id_estado_civil','estado_civiles.estado_civil', 'usuarios.sexo')->where('usuarios.id','=',$id)->get()->first();
+        $usuario=Usuario::where('usuarios.id','=',$id)->get()->first();
         $pais=Pais::all();
-        $tipoDocId=Tipo_doc_identidad::all();
+        $tipoDocId=Tipo_doc_identidad::pluck('nombre_tipo_doc_identidad','id');
         $ciudad=Ciudad::all();
         $provincia=Provincia::all();
         $estado=Estado_civil::all();
+        $usuario_email=Usuario::join('usuario_emails','usuario_emails.id_usuario','=','usuarios.id')->join('tipo_emails','tipo_emails.id','=','usuario_emails.id_tipo_email')->select('id_usuario','email','id_tipo_email','nombre_tipo_email')->where('usuarios.id','=',$id)->get();
+       $usuario_telefono=Usuario::join('usuario_telefonos','usuario_telefonos.id_usuario','=','usuarios.id')->join('tipo_telefonos','tipo_telefonos.id','=','usuario_telefonos.id_tipo_telefono')->select('id_usuario','numero_telefono','id_tipo_telefono','nombre_tipo_telefono')->where('usuarios.id','=',$id)->get();
+        
+       $usuario_direccion=Usuario::join('usuario_direcciones','usuario_direcciones.id_usuario','=','usuarios.id')->join('tipo_direcciones','tipo_direcciones.id','=','usuario_direcciones.id_tipo_direccion')->select('id_usuario','nombre_direccion','id_tipo_direccion','nombre_tipo_direccion','usuario_direcciones.id')->where('usuarios.id','=',$id)->get();
 
-        //return $user;
-        return view($this->path.'.editarUsuario', compact('pais','tipoDocId','ciudad','provincia','estado','user'));
+        return view($this->path.'.editarUsuario', compact('usuario','tipo_direccion','usuario_telefono','usuario_direccion','usuario_email','pais','tipoDocId','ciudad','provincia','estado','user'));    
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $user=Usuario::where('usuarios.id',$id)->get()->first();
@@ -171,12 +296,6 @@ class UsuariosController extends Controller
         return redirect()->route($this->path.'.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
        try{
@@ -196,20 +315,7 @@ class UsuariosController extends Controller
         catch (Exception $e){
     }   
     }
-        /*
-        if ( Auth::user()->id == $id ) {
-        flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
-        return redirect()->back();
-    }
-
-    if( User::findOrFail($id)->delete() ) {
-        flash()->success('User has been deleted');
-    } else {
-        flash()->success('User not deleted');
-    }
-        */
-
-    //Parte de Autenticacion
+      
     public function login()
     {
         return view('usuarios.login');
@@ -220,7 +326,6 @@ class UsuariosController extends Controller
         $credenciales = $request->only([
             'login', 'password'
             ]);
-        //return $credenciales;
         if(auth()->attempt($credenciales))
             return redirect()
                 ->route('home.index');
@@ -246,23 +351,19 @@ class UsuariosController extends Controller
 
     public function perfil()
     {
-       $usuario=auth()->user();
-       $usuarioInfo=Usuario::join('tipo_doc_identidades','tipo_doc_identidades.id','=','usuarios.id_tipo_doc_identidad')->join('estado_civiles','estado_civiles.id','=','usuarios.id_estado_civil')->join('provincias','provincias.id','=','usuarios.id_provincia')->join('ciudades','ciudades.id','=','usuarios.ciudad_expedido_doc')->select('tipo_doc_identidades.nombre_tipo_doc_identidad','estado_civiles.estado_civil','provincias.nombre_provincia','ciudades.nombre_ciudad')->where('usuarios.id','=',auth()->user()->id)->get()->first();
+       $usuario=Usuario::where('usuarios.id','=',auth()->user()->id)->get()->first();
 
-       $usuarioPais=Ciudad::join('paises','paises.id','=','ciudades.id_pais')->select('paises.nombre_pais')->where('ciudades.id','=',auth()->user()->ciudad_expedido_doc)->get()->first();
+       $usuarioEmail=Usuario_email::join('tipo_emails','tipo_emails.id','=','usuario_emails.id_tipo_email')->select('tipo_emails.nombre_tipo_email','usuario_emails.email','usuario_emails.email_activo','usuario_emails.id','tipo_emails.id as id_tipo_email')->where('usuario_emails.id_usuario','=',auth()->user()->id)->get();
 
-       $usuarioEmail=Usuario_email::join('tipo_emails','tipo_emails.id','=','usuario_emails.id_tipo_email')->select('tipo_emails.nombre_tipo_email','usuario_emails.email')->where('usuario_emails.id_usuario','=',auth()->user()->id)->get()->first();
+       $usuarioTelf=Usuario_telefono::join('tipo_telefonos','tipo_telefonos.id','=','usuario_telefonos.id_tipo_telefono')->select('tipo_telefonos.nombre_tipo_telefono', 'usuario_telefonos.numero_telefono','usuario_telefonos.id', 'tipo_telefonos.id as id_tipo_telefono')->where('usuario_telefonos.id_usuario','=',auth()->user()->id)->get();
+
+       $usuarioDir=Usuario_direccion::join('tipo_direcciones','tipo_direcciones.id','=','Usuario_direcciones.id_tipo_direccion')->select('tipo_direcciones.nombre_tipo_direccion','Usuario_direcciones.nombre_direccion','usuario_direcciones.id','tipo_direcciones.id as id_tipo_direccion')->where('Usuario_direcciones.id_usuario','=',auth()->user()->id)->get();
+        $tipo_email=Tipo_email::all()->pluck('nombre_tipo_email','id');
+       $tipo_telefono=Tipo_telefono::all()->pluck('nombre_tipo_telefono', 'id');
+       $tipo_direccion=Tipo_direccion::all()->pluck('nombre_tipo_direccion', 'id'); 
+        
+      return view('usuarios.perfil', compact('usuario','usuarioEmail','usuarioTelf','usuarioDir','tipo_email','tipo_telefono','tipo_direccion'));
        
-       //$usuarioEmail=2;
-       $usuarioTelf=Usuario_telefono::join('tipo_telefonos','tipo_telefonos.id','=','usuario_telefonos.id_tipo_telefono')->select('tipo_telefonos.nombre_tipo_telefono', 'usuario_telefonos.numero_telefono')->where('usuario_telefonos.id_usuario','=',auth()->user()->id)->get()->first();
-
-       $usuarioDir=Usuario_direccion::join('tipo_direcciones','tipo_direcciones.id','=','Usuario_direcciones.id_tipo_direccion')->select('tipo_direcciones.nombre_tipo_direccion','Usuario_direcciones.nombre_direccion')->where('Usuario_direcciones.id_usuario','=',auth()->user()->id)->get()->first();
-
-        //$usuario=Usuario::where('id','=',auth()->user());
-        //return $usuarioDir;
-      return view('usuarios.perfil', compact('usuario','usuarioInfo','usuarioPais','usuarioEmail','usuarioTelf','usuarioDir'));
-       
-        //return view('usuarios.perfil')->with('usuario',$usuario);
     }
 
     public function loginModificar()
@@ -291,7 +392,6 @@ class UsuariosController extends Controller
             'alert-type'=>'success'
          );
         return back()->with($notification);
-        //return redirect()->route($this->path.'.loginModificar')->with('mensaje2', '   Nuevo login guardado correctamente.');
         }
     }
 
@@ -325,7 +425,7 @@ class UsuariosController extends Controller
               if($usuario->save())
                 {
                 return redirect()->route($this->path.'.contrasenaModificar')->with('mensaje2', '  Nueva contraseña guardada correctamente');
-                        //return redirect()->route($this->path.'.index');
+                    
                 }
               else
                 {
