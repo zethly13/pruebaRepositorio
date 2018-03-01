@@ -1,4 +1,3 @@
-
 @if (Auth::guest())
   <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
     <a class="navbar-brand" href="#">LOGO</a>
@@ -18,9 +17,16 @@
     <div class="collapse navbar-collapse" id="navbarsExample06">
       <ul class="navbar-nav mr-auto">
         @foreach($acceso as $accesos)
-          <li class="nav-item">
-              <a class="nav-link" href="#" id="id_menu" class="enviar">{{ $accesos->nombre_acceso }}</a>
-          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{ $accesos->nombre_acceso }}</a>
+              <div class="dropdown-menu">
+                @foreach($subAccesosUsuario as $subAccesos)
+                  @if($subAccesos->id_acceso == $accesos->id)
+                    <a class="dropdown-item" href="{{ route($subAccesos->ruta_sub_acceso) }}">{{ $subAccesos->nombre_sub_acceso }}</a>
+                  @endif
+                @endforeach
+              </div>
+        </li>
         @endforeach
       </ul>
     
@@ -53,12 +59,4 @@
             @endforeach
           </ul>
       </nav>
-
-
-     
-         
-     
-
 @endif
-<!--contenido-->
-
