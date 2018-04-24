@@ -17,6 +17,8 @@ Route::any('/login','UsuariosController@login')->name('usuarios.login');
 Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 });
 
+Route::resource('titulacion', 'TitulacionController');
+
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
 //Route::any('usuarios/acceso/{id}','UsuariosController@subRolesAsignadosMenu')->name('usuarios.subRolesAsignadosMenu');
