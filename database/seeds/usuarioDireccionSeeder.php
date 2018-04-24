@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Database\Seeder;
 
@@ -11,6 +11,54 @@ class usuarioDireccionSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Usuario_direccion::class, 15)->create();
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. ZARATE VILLCA', 
+        	'id_usuario'=>'1', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. MIRAFLORES', 
+        	'id_usuario'=>'2', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. OQUENDO', 
+        	'id_usuario'=>'3', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. HEROINAS', 
+        	'id_usuario'=>'4', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. CALAMA', 
+        	'id_usuario'=>'5', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. BLANCO GALINDO', 
+        	'id_usuario'=>'6', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
+        App\Usuario_direccion::create([
+
+        	'nombre_direccion'=>'AV. LADISLAO CABRERA', 
+        	'id_usuario'=>'7', 
+        	'id_tipo_direccion'=>'1'
+         ]);
+
     }
 }

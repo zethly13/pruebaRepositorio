@@ -14,38 +14,32 @@ class rolSeeder extends Seeder
     {
     	App\Rol::create([
 
-        	'nombre_rol' => 'Administrador del sistema',
-			'descripcion_rol' => 'Es un Administrador del sistema'
+        	'nombre_rol' => 'ADMINISTRADOR DEL SISTEMA',
+			'descripcion_rol' => ''
          ]);
+
         App\Rol::create([
 
-        	'nombre_rol' => 'Administrativo',
-			'descripcion_rol' => 'Es un administrativo'
+        	'nombre_rol' => 'ADMINISTRATIVO',
+			'descripcion_rol' => 'PERSONAL ADMINISTRATIVO'
          ]);
+
         App\Rol::create([
 
-        	'nombre_rol' => 'Academico',
-			'descripcion_rol' => 'Es un academico'
+        	'nombre_rol' => 'ACADEMICO',
+			'descripcion_rol' => 'PERSONAL DOCENTE'
          ]);
+
         App\Rol::create([
 
-        	'nombre_rol' => 'Estudiante',
-			'descripcion_rol' => 'Es un estudiante'
+        	'nombre_rol' => 'ESTUDIANTE',
+			'descripcion_rol' => 'ESTUDIANTES FCE'
          ]);
+
         App\Rol::create([
 
-        	'nombre_rol' => 'Visitantes',
-			'descripcion_rol' => 'Es un visitante'
-         ]);
-        App\Rol::create([
-
-        	'nombre_rol' => 'Propedeutico',
-			'descripcion_rol' => 'Es un Propedeutico'
-         ]);
-        App\Rol::create([
-
-        	'nombre_rol' => 'Oficina educativo',
-			'descripcion_rol' => 'Es de oficina educativa'
+        	'nombre_rol' => 'VISITANTES',
+			'descripcion_rol' => 'PERSONAL VISITANTE FCE'
          ]);
 
     }

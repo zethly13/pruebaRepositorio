@@ -17,8 +17,8 @@ class CreateMateriasTable extends Migration
             $table->increments('id');
             $table->integer('cod_materia');
             $table->string('nombre_materia',150);
-            $table->string('nombre_corto',100);
-            $table->string('nombre_impresion',100);
+            $table->string('nombre_corto',100)->nullable();
+            $table->string('nombre_impresion',100)->nullable();
             $table->timestamps();
         });
     }

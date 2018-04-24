@@ -1,5 +1,5 @@
 <?php
-
+ 
 use Illuminate\Database\Seeder;
 
 class accesoSubRolSeeder extends Seeder
@@ -53,6 +53,9 @@ class accesoSubRolSeeder extends Seeder
 			'id_sub_rol'=>'1'
 
          ]);
-        factory(App\Acceso_sub_rol::class, 20)->create();
+
+
+       
     }
 }
+ 

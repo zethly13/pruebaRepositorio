@@ -37,5 +37,18 @@ class DatabaseSeeder extends Seeder
         $this->call(planSeeder::class);
         $this->call(gestionSeeder::class);
         $this->call(planGestionUnidadSeeder::class);
+        $this->call(materiaSeeder::class);
+        $this->call(gradoInstruccionSeeder::class);
+        $this->call(tituloSeeder::class);
+        $this->call(usuarioTituloSeeder::class);
+        $this->call(unidadMateriaSeeder::class);
+        $this->call(tipoPlanillaSeeder::class);
+        $this->call(tipoOperacionBitacoraSeeder::class);
+        $this->call(bitacoraSeeder::class);
+        $this->call(tipoAmbienteSeeder::class);
+        $this->call(ambienteSeeder::class);
+        $this->call(funcionDefensaSeeder::class);
+        $this->call(modalidadTitulacionSeeder::class);
+
     }
 }

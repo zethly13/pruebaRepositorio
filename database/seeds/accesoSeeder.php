@@ -1,5 +1,5 @@
 <?php
-
+ 
 use Illuminate\Database\Seeder;
 
 class accesoSeeder extends Seeder
@@ -8,7 +8,7 @@ class accesoSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
-     */
+     */ 
     public function run()
     {
         App\Acceso::create([
@@ -29,6 +29,6 @@ class accesoSeeder extends Seeder
 			'defecto_acceso' =>'NO',
 			'peso_acceso' =>'41'
          ]);
-       
+
     }
 }
