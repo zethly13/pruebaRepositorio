@@ -71,3 +71,7 @@
 	{!! Form::text('carrera',null,array('placeholder' => 'Ingrese su carrera','class'=>'form-control')) !!}
 	</div>
 </div>
+
+<div class="text-center">
+  {!! Form::button('Agregar nuevo usuario', array('type'=> 'submit','class'=>'btn btn-success'))!!}
+</div> 
