@@ -362,7 +362,8 @@ class ScriptController extends Controller
 
                 }
                 //verificamos que todos los estudintes esten habilitados
-                $resultEstudiante=Migrar_inscripcion::select('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->groupBy('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->orderBy('apellidos','desc')->orderBy('nombres','desc')->limit(10000,10000)->get();
+                $resultEstudiante=Migrar_inscripcion::select('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->groupBy('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->orderBy('apellidos','desc')->orderBy('nombres','desc')->get();
+                // $resultEstudiante=Migrar_inscripcion::select('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->groupBy('cod_estudiante','ci','apellidos','nombres','fecha_nac','sexo','cod_plan','nombre_plan','nivelMat','cod_materia','nombreMat','tipoMateria','grupoMat')->orderBy('apellidos','desc')->orderBy('nombres','desc')->limit(10000,10000)->get();
                 // return $items;
                 foreach($resultEstudiante as $rowEstudiante)
                 {
