@@ -15,17 +15,17 @@ class CreateGrupoMateriaPlanGestionUnidadesTable extends Migration
     {
         Schema::create('grupo_materia_plan_gestion_unidades', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('cod_grupo',20);
             $table->enum('grupo_principal',['SI','NO']);
 
             $table->integer('id_mat_plan_gestion_unidad')->unsigned();
-            $table->integer('id_tipo_planilla')->unsigned();
             $table->integer('id_agrupar_materias')->unsigned();
-
-            $table->foreign('id_mat_plan_gestion_unidad','id_matplangestunid')->references('id')->on('materia_plan_gestion_unidades')->onDelete('cascade');
-            $table->foreign('id_tipo_planilla')->references('id')->on('tipo_planillas')->onDelete('cascade');
             
+            $table->integer('id_tipo_planilla')->unsigned();
 
+            $table->foreign('id_mat_plan_gestion_unidad','id_mat')->references('id')->on('materia_plan_gestion_unidades')->onDelete('cascade');
+            $table->foreign('id_tipo_planilla')->references('id')->on('tipo_planillas')->onDelete('cascade');
 
             $table->timestamps();
         });

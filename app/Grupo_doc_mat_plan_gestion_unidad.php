@@ -8,7 +8,7 @@ class Grupo_doc_mat_plan_gestion_unidad extends Model
 {
     protected $table = 'grupo_doc_mat_plan_gestion_unidades';
 
-    protected $fillable = ['subir_notas','fecha_inicio_doc','fecha_fin_doc','activo','id_tipo_planilla','id_usuasigsubrol'];
+    protected $fillable = ['subir_notas','fecha_inicio_doc','fecha_fin_doc','activo','id_tipo_planilla','id_usuario_asignar_sub_rol','id_agrupar_materias'];
     
     public function usuario_asignar_sub_roles()
 	{

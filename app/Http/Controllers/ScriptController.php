@@ -31,6 +31,7 @@ class ScriptController extends Controller
     // }
     public function subirScript()
     {
+        // return "hola";
         $gestiones=Gestion::orderBy('anio','desc')->orderBy('id_tipo_gestion','desc')->get();
         $gestiones->each(function($gestiones){
          $gestiones->tipo_gestiones;
@@ -319,14 +320,15 @@ class ScriptController extends Controller
                 else{
                     $idMatPlanGestion=$resultConsulta->first()->id;
                 }//fin de materia en la BD
-
+                // return $idMatPlanGestion;   
                 $resultVerificar2=Grupo_materia_plan_gestion_unidad::where('id_mat_plan_gestion_unidad',$idMatPlanGestion)->where('cod_grupo',$rowGrupos->grupoMat)->where('id_tipo_planilla',$rowGrupos->tipoMateria)->select('id as id_grupo_materia_plan_gestion_unid','id_agrupar_materias')->get();
                 if($resultVerificar2->isEmpty())
                 {
                     $idAgruparMaterias++;
+                    // return $idMatPlanGestion." grupo ".$rowGrupos->grupoMat." idAgruparMaterias   ".$idAgruparMaterias;
                     $resultInsert=Grupo_materia_plan_gestion_unidad::create([
-                        'id_mat_plan_gestion_unidad'=>$idMatPlanGestion,
                         'cod_grupo'=>$rowGrupos->grupoMat,
+                        'id_mat_plan_gestion_unidad'=>$idMatPlanGestion,
                         'id_agrupar_materias'=>$idAgruparMaterias,
                         'id_tipo_planilla'=>$rowGrupos->tipoMateria
                     ]);

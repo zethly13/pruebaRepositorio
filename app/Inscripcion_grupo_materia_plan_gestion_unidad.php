@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inscripcion_grupo_materia_plan_gestion_unidad extends Model
 {
-    protected $table = 'Inscripcion_gurpo_materia_plan_gestion_unidades';
+    protected $table = 'Inscripcion_grupo_materia_plan_gestion_unidades';
 
 	protected $fillable = ['tipo_ins_grupo','id_inscripcion','id_grupo_materia_plan_gestion_unidad'];
 

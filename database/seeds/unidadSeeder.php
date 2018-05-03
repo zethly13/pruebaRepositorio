@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class unidadSeeder extends Seeder
 {
-    /** 
+    /**
      * Run the database seeds.
      * 
      * @return void
@@ -79,7 +79,7 @@ class unidadSeeder extends Seeder
 
             'nombre_unidad' =>'TALLER ADM. EMPRESAS',
             'telefono_unidad' =>'',
-            'interno_unidad' =>'',
+            'interno_unidad' =>'22',
             'correo_unidad' =>''
             
         ]);
@@ -88,7 +88,7 @@ class unidadSeeder extends Seeder
 
             'nombre_unidad' =>'TALLER CONT. PUBLICA',
             'telefono_unidad' =>'',
-            'interno_unidad' =>'',
+            'interno_unidad' =>'22',
             'correo_unidad' =>''
             
         ]);
@@ -97,7 +97,7 @@ class unidadSeeder extends Seeder
 
             'nombre_unidad' =>'TALLER ECONOMIA',
             'telefono_unidad' =>'',
-            'interno_unidad' =>'',
+            'interno_unidad' =>'22',
             'correo_unidad' =>''
             
         ]);
