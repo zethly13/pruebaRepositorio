@@ -52,6 +52,11 @@ class funcionSeeder extends Seeder
             'nombre_funcion'=>'Jefe de departamento'
             
         ]);
+        App\Funcion::create([
+
+            'nombre_funcion'=>'Estudiante'
+            
+        ]);
 
     }
 }

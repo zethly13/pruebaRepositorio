@@ -60,5 +60,7 @@ Route::group(['middleware'=>'permisos:7'],function(){
 	Route::post('usuarios/{id}/modificarDireccion','UsuariosController@modificarDireccion')->name('usuarios.modificarDireccion');
 	Route::post('usuarios/{id}/modificarTelefono','UsuariosController@modificarTelefono')->name('usuarios.modificarTelefono');  
 	});
+	 Route::get('gestiones/subir_script','ScriptController@subirScript');
+	 Route::post('gestiones/subir','ScriptController@importarScript')->name('gestiones.importarScript');
 	Route::resource('gestiones','GestionesController');
 });

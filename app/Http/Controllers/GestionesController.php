@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
 use Request;
+use DB;
 use App\Plan_gestion_unidad;
 use App\Gestion;
 use App\Tipo_gestion;
 use App\Plan;
 use Carbon\Carbon;
+use Excel;
 use App\Http\Requests\Gestiones;
 use Validator;
 use Response;

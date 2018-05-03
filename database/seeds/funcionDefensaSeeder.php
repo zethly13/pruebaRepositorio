@@ -48,7 +48,7 @@ class funcionDefensaSeeder extends Seeder
 
         App\Funcion_defensa::create([
 
-            'descripcion_funcion'=>'DIRECTORD DE CARRERA',
+            'descripcion_funcion'=>'DIRECTOR DE CARRERA',
 			'estado_funcion'=>'ACTIVO'
             
         ]);

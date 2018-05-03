@@ -34,7 +34,7 @@ class CreateMigrarInscripciones extends Migration
             $table->string('apellidosDocente',50);
             $table->string('nombresDocente',50);
             $table->string('genero',10);
-            $table->date('fecha');
+            $table->date('fecha')->default('0000-10-08');
             $table->string('titulo',20);
             
             $table->timestamps();
