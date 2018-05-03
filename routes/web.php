@@ -18,6 +18,7 @@ Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 });
 
 Route::resource('titulacion', 'TitulacionController');
+Route::post('/titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
 
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
