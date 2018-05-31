@@ -16,8 +16,10 @@ class CreateBitacorasTable extends Migration
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->increments('id');
             $table->ipAddress('ip');
-            $table->string('desc_operacion',200);
-            $table->date('fecha_bitacora');
+            $table->string('desc_operacion',500);
+            $table->dateTime('fecha_bitacora')->default('1000-01-01 00:00:00');
+            // $table->date('fecha_bitacora');
+            // $table->time('hora_bitacora');
 
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_tipo_op_bitacora')->unsigned();

@@ -16,7 +16,7 @@ use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;//tati contraseña
 use Illuminate\Support\Facades\Redirect;//tati contraseña
-
+use App\Events\GestionEvent;
 class GestionesController extends Controller
 {
 	private $path ='gestiones';
@@ -84,9 +84,12 @@ class GestionesController extends Controller
                             $plan_gestion->activo="NO";
                         // endif
                     // endforeach
-                
                     $plan_gestion->save();
-                    
+            $gestion=Gestion::all()->last();
+            // $gestion->plan_gestion=$plan_gestion;
+            $gestion->desc='Id del Nuevo Registro: '.$gestion->id.' con el plan_gestion: '.$plan_gestion->planes->nombre_plan.' Plan_Activo: '.$plan_gestion->activo;
+            $gestion->action=6;
+            event(new GestionEvent($gestion));
                 }
             }
             // return $gestion;
@@ -139,24 +142,38 @@ class GestionesController extends Controller
     public function update(Gestiones $request, $id)
     {
         $gestionModif=Gestion::findorfail($id);
-        // return $gestionModif;
-        // $gestionModif->anio = $request->anio;
         $gestionModif->periodo=$request->periodo;
         
         $gestionModif->fecha_inicio=$request->fecha_inicio;
         $gestionModif->fecha_fin=$request->fecha_fin;
         $gestionModif->id_tipo_gestion=$request->tipo_gestion;
         $gestionModif->save();
+        $gestionModif->desc='Registro Modificado: '.$gestionModif->id;
+        $gestionModif->action=7;
+        event(new GestionEvent($gestionModif));
         $planModificar=Plan_gestion_unidad::where('id_gestion','=',$gestionModif->id)->get();
         $planes=$request->plan;
         foreach($planModificar as $plan)
         {
         // return $plan;
             if(in_array($plan->id_plan,$planes))
+            {
                 $plan->activo='SI';
+                $gestionModif->desc='Registro Modificado: '.$gestionModif->id.' Plan_Gestion_Activo: '.$plan->activo;
+                $gestionModif->action=7;
+                event(new GestionEvent($gestionModif));
+            }
             else
+            {
                 $plan->activo='NO';
+                $gestionModif->desc='Registro Modificado: '.$gestionModif->id.' Plan_Gestion_Activo: '.$plan->activo;
+                $gestionModif->action=7;
+                event(new GestionEvent($gestionModif));
+            }
             $plan->save();
+            // $gestionModif=Gestion::findorfail($id);
+            // $gestionModif->plan_gestion=$plan;
+        
         }
         return redirect()->route($this->path.'.index');
         // return $gestionModificar;
@@ -172,6 +189,9 @@ class GestionesController extends Controller
     {
         try{
             $gestionEliminar = Gestion::findOrFail($id);
+            $gestionEliminar->desc='Id del Registro Gestion Eliminado: '.$gestionEliminar->id;
+            $gestionEliminar->action=8;
+            event(new GestionEvent($gestionEliminar));
             $gestionEliminar->delete();
             return redirect()->route($this->path.'.index');
         } catch(Exception $e){
@@ -187,6 +207,10 @@ class GestionesController extends Controller
                 $modActivo->activo='SI';
             }
             $modActivo->save();
+            $modActivo->desc='Registro Modificado: '.$modActivo->id.' Gestion_Activo: '.$modActivo->activo;
+            $modActivo->action=7;
+            event(new GestionEvent($modActivo));
+        
             return redirect()->route('gestiones.index');
     }
 

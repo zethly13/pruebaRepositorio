@@ -13,8 +13,37 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\RolesEvent' => [
+            'App\Listeners\Rol\CrearRolBitacora',
+        ],
+        'App\Events\Sub_rolesEvent' => [
+            'App\Listeners\Sub_rolListener',
+        ],
+        'App\Events\GestionEvent' => [
+            'App\Listeners\GestionListener',
+        ],
+        'App\Events\Accesos\AccesosEvent' => [
+            'App\Listeners\Accesos\AccesosListener',
+        ],
+
+        'App\Events\Auth\UsuarioLogueado'=>[
+            'App\Listeners\Auth\RegistroIngresoSistema',
+        ],
+        'App\Events\Auth\UsuarioExit'=>[
+            'App\Listeners\Usuario\SalidaSistema',
+        ],
+        'App\Events\Usuario\UsuarioNuevoBit'=>[
+            'App\Listeners\Usuario\UsuarioNuevoRegistroBit',
+        ],
+
+        'App\Events\Usuario\Informacion\TelefonoEvent'=>[
+            'App\Listeners\Usuario\Informacion\TelefonoListener',
+        ],
+        'App\Events\Usuario\Informacion\EmailEvent'=>[
+            'App\Listeners\Usuario\Informacion\EmailListener',
+        ],
+        'App\Events\Usuario\Informacion\DireccionEvent'=>[
+            'App\Listeners\Usuario\Informacion\DireccionListener',
         ],
     ];
 

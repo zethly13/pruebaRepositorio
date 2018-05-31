@@ -12,7 +12,7 @@ use App\Acceso_sub_rol;
 use App\Acceso;
 use Illuminate\Support\Facades\Input; //tati validacion
 use App\Http\Requests\subRolesRequest;//msj validacion tati
-
+use App\Events\Sub_rolesEvent;
 class Sub_RolesController extends Controller
 {
     
@@ -67,6 +67,11 @@ class Sub_RolesController extends Controller
                     $subAcceso->id_sub_rol =    $subRol->id;
                     $subAcceso->id_sub_acceso = $id_sub_acceso;
                     $subAcceso->save();
+               $sub_rol=Sub_rol::all()->last();
+               $sub_rol->accesos=$subAcceso;
+               $sub_rol->desc='Id del nuevo Registro: '.$sub_rol->id.' con Sub_acceso: '.$subAcceso->sub_accesos->nombre_sub_acceso;
+               $sub_rol->action=12;
+                event(new Sub_rolesEvent($sub_rol));
                     }
                }
                $notification = array('mensaje3' =>'sub Rol guardado correctamente',
@@ -120,9 +125,11 @@ class Sub_RolesController extends Controller
         $sRol_editar->descripcion_sub_rol= $request->desc_sub_rol;
         $sRol_editar->id_rol= $request->rol_seleccionado;
         $sRol_editar->save();
-        
         $sub_accesos=$request->permiso;
         $id_eliminar=Acceso_sub_rol::select('id')->where('id_sub_rol','=',$sRol_editar->id)->get();
+        $sRol_editar->desc='Modifico el Registro: '.$sRol_editar->id.' con los sub_Acceso: '.$id_eliminar;
+        $sRol_editar->action=13;
+        event(new Sub_rolesEvent($sRol_editar));
 
             //return $id_eliminar;
 
@@ -138,6 +145,12 @@ class Sub_RolesController extends Controller
 
             $subAccesoModificado->id_sub_rol =    $sRol_editar->id;
             $subAccesoModificado->save();
+        $sRol_editar_bitacora=Sub_rol::findOrFail($id);
+        // $sRol_editar_bitacora->subAcceso=$subAccesoModificado;
+        // $sRol_editar->desc='Modifico el registro SubRol: '.$sRol_editar->id.' sub_rol: '.$sRol_editar->nombre_sub_rol;
+        $sRol_editar_bitacora->desc='Modifico el Registro: '.$sRol_editar_bitacora->id.' con Sub_acceso: '.$subAccesoModificado->sub_accesos->nombre_sub_acceso;
+        $sRol_editar_bitacora->action=13;
+        event(new Sub_rolesEvent($sRol_editar_bitacora));
         }
 
         $notification = array('mensaje3' =>'sub Rol cambiado correctamente',
@@ -156,6 +169,9 @@ class Sub_RolesController extends Controller
         
         try {
             $sRolEliminar = Sub_rol::findOrFail($id);
+            $sRolEliminar->desc='Elimino el registro SubRol: '.$sRolEliminar->id.' sub_rol: '.$sRolEliminar->nombre_sub_rol;
+            $sRolEliminar->action=14;
+            event(new Sub_rolesEvent($sRolEliminar));
             $sRolEliminar->delete(); 
             //return redirect()->route('rols.index');
             $notification = array('mensaje3' =>' Eliminado exitosamente !',

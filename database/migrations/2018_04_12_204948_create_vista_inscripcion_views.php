@@ -14,7 +14,7 @@ class CreateVistaInscripcionViews extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW vista_inscripcion AS
+            CREATE or replace VIEW vista_inscripcion AS
             (
             SELECT f.id_usuario as id_usuario,f.id as id_usuario_asignar_sub_rol,g.doc_identidad as doc_identidad,g.apellidos as apellidos,g.nombres as nombres,g.sexo as sexo,g.fecha_nac as fecha_nac, f.id_sub_rol as id_sub_rol,f.cod_sis as cod_sis,a.id as id_inscripcion,a.tipo_inscripcion as tipo_inscripcion,b.id as id_plan_gestion_unidad,c.id as id_gestion,c.anio as anio,c.periodo as periodo,c.activo as activa_ins,d.id as id_plan,d.cod_plan as cod_plan,d.nombre_plan as nombre_plan,e.categoria as categoria,e.nombre_tipo_gestion as nombre_tipo_gestion,e.tipo_gestion as tipo_gestion,a.cod_inscripcion as cod_inscripcion
             FROM inscripciones a

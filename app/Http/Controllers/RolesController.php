@@ -7,7 +7,7 @@ use DB;
 use App\Rol;
 use Illuminate\Support\Facades\Input; //tati validacion
 use App\Http\Requests\rolesRequest;//msj validaction tati
-
+use App\Events\RolesEvent;
 class RolesController extends Controller
 {
     private $path = 'roles';
@@ -61,9 +61,14 @@ class RolesController extends Controller
                $role->descripcion_rol = $request->desc_rol;
                $role->save();
                $notification= array('mensaje3'=>'Guardado correctamente!','alert-type'=>'success');
+               $rol=Rol::all()->last();
+               // la descripcion con la se que guardara en la bitacora
+               $rol->desc="Registro rol :".$rol->id." con nombre_rol: ".$rol->nombre_rol;
+               $rol->action=9;
+               event(new RolesEvent($rol));
                 return redirect()->route('roles.index')->with($notification);
                //return $rol;
-               return redirect()->route('roles.index');
+               // return redirect()->route('roles.index');
            } catch (Exception $e) {
                return "Fatal Error -".$e->getMessage();
            }   
@@ -106,6 +111,11 @@ class RolesController extends Controller
     public function update(rolesRequest $request, $id)
     {
         $rol_editar=Rol::findOrFail($id);
+        $rol->desc="Modifico el registro :".$rol->id." con nombre_rol: ".$rol->nombre_rol;
+        $rol_editar->action=10;
+        event(new RolesEvent($rol_editar));
+        $rol_editar=Rol::findOrFail($id);
+        // $rol_bitacora=$rol_editar;
         $rol_editar->nombre_rol     = $request->nombre_rol;
         $rol_editar->descripcion_rol= $request->desc_rol;
         $rol_editar->save();
@@ -123,6 +133,9 @@ class RolesController extends Controller
     {
         try {
             $rolEliminar = Rol::findOrFail($id);
+             $rol->desc="Elimino el registro :".$rol->id." con nombre_rol: ".$rol->nombre_rol;
+            $rolEliminar->action=11;
+            event(new RolesEvent($rolEliminar));
             $rolEliminar->delete(); 
             $notification = array('mensaje3' =>' Eliminado exitosamente !',
             'alert-type'=>'success');

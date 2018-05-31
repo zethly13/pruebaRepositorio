@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+    set_time_limit(1000);
+    ini_set('memory_limit','1024M');
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -18,7 +19,7 @@ use Auth;
 use Carbon\carbon;
 use App\Http\Requests\accesosRequest;//msj validacion tati
 use Illuminate\Support\Facades\Input; //tati validacion
-
+use App\Events\Accesos\AccesosEvent;
 class AccesoController extends Controller
 {
 	
@@ -65,6 +66,10 @@ class AccesoController extends Controller
                	$asignar->id_unidad = $request->unidad;
                	$asignar->id_usuario = $id;
                	$asignar->save();
+               	$asignar=Usuario_asignar_sub_rol::all()->last();
+               	$asignar->desc='ID Registrado Usuario_asignar_sub_rol: '.$asignar->id;
+               	$asignar->action=26;
+            	event(new AccesosEvent($asignar));
                	$notification = array('mensaje3' =>'nueva asignacion guardado correctamente',
             'alert-type'=>'success');
                	return redirect()->route('accesos.index')->with($notification);
@@ -101,6 +106,9 @@ class AccesoController extends Controller
 	    $permisoUsuario_mod->fecha_fin = $request->fecha_fin;
 	    $permisoUsuario_mod->activo = $request->activo;
 	    $permisoUsuario_mod->save();
+	    $permisoUsuario_mod->desc='Modifico Usuario_asignar_sub_rol: '.$permisoUsuario_mod->id;
+        $permisoUsuario_mod->action=27;
+        event(new AccesosEvent($permisoUsuario_mod));
 	    $notification = array('mensaje3' =>'nueva asignacion guardado correctamente',
             'alert-type'=>'success');
         return redirect()->route('accesos.index')->with($notification);     
@@ -120,6 +128,9 @@ class AccesoController extends Controller
 				$modActivo->activo='SI';
 			}
 			$modActivo->save();
+			$modActivo->desc='ID de Usuario_asignar_sub_rol en el que se modifico el estado: '.$modActivo->id;
+        	$modActivo->action=27;
+        	event(new AccesosEvent($modActivo));
            // $modActivo->activo = $request->;
             //$modActivo->save();
             return redirect()->route('accesos.index');

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(tipoOperacionBitacoraSeeder::class);
         $this->call(rolSeeder::class);
         $this->call(funcionSeeder::class);
         $this->call(unidadSeeder::class);
@@ -43,7 +44,6 @@ class DatabaseSeeder extends Seeder
         $this->call(usuarioTituloSeeder::class);
         $this->call(unidadMateriaSeeder::class);
         $this->call(tipoPlanillaSeeder::class);
-        $this->call(tipoOperacionBitacoraSeeder::class);
         $this->call(bitacoraSeeder::class);
         $this->call(tipoAmbienteSeeder::class);
         $this->call(ambienteSeeder::class);

@@ -31,6 +31,13 @@ use Validator;
 use Response;
 use App\Http\Requests\usuarioRequest;
 use Illuminate\Http\Requests;
+use App\Events\Auth\UsuarioLogueado;
+use App\Events\Auth\UsuarioExit;
+use App\Events\Usuario\UsuarioNuevoBit;
+use App\Events\Usuario\Informacion\TelefonoEvent;
+use App\Events\Usuario\Informacion\EmailEvent;
+use App\Events\Usuario\Informacion\DireccionEvent;
+
 
 class UsuariosController extends Controller
 {
@@ -130,6 +137,10 @@ class UsuariosController extends Controller
                 $usuario_direccion->id_usuario = $user->doc_identidad;
                 $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
                 $usuario_direccion->save();
+                $user=Usuario::all()->last();
+                $user->desc='ID de Registro: '.$user->id;
+                $user->action=3;
+                event(new UsuarioNuevoBit($user));
 
                return redirect()->route($this->path.'.index')->with('mensaje','se registro el usuario');
            } catch (Exception $e) {
@@ -162,6 +173,10 @@ class UsuariosController extends Controller
                $usuario_email->id_usuario = $id;
                $usuario_email->id_tipo_email= $request->tipo_email;
                $usuario_email->save();
+               $user=Usuario_email::all()->last();
+               $user->desc='ID de Registro Usuario_E-mail: '.$user->id;
+                $user->action=21;
+                event(new EmailEvent($user));
                return redirect::back();
     }
 
@@ -173,6 +188,10 @@ class UsuariosController extends Controller
                 $usuario_telefono->id_usuario = $id;
                 $usuario_telefono->id_tipo_telefono= $request->tipo_telefono;
                 $usuario_telefono->save();
+                $user=Usuario_telefono::all()->last();
+                $user->desc='ID de Registro Usuario_Telefono: '.$user->id;
+                $user->action=15;
+                event(new TelefonoEvent($user));
                 return redirect::back();
     }
    
@@ -183,6 +202,10 @@ class UsuariosController extends Controller
                 $usuario_direccion->id_usuario = $id;
                 $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
                 $usuario_direccion->save();
+                $user=Usuario_direccion::all()->last();
+                $user->desc='ID de Registro Usuario_Direccion: '.$user->id;
+                $user->action=18;
+                event(new DireccionEvent($user));
                 return redirect::back();
     }
 
@@ -192,6 +215,9 @@ class UsuariosController extends Controller
        try {
 
             $email = Usuario_email::where('id',$id)->get()->first();
+            $email->desc='Elimino el Registro Usuario_E-mail: '.$email->id.' correo: '.$email->email;
+            $email->action=23;
+                event(new EmailEvent($email));
             $email->delete();
                  flash()->success('Email ha sido eliminado'); 
             return redirect()->back();
@@ -207,6 +233,9 @@ class UsuariosController extends Controller
        try {
 
             $telefono = Usuario_telefono::where('id',$id)->get()->first();
+            $telefono->desc='Elimino el Registro Usuario_Telefono: '.$telefono->id.' Nro Telf: '.$telefono->numero_telefono;
+            $telefono->action=17;
+                event(new TelefonoEvent($telefono));
             $telefono->delete();
                  flash()->success('Telefono ha sido eliminado'); 
             return redirect()->back();
@@ -222,6 +251,9 @@ class UsuariosController extends Controller
        try {
 
             $direccion = Usuario_direccion::where('id',$id)->get()->first();
+            $direccion->desc='Elimino el Registro Usuario_Direccion: '.$direccion->id.' Dir: '.$direccion->nombre_direccion;
+            $direccion->action=20;
+                event(new DireccionEvent($direccion));
             $direccion->delete();
                  flash()->success('Direccion ha sido eliminado'); 
             return redirect()->back();
@@ -233,29 +265,41 @@ class UsuariosController extends Controller
 
     public function modificarEmail(Request $request, $id)
     {
+               // $usuario_email = Usuario_email::where('id',$id)->get()->first();
                $usuario_email = Usuario_email::where('id',$id)->get()->first();
                $usuario_email->email = $request->email_usuario;
                $usuario_email->email_activo ='SI';
                $usuario_email->id_tipo_email= $request->tipo_email;
                $usuario_email->save();
+               $usuario_email->desc='Modifico el Registro Usuario_E-mail: '.$usuario_email->id;
+               $usuario_email->action=22;
+               event(new EmailEvent($usuario_email));
                return redirect::back();
     }
 
     public function modificarTelefono(Request $request, $id)
     {
+                // $usuario_telefono = Usuario_telefono::where('id',$id)->get()->first();
                 $usuario_telefono = Usuario_telefono::where('id',$id)->get()->first();
                 $usuario_telefono->numero_telefono = $request->telefono_usuario;
                 $usuario_telefono->id_tipo_telefono= $request->tipo_telefono;
                 $usuario_telefono->save();
+                $usuario_telefono->desc='Modifico el Registro Usuario_Telefono: '.$usuario_telefono->id;
+                $usuario_telefono->action=16;
+                event(new TelefonoEvent($usuario_telefono));
                 return redirect::back();
     }
 
     public function modificarDireccion(Request $request, $id)
     {
+                // $usuario_direccion = Usuario_direccion::where('id',$id)->get()->first();
                 $usuario_direccion = Usuario_direccion::where('id',$id)->get()->first();
                 $usuario_direccion->nombre_direccion = $request->direccion_usuario;
                 $usuario_direccion->id_tipo_direccion= $request->tipo_direccion;
                 $usuario_direccion->save();
+                $usuario_direccion->desc='Modifico el Registro Usuario_Direccion: '.$usuario_direccion->id;
+                $usuario_direccion->action=19;
+                event(new DireccionEvent($usuario_direccion));
                 return redirect::back();
     }
 
@@ -276,6 +320,7 @@ class UsuariosController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // $user=Usuario::where('usuarios.id',$id)->get()->first();
         $user=Usuario::where('usuarios.id',$id)->get()->first();
         $user->doc_identidad = $request->numero_identidad_usuario;
         $user->login = $request->numero_identidad_usuario;
@@ -293,6 +338,9 @@ class UsuariosController extends Controller
         $user->ciudad_expedido_doc=$request->expedido_usuario;
         $user->id_tipo_Doc_identidad=$request->tipo_doc_usuario;
         $user->save();
+        $user->desc='Modifico el Registro Usuario: '.$user->id;
+        $user->action=4;
+        event(new UsuarioNuevoBit($user));
         return redirect()->route($this->path.'.index');
     }
 
@@ -302,6 +350,9 @@ class UsuariosController extends Controller
           $user = Usuario::where('usuarios.id',$id)->get()->first();
           if(Auth::user()->id!== $user->id)
             {
+              $user->desc='Elimino el Registro Usuario: '.$user->id.' con CI: '.$user->doc_identidad;
+              $user->action=5;
+              event(new UsuarioNuevoBit($user));
               $user->delete();
               $notification = array('mensaje3' =>' Eliminado exitosamente !','alert-type'=>'success');
               return redirect()->back()->with($notification);
@@ -327,9 +378,11 @@ class UsuariosController extends Controller
             'login', 'password'
             ]);
         if(auth()->attempt($credenciales))
+        {
+          event(new UsuarioLogueado(Auth::user()));
             return redirect()
                 ->route('home.index');
-        else return redirect()
+        }else return redirect()
                 ->route('usuarios.login')
                 ->withErrors([
                     'login' => 'Usuario o contraseña incorrectos'
@@ -341,6 +394,7 @@ class UsuariosController extends Controller
 
     public function logout()
     {
+      event(new UsuarioExit(Auth::user()));
         auth()->logout();
         return redirect()->route('usuarios.login');
     }
@@ -388,6 +442,9 @@ class UsuariosController extends Controller
         {
         $usuario->login = $request->nuevo_login;
         $usuario->save();
+        $usuario->desc='El usuario modifico el login: '.$usuario->id.' con CI: '.$usuario->doc_identidad;
+              $usuario->action=24;
+              event(new UsuarioNuevoBit($usuario));
         $notification = array('mensaje3' =>'Login guardado correctamente !',
             'alert-type'=>'success'
          );
@@ -421,9 +478,13 @@ class UsuariosController extends Controller
             {
               $usuario = Auth::user();
               $usuario->clave = Hash::make(Input::get('nueva_contrasena'));
+
               $usuario->save();  
               if($usuario->save())
                 {
+                  $usuario->desc='El usuario modifico la contraseña: '.$usuario->id.' con CI: '.$usuario->doc_identidad;
+              $usuario->action=25;
+              event(new UsuarioNuevoBit($usuario));
                 return redirect()->route($this->path.'.contrasenaModificar')->with('mensaje2', '  Nueva contraseña guardada correctamente');
                     
                 }

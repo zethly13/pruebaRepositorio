@@ -14,7 +14,7 @@ class CreateVistaUsrInsGruposViews extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW vista_usr_ins_grupos AS
+            CREATE or replace VIEW vista_usr_ins_grupos AS
             (
             SELECT a.id as id_usuario, b.cod_sis as cod_sis,a.doc_identidad as doc_identidad,a.apellidos as apellidos,a.nombres as nombres, a.sexo as sexo, a.fecha_nac AS fecha_nac,c.id as id_inscripcion,e.cod_plan as cod_plan,e.nombre_plan as nombre_plan,e.nombre_plan_corto as nombre_plan_corto,c.ins_activo as ins_activa,b.id as id_usuario_asignar_sub_rol,j.id_materia as id_materia, k.cod_materia as cod_materia, k.nombre_materia as nombre_mat,h.porcentaje as porcentaje_materia,f.id as id_ins_grupo,f.id_grupo_materia_plan_gestion_unidad as id_grupo_materia_plan_gestion_unidad,h.id as id_mat_plan_gestion_unidad, g.id_agrupar_materias as id_agrupar_materias,g.id_tipo_planilla as id_tipo_planilla,f.tipo_ins_grupo as tipo_ins_grupo,d.id_gestion as id_gestion, g.cod_grupo as cod_grupo, h. version as version
             FROM usuarios a

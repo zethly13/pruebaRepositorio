@@ -23,6 +23,8 @@ use App\Plan_gestion_unidad;
 use App\Inscripcion;
 use App\Inscripcion_grupo_materia_plan_gestion_unidad;
 use Carbon\Carbon; 
+use Auth;
+use App\Events\Usuario\UsuarioNuevoBit;
 class ScriptController extends Controller
 {
     // public function __construct() 
@@ -84,14 +86,14 @@ class ScriptController extends Controller
                     // return $value->fechanacdoc;
                         // return $inscripcion;
                     // $fechaVerificar=$value->fechanacdoc;
-                    // if(empty($value->fechanacdoc))
+                    if($value->fechanacdoc!='NULL')
+                        $inscripcion->fecha = $value->fechanacdoc;
                     // {
                     //     // return $inscripcion;
                     //     $fecha = $value->fechanacdoc;
                     // }else{
                     //     $fecha = '0000-11-08';
                     // }
-                    // $inscripcion->fecha = $value->fechanacdoc;
                     // $fechaRegistro=$fecha;
                     $inscripcion->titulo = $value->titulodocente;
                     $inscripcion->save();                    
@@ -526,9 +528,9 @@ class ScriptController extends Controller
                 // $resultInscribir=DB::table('migrar_inscripciones')->limit($i,20000)->get();
                 foreach($resultInscribir as $rowEstudiante)
                 {
-                    echo "<strong>$i</strong>";
+                    // echo "<strong>$i</strong>";
                     $resultAux=DB::table('vista_inscripcion')->where([['cod_sis',$rowEstudiante->cod_estudiante],['activa_ins','SI'],['id_gestion',$idGestion],['cod_plan',$rowEstudiante->cod_plan]])->select('id_inscripcion')->get();
-                    echo "<br>";
+                    // echo "<br>";
                     $rowIdIns=$resultAux->first();
                     //el otro campo
                     //idGrupoMatPlan gestion unidad
@@ -546,6 +548,10 @@ class ScriptController extends Controller
                     }
                 }
                 echo "<strong><font color=#990000 size=7 face=Verdana, Arial, Helvetica, sans-serif>TERMINADO EL TRABAJITO</font></strong>";
+                $permisoUsuario_mod=Auth::user();
+                $permisoUsuario_mod->desc='Subio un Archivo CSV con estudiantes egresados';
+                $permisoUsuario_mod->action=28;
+                event(new UsuarioNuevoBit($permisoUsuario_mod));
             }
 
         }

@@ -14,7 +14,7 @@ class CreateVistaDocMatPlanGestionViews extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW vista_doc_mat_plan_gestion AS
+            CREATE or replace VIEW vista_doc_mat_plan_gestion AS
             (
             SELECT a.id as id_usuario,a.doc_identidad as doc_identidad,a.login as login,a.apellidos as apellidos, a.nombres as nombres, b.cod_sis as cod_sis, b.id as id_usuario_asignar_sub_rol, b.id_sub_rol as id_sub_rol, c.id as id_grupo_doc_mat_plan_gestion_unidad, d.id as id_grupo_materia_plan_gestion_unidad, d.cod_grupo as cod_grupo,d.id_agrupar_materias as id_agrupar_materias,
             d.id_mat_plan_gestion_unidad as id_mat_plan_gestion_unidad,
