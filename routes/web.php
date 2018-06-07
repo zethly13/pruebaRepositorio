@@ -1,4 +1,8 @@
 <?php
+use App\Usuario;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
 Route::group(['middleware'=>'guest'],function(){
 	 
 Route::any('/','UsuariosController@login')->name('usuarios.login');
@@ -8,11 +12,32 @@ Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 
 // titulacion 
 Route::post('titulacion/addAmbiente','TitulacionController@addAmbiente')->name('titulacion.addAmbiente');
+Route::post('titulacion/addPresidente','TitulacionController@addPresidente')->name('titulacion.addPresidente');
+Route::post('titulacion/addMiembro','TitulacionController@addMiembro')->name('titulacion.addMiembro');
+Route::post('titulacion/addTutor','TitulacionController@addTutor')->name('titulacion.addTutor');
+Route::post('titulacion/addDecano','TitulacionController@addDecano')->name('titulacion.addDecano');
+
 
 Route::get('titulacion/buscar','TitulacionController@buscar')->name('titulacion.buscar');
 Route::get('titulacion/search/{cod_sis}','TitulacionController@search');
 Route::post('/titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
 Route::resource('titulacion', 'TitulacionController');
+
+Route::any('/search',function(){
+    $q = Input::get ( 'q' );
+    //dd($q);
+    if($q!=""){
+   		$user = Usuario::where('nombres','LIKE','%'.$q.'%')->orWhere('apellidos','LIKE','%'.$q.'%')->get();	
+    	if(count($user) > 0)
+        return view('titulacion.search')
+    	//return redirect::back()
+    		->withDetails($user)
+    		->withQuery( $q );
+    }
+    else return "no se encontro usuario";
+});
+
+
 
 Route::get('titulacion/generar/designacionTribunal','TitulacionController@generar_designacionTribunal')->name('designacionTribunal.pdf');
 Route::get('titulacion/generar/primerRecordatorio','TitulacionController@generar_primerRecordatorio')->name('primerRecordatorio.pdf');

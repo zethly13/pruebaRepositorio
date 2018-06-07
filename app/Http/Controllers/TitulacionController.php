@@ -105,6 +105,69 @@ class TitulacionController extends Controller
     {
         //
     }
+
+    public function addPresidente(Request $request){
+        $user=new Usuario();
+        $user->apellidos=$request->apellido_usuario;
+        $user->nombres=$request->nombre_usuario;
+        $user->doc_identidad = $request->ci_usuario;
+        $user->sexo=$request->sexo_usuario;
+        $user->login = 'aaa';
+        $user->clave ='bbb';
+        $user->fecha_nac="1992-11-08";
+        $user->usuario_activo='SI';
+        $user->inscribir_adm='SI';
+        $user->estilo='Moderno';
+        $user->subir_foto='NO';
+        $user->id_estado_civil=1;
+        $user->id_provincia=1;
+        $user->ciudad_expedido_doc=1;
+        $user->id_tipo_Doc_identidad=1;
+        $user->save();
+                
+        $user_subrol = new usuario_asignar_sub_rol();
+        $user_subrol->id_usuario=$user->doc_identidad;
+        $user_subrol->cod_sis=222;
+        $user_subrol->id_funcion=4;
+        $user_subrol->id_unidad=7;
+        $user_subrol->id_sub_rol=1;
+        $user_subrol->fecha_inicio="1992-11-08";
+        $user_subrol->fecha_fin="1992-11-08";
+        $user_subrol->activo='SI';
+        $user_subrol->save();
+      return redirect::back();        
+    }
+    public function addMiembro(Request $request){
+        $user=new Usuario();
+        $user->apellidos=$request->apellido_usuario;
+        $user->nombres=$request->nombre_usuario;
+        $user->doc_identidad = $request->ci_usuario;
+        $user->sexo=$request->sexo_usuario;
+        $user->login = 'aaa';
+        $user->clave ='bbb';
+        $user->fecha_nac="1992-11-08";
+        $user->usuario_activo='SI';
+        $user->inscribir_adm='SI';
+        $user->estilo='Moderno';
+        $user->subir_foto='NO';
+        $user->id_estado_civil=1;
+        $user->id_provincia=1;
+        $user->ciudad_expedido_doc=1;
+        $user->id_tipo_Doc_identidad=1;
+        $user->save();
+                
+        $user_subrol = new usuario_asignar_sub_rol();
+        $user_subrol->id_usuario=$user->doc_identidad;
+        $user_subrol->cod_sis=222;
+        $user_subrol->id_funcion=1;
+        $user_subrol->id_unidad=7;
+        $user_subrol->id_sub_rol=1;
+        $user_subrol->fecha_inicio="1992-11-08";
+        $user_subrol->fecha_fin="1992-11-08";
+        $user_subrol->activo='SI';
+        $user_subrol->save();
+      return redirect::back();        
+    }
     public function store(Request $request)
     {
         //
