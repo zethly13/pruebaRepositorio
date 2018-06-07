@@ -5,7 +5,7 @@
 	</div>
 	<a class="btn btn-secondary btn-sm" href="#buscarEstudiante" data-target="#buscarEst" data-toggle="modal"><i class="fa fa-pencil"></i>  Buscar Estudinte</a>
 </div>
-
+ 
 <div class="form-group row">
 	{!! Form::label('nombre','* Nombres:',['class'=>'col-md-2'])!!}
 	<div class="col-md-5">
@@ -31,6 +31,13 @@
   {!! Form::button('Agregar nuevo usuario', array('class'=>'btn btn-success'))!!}
 </div> --}}
 <a href="{{ route('titulacion.buscar') }}" role="button" class="btn btn-success">BUSCAR UN USUARIO</a>
+
+<a target="_black" href="/titulacion/generar/designacionTribunal" class="btn btn-primary">Generar Designacion de Tribunal</a>
+<a target="_black" href="/titulacion/generar/primerRecordatorio" class="btn btn-primary">Generar Primer Recordatorio</a>
+<a target="_black" href="/titulacion/generar/actaDefensa" class="btn btn-primary">Generar Acta de Defensa</a>
+<a target="_black" href="/titulacion/generar/testimonio" class="btn btn-primary">Generar Testimonio</a>
+	
+
 
 <script>
 	function search_sis(){

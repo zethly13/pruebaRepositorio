@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
@@ -129,4 +129,53 @@ class TitulacionController extends Controller
     {
         //
     }
+
+    public function generar_designacionTribunal()
+    {
+        $modalidad = Modalidad_titulacion::all();
+        $view = \View::make('titulacion.designacionTribunal', compact('modalidad'))->render();
+       
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream('designacionTribunal.pdf');    
+        
+    }
+
+     public function generar_primerRecordatorio()
+    {
+        $modalidad = Modalidad_titulacion::all();
+        $view = \View::make('titulacion.primerRecordatorio', compact('modalidad'))->render();
+       
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream('primerRecordatorio.pdf');    
+        
+    }
+
+     public function generar_actaDefensa()
+    {
+        $modalidad = Modalidad_titulacion::all();
+        $view = \View::make('titulacion.actaDefensa', compact('modalidad'))->render();
+       
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream('actaDefensa.pdf');    
+        
+    }
+
+     public function generar_testimonio()
+    {
+        $modalidad = Modalidad_titulacion::all();
+        $view = \View::make('titulacion.testimonio', compact('modalidad'))->render();
+       
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream('testimoni.pdf');    
+        
+    }
+
 }

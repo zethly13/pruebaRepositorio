@@ -1,12 +1,12 @@
 <?php
 Route::group(['middleware'=>'guest'],function(){
-	
+	 
 Route::any('/','UsuariosController@login')->name('usuarios.login');
 Route::any('/login','UsuariosController@login')->name('usuarios.login');
 Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 });
 
-// titulacion
+// titulacion 
 Route::post('titulacion/addAmbiente','TitulacionController@addAmbiente')->name('titulacion.addAmbiente');
 
 Route::get('titulacion/buscar','TitulacionController@buscar')->name('titulacion.buscar');
@@ -14,9 +14,12 @@ Route::get('titulacion/search/{cod_sis}','TitulacionController@search');
 Route::post('/titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
 Route::resource('titulacion', 'TitulacionController');
 
+Route::get('titulacion/generar/designacionTribunal','TitulacionController@generar_designacionTribunal')->name('designacionTribunal.pdf');
+Route::get('titulacion/generar/primerRecordatorio','TitulacionController@generar_primerRecordatorio')->name('primerRecordatorio.pdf');
+Route::get('titulacion/generar/actaDefensa','TitulacionController@generar_actaDefensa')->name('actaDefensa.pdf');
+Route::get('titulacion/generar/testimonio','TitulacionController@generar_testimonio')->name('testimonio.pdf');
+
 // &&&&&&&&&&&&&&&&
-
-
 
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
