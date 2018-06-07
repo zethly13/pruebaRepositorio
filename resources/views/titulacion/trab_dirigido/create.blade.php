@@ -34,5 +34,5 @@
     </div>
   </div>
 </div>
-
+@include('titulacion.partials.modals')
 @endsection

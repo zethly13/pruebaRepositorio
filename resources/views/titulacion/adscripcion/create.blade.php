@@ -1,9 +1,8 @@
 @extends('layout.master')
-
 @section('contenido')
 <div class="container">
     <div class="row">
-    <!-- <div class="col-md-4 ml-auto mr-auto"> -->
+    {{-- <div class="col-md-10 ml-auto mr-auto"> --}}
     <div class="card">
         <div class="card-header card-header-primary text-center">
         <h5>REGISTRO DE ACTA</h5>
@@ -35,4 +34,8 @@
   </div>
 </div>
 
+@include('titulacion.partials.modals')
 @endsection
+
+
+

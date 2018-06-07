@@ -1,15 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|ss
-*/
 Route::group(['middleware'=>'guest'],function(){
 	
 Route::any('/','UsuariosController@login')->name('usuarios.login');
@@ -17,8 +6,17 @@ Route::any('/login','UsuariosController@login')->name('usuarios.login');
 Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 });
 
-Route::resource('titulacion', 'TitulacionController');
+// titulacion
+Route::post('titulacion/addAmbiente','TitulacionController@addAmbiente')->name('titulacion.addAmbiente');
+
+Route::get('titulacion/buscar','TitulacionController@buscar')->name('titulacion.buscar');
+Route::get('titulacion/search/{cod_sis}','TitulacionController@search');
 Route::post('/titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
+Route::resource('titulacion', 'TitulacionController');
+
+// &&&&&&&&&&&&&&&&
+
+
 
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');

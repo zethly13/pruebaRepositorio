@@ -3,52 +3,7 @@
 	<div class="col-md-5">
 	{!! Form::text('codSis',null,array('placeholder' => 'Ingrese codigo sis', 'class'=>'form-control')) !!}
 	</div>
-
 	<a class="btn btn-secondary btn-sm" href="#buscarEstudiante" data-target="#buscarEst" data-toggle="modal"><i class="fa fa-pencil"></i>  Buscar Estudinte</a>
-	<div class="modal fade" id="buscarEst">
-    <div class="modal-dialog modal-lg">
-      	<div class="modal-content">
-        	<div class="modal-header">
-          		<h2 class="modal-title">Buscar Estudiante</h2>
-           		<button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>          
-        	</div>         
-        	<div class="modal-body">
-
-          		{!! Form::open() !!}
-						<div class="form-group row">
-							{!! Form::label('codSis','Cod Sis:',['class'=>'col-md-3']) !!}
-							<div class="col-md-9">
-							{!! Form::text('ci',null,array('placeholder'=>'Ingrese Doc de Identidad','class'=>'form-control')) !!}
-							</div>
-						</div>
-		
-						<div class="form-group row">
-							{!! Form::label('nombre','Nombre de Usuario:',['class'=>'col-md-3']) !!}
-							<div class="col-md-9">
-							{!! Form::text('nombre',null,array('placeholder'=>'Nombre de Usuario','class'=>'form-control')) !!}
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							{!! Form::label('apellido','Apellidos de Usuario:',['class'=>'col-md-3']) !!}
-							<div class="col-md-9">{!! Form::text('apellido',null,array('placeholder'=>'Apellidos de Usuario','class'=>'form-control')) !!}
-							</div>
-						</div>
-						<div class="text-center">
-							{!! Form::button('Buscar', array('type'=> 'submit','class'=>'btn btn-primary'))!!}
-						</div>
-				{!! Form::close() !!}
-
-        	</div>
-        	<div class="modal-footer">
-        	{{ Form::open() }}
-            	{!! Form::button('Guardar', array('type'=> 'submit','class'=>'btn btn-primary'))!!}
-            	{!! Form::button('Cancelar', array('class'=>'btn btn-danger','data-dismiss'=>'modal'))!!}
-        	</div>            
-      	</div>              
-    </div> 
-    	{{ Form::close() }}         
-  	</div>
 </div>
 
 <div class="form-group row">
@@ -72,6 +27,24 @@
 	</div>
 </div>
 
-<div class="text-center">
-  {!! Form::button('Agregar nuevo usuario', array('type'=> 'submit','class'=>'btn btn-success'))!!}
-</div> 
+{{-- <div class="text-center">
+  {!! Form::button('Agregar nuevo usuario', array('class'=>'btn btn-success'))!!}
+</div> --}}
+<a href="{{ route('titulacion.buscar') }}" role="button" class="btn btn-success">BUSCAR UN USUARIO</a>
+
+<script>
+	function search_sis(){
+		cod_sis = document.getElementById("search_sis").value;
+		$.get('search/'+cod_sis, function(data, status){
+		var array=new Array(data);
+		var contador;
+
+	for( contador=0; contador < 7; contador++ ) {
+     document.write( "El valor de la posición [" + contador + "] es [" + array[contador] + "]<br/>" );
+ 	}
+    });
+		console.log(array);
+
+
+	}
+</script>

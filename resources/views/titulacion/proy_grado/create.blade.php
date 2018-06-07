@@ -5,7 +5,7 @@
   <div class="row">
     <!-- <div class="col-md-4 ml-auto mr-auto"> -->
     <div class="card">
-      <div class="card-header card-header-primary text-center">
+        <div class="card-header card-header-primary text-center">
         <h5>REGISTRO DE ACTA</h5>
 				<p class="category">MODALIDAD: {{ $modalidad->nombre_modalidad }}</p>
         </div>
@@ -26,5 +26,5 @@
     </div>
   </div>
 </div>
-
+@include('titulacion.partials.modals')
 @endsection

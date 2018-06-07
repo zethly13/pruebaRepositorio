@@ -31,4 +31,8 @@ class Usuario_asignar_sub_rol extends Model
 	{
 		return $this->hasMany('App\grupo_doc_mat_plan_gestion_unidad', 'id_usuasigsubrol','id');
 	}
+	public function getNombreCompletoUserAttribute()
+	{
+		return $this->usuario->nombres." ".$this->usuario->apellidos;
+	}
 }
