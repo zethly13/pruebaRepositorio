@@ -177,6 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
         /*
          * Application Service Personales...
          */
@@ -184,6 +185,7 @@ return [
         App\Providers\MenuDinamicoServiceProvider::class,
         
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\domPDF\ServiceProvider::class,
     ],
 
     /*
@@ -236,6 +238,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash'=> Laracasts\Flash\Flash::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF'=>Barryvdh\DomPDF\Facade::class,
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];

@@ -43,7 +43,7 @@ class modalidadTitulacionSeeder extends Seeder
 
         App\Modalidad_titulacion::create([
 
-        	'nombre_modalidad'=>'RENDIMIENTO ACADEMICO',
+        	'nombre_modalidad'=>'RENDIMIENTO ACADEMICA',
 			'descripcion_modalidad'=>''
         ]);
 
@@ -61,7 +61,7 @@ class modalidadTitulacionSeeder extends Seeder
 
         App\Modalidad_titulacion::create([
 
-        	'nombre_modalidad'=>'PETANG',
+        	'nombre_modalidad'=>'PTAANG',
 			'descripcion_modalidad'=>''
         ]);
     }

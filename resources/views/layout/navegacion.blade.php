@@ -13,7 +13,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+        
         <div class="collapse navbar-collapse" id="navbarsExample06">
             <ul class="navbar-nav mr-auto">
                 @foreach($acceso as $accesos)
@@ -29,7 +29,7 @@
                     </li>
                 @endforeach
             </ul>
-    
+             
             <div class="form-inline my-2 my-md-0">
                 <ul class="navbar-nav mr-auto">      
                     <li class="nav-item dropdown">
@@ -38,7 +38,9 @@
                             <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">Perfil Usuario</a>
                             <a class="dropdown-item" href="{{ route('usuarios.loginModificar') }}">Modificar Login</a>
                             <a class="dropdown-item" href="{{ route('usuarios.contrasenaModificar') }}">Modificar Contraseña</a>
+                            <a class="dropdown-item" href="{{ route('usuarios.bitacora') }}">Bitacora de usuario</a>
                             <a class="dropdown-item" href="{{ route('usuarios.logout') }}">Salir del Sistema</a>
+                            
                         </div>          
                     </li>
                 </ul>
@@ -58,5 +60,10 @@
                         </li>
                     @endforeach
                 </ul>
+                <a class="dropdown-item" href="#">{{ $usuarioLogueado->funcion->nombre_funcion }}hola</a>
+                <a class="dropdown-item" href="#">{{ $usuarioLogueado->unidad->nombre_unidad     }}hola</a>
             </nav>
 @endif
+{{-- @foreach($usuarioLogueado->funcion as $pru)
+    $pru->nombre_funcion
+@endforeach --}}

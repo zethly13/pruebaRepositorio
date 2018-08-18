@@ -17,7 +17,7 @@ class CreateTipoGestionesTable extends Migration
             $table->increments('id');
             $table->string('nombre_tipo_gestion',60);
             $table->string('nombre_corto_tipo_gestion',50)->nullable();
-            $table->enum('categoria',['P','E', 'S','O']);
+            $table->enum('categoria',['P','E', 'S','O'])->default('E');
             $table->integer('tipo_gestion');
 
             $table->timestamps();

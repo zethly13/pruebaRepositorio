@@ -11,38 +11,44 @@ Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 });
 
 // titulacion 
-Route::post('titulacion/addAmbiente','TitulacionController@addAmbiente')->name('titulacion.addAmbiente');
-Route::post('titulacion/addPresidente','TitulacionController@addPresidente')->name('titulacion.addPresidente');
-Route::post('titulacion/addMiembro','TitulacionController@addMiembro')->name('titulacion.addMiembro');
-Route::post('titulacion/addTutor','TitulacionController@addTutor')->name('titulacion.addTutor');
-Route::post('titulacion/addDecano','TitulacionController@addDecano')->name('titulacion.addDecano');
 
+Route::get('titulacion/crearActa','TitulacionController@crearActa')->name('titulacion.crearActa');
+Route::post('titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
+Route::post('titulacion/prueba','TitulacionController@prueba')->name('titulacion.prueba');
 
-Route::get('titulacion/buscar','TitulacionController@buscar')->name('titulacion.buscar');
-Route::get('titulacion/search/{cod_sis}','TitulacionController@search');
-Route::post('/titulacion/crear','TitulacionController@crear')->name('titulacion.crear');
 Route::resource('titulacion', 'TitulacionController');
+Route::post('/titulacion/addAmbiente','TitulacionController@addAmbiente');
+Route::post('/titulacion/addProfesional','TitulacionController@addProfesional');
 
-Route::any('/search',function(){
-    $q = Input::get ( 'q' );
-    //dd($q);
-    if($q!=""){
-   		$user = Usuario::where('nombres','LIKE','%'.$q.'%')->orWhere('apellidos','LIKE','%'.$q.'%')->get();	
-    	if(count($user) > 0)
-        return view('titulacion.search')
-    	//return redirect::back()
-    		->withDetails($user)
-    		->withQuery( $q );
-    }
-    else return "no se encontro usuario";
-});
+Route::post('/titulacion/editAmbiente','TitulacionController@editAmbiente');
+Route::post('/titulacion/editProfesional','TitulacionController@editProfesional');
 
+Route::get('/titulacion/showAmbiente/{id}','TitulacionController@showAmbiente');
+Route::get('/titulacion/showProfesional/{id}','TitulacionController@showProfesional');
 
+Route::post('titulacion/buscar','TitulacionController@buscar')->name('titulacion.buscar');
+Route::post('titulacion/buscarUsuario','TitulacionController@buscarUsuario')->name('titulacion.buscarUsuario');
+// Route::get('titulacion/buscarTitulado','TitulacionController@buscarTitulado');
+// 
+// Route::get('titulacion/search/{cod_sis}','TitulacionController@search');
+// Route::any('/search',function(){
+//     $q = Input::get ( 'q' );
+//     //dd($q);
+//     if($q!=""){
+//    		$user = Usuario::where('nombres','LIKE','%'.$q.'%')->orWhere('apellidos','LIKE','%'.$q.'%')->get();	
+//     	if(count($user) > 0)
+//         return view('titulacion.search')
+//     	//return redirect::back()
+//     		->withDetails($user)
+//     		->withQuery( $q );
+//     }
+//     else return "no se encontro usuario";
+// });
 
-Route::get('titulacion/generar/designacionTribunal','TitulacionController@generar_designacionTribunal')->name('designacionTribunal.pdf');
-Route::get('titulacion/generar/primerRecordatorio','TitulacionController@generar_primerRecordatorio')->name('primerRecordatorio.pdf');
-Route::get('titulacion/generar/actaDefensa','TitulacionController@generar_actaDefensa')->name('actaDefensa.pdf');
-Route::get('titulacion/generar/testimonio','TitulacionController@generar_testimonio')->name('testimonio.pdf');
+Route::get('titulacion/generar/designacionTribunal/{id}','TitulacionController@generar_designacionTribunal')->name('designacionTribunal.pdf');
+Route::get('titulacion/generar/primerRecordatorio/{id}','TitulacionController@generar_primerRecordatorio')->name('primerRecordatorio.pdf');
+Route::get('titulacion/generar/actaDefensa/{id}','TitulacionController@generar_actaDefensa')->name('actaDefensa.pdf');
+Route::get('titulacion/generar/testimonio/{id}','TitulacionController@generar_testimonio')->name('testimonio.pdf');
 
 // &&&&&&&&&&&&&&&&
 
@@ -56,6 +62,8 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::get('usuarios/contrasenaModificar','UsuariosController@contrasenaModificar')->name('usuarios.contrasenaModificar');
 	Route::post('usuarios/{id}/validarModLogin','UsuariosController@validarModLogin')->name('usuarios.validarModLogin');
 	Route::post('usuarios/{id}/validarModContrasena','UsuariosController@ValidarModContrasena')->name('usuarios.validarModContrasena');
+	Route::get('Usuarios/bitacora','UsuariosController@bitacora')->name('usuarios.bitacora');
+	Route::get('Usuarios/verBitacora/{id}','UsuariosController@bitacoraUser')->name('usuarios.verBitacora');
 	Route::resource('roles', 'RolesController');
 	Route::resource('sub_roles', 'Sub_RolesController');
 	Route::resource('usuarios', 'UsuariosController');

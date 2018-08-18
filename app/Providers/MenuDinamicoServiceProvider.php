@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Sub_acceso; 
 use App\Acceso; 
+use App\Usuario_asignar_sub_rol; 
 use Carbon\Carbon; 
 use Auth;
 class MenuDinamicoServiceProvider extends ServiceProvider
@@ -41,7 +42,13 @@ class MenuDinamicoServiceProvider extends ServiceProvider
                 ->groupBy('sub_accesos.id_acceso');
             })->orderBy('peso_acceso','asc')
             ->get();
-            $view->with('subAccesosUsuario', $subAccesosUsuario)->with('acceso',$acceso);
+            $usuarioLogueado=Usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')->where('a.id',Auth::user()->id)->first();
+            $usuarioLogueado->each(function($usuarioLogueado){
+            $usuarioLogueado->sub_rol;
+            $usuarioLogueado->funcion;
+            $usuarioLogueado->unidad;
+            });
+            $view->with('subAccesosUsuario', $subAccesosUsuario)->with('acceso',$acceso)->with('usuarioLogueado',$usuarioLogueado);
         });
     }
 

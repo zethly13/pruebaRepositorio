@@ -21,7 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('apellidos',50)->default('no');
             $table->string('nombres',50)->default('no');
             $table->string('sexo',10)->default('MASCULINO');
-            $table->date('fecha_nac')->nullable();
+            $table->date('fecha_nac')->default('0000-10-08');
             $table->enum('usuario_activo',['SI','NO'])->default('SI');
             $table->enum('inscribir_adm',['SI','NO'])->default('SI');
             $table->string('estilo',20)->default('general');

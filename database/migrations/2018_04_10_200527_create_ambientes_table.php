@@ -16,7 +16,7 @@ class CreateAmbientesTable extends Migration
         Schema::create('ambientes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_ambiente',30);
-            $table->integer('max_estudiantes');
+            $table->integer('max_estudiantes')->default(0);
             $table->enum('ambiente_activo',['SI','NO'])->default('SI');
 
             $table->integer('id_unidad')->unsigned();

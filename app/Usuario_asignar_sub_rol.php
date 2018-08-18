@@ -35,4 +35,24 @@ class Usuario_asignar_sub_rol extends Model
 	{
 		return $this->usuario->nombres." ".$this->usuario->apellidos;
 	}
+	// public function scopeUnidadUsuario($query,$idUnidad)
+	// {
+	// 	switch ($idUnidad) {
+	// 		case '1':
+	// 			return 'Economia'
+	// 			break;
+	// 		case '2':
+	// 			return 'Administracion Empresas'
+	// 			break;
+	// 		case '3':
+	// 			return 'Contaduria Publica'
+	// 			break;
+	// 		case '4':
+	// 			return 'Comercial'
+	// 			break;
+	// 		case '5':
+	// 			return 'Financiera'
+	// 			break;
+	// 	}
+	// }
 }

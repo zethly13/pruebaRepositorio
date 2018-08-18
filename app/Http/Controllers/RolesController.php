@@ -19,11 +19,7 @@ class RolesController extends Controller
         $this->middleware('permisos:4', ['only' => 'update','edit','destroy']);
         
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $rol= Rol::all();
@@ -32,31 +28,16 @@ class RolesController extends Controller
         return view($this->path.'.index',compact('rol'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view($this->path.'.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(rolesRequest $request)
     {
         try {
-                $role = new Rol();
-               /*$this->validate($request,[
-                'nombre_rol' => 'required|max:100',
-                'desc_rol'=>'required|max:100',
-                ]);
-*/              
+                $role = new Rol();            
                $role->nombre_rol = $request->nombre_rol;
                $role->descripcion_rol = $request->desc_rol;
                $role->save();
@@ -73,27 +54,14 @@ class RolesController extends Controller
                return "Fatal Error -".$e->getMessage();
            }   
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
-        //
         $rol = Rol::findOrFail($id);
        // $rol->delete();
         //return 'esta es la '.$rol;
@@ -101,39 +69,27 @@ class RolesController extends Controller
         return view('roles.edit', compact('rol'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(rolesRequest $request, $id)
     {
         $rol_editar=Rol::findOrFail($id);
-        $rol->desc="Modifico el registro :".$rol->id." con nombre_rol: ".$rol->nombre_rol;
-        $rol_editar->action=10;
-        event(new RolesEvent($rol_editar));
-        $rol_editar=Rol::findOrFail($id);
-        // $rol_bitacora=$rol_editar;
         $rol_editar->nombre_rol     = $request->nombre_rol;
         $rol_editar->descripcion_rol= $request->desc_rol;
         $rol_editar->save();
+        $rol_editar->desc="Modifico el registro :".$rol_editar->id." con nombre_rol: ".$rol_editar->nombre_rol;
+        $rol_editar->action=10;
+        event(new RolesEvent($rol_editar));
+        //$rol_editar=Rol::findOrFail($id);
+        // $rol_bitacora=$rol_editar;
         $notification= array('mensaje3'=>'Guardado correctamente!','alert-type'=>'success');
         return redirect()->route('roles.index')->with($notification);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {
             $rolEliminar = Rol::findOrFail($id);
-             $rol->desc="Elimino el registro :".$rol->id." con nombre_rol: ".$rol->nombre_rol;
+            $rolEliminar->desc="Elimino el registro :".$rolEliminar->id." con nombre_rol: ".$rolEliminar->nombre_rol;
             $rolEliminar->action=11;
             event(new RolesEvent($rolEliminar));
             $rolEliminar->delete(); 

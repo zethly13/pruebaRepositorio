@@ -15,10 +15,10 @@ class CreateUsuarioAsignarSubRolesTable extends Migration
     {
         Schema::create('usuario_asignar_sub_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cod_sis');
+            $table->string('cod_sis')->nullable()->default('NULL');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->enum('activo',['SI','NO']);
+            $table->enum('activo',['SI','NO'])->default('SI');
            
             $table->integer('id_funcion')->unsigned();
             $table->integer('id_sub_rol')->unsigned(); 

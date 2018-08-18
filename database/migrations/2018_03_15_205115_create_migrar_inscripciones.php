@@ -29,7 +29,7 @@ class CreateMigrarInscripciones extends Migration
             $table->string('nombreMat',150);
             $table->string('tipoMateria',20);
             $table->string('grupoMat',10);
-            $table->string('codDocente');
+            $table->string('codDocente')->default('NULL')->nullable();
             $table->string('ciDoc',20);
             $table->string('apellidosDocente',50);
             $table->string('nombresDocente',50);

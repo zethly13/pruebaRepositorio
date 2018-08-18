@@ -23,20 +23,24 @@ use App\Events\Accesos\AccesosEvent;
 class AccesoController extends Controller
 {
 	
-	public function index()
+	public function index(Request $request)
 	{
-		return view('accesos.asignarUsuarioSubRol');
-	}
-	public function index2(Request $request)
-	{
-		if($request->ci==null && $request->nombre==null && $request->apellido==null)
-			back();
-		else
+		if($request->ci==null && $request->nombre==null && $request->apellido==null ){
+			$usuarios='vacio';
+		}else
 		{
-		$usuarios=Usuario::Buscador2($request->ci,$request->nombre,$request->apellido)->get();
+		$usuarios=Usuario::identidad($request->ci)
+		->nombres($request->nombre)
+		->apellido($request->apellido)
+		->orderby('apellidos','desc')->paginate(10);
 		$permisosAsignados=Usuario_asignar_sub_rol::all();
-		return view('accesos.asignarUsuarioSubRolUsuario',compact('usuarios','permisosAsignados'));
 		}
+
+		return view('accesos.asignarUsuarioSubRol',compact('usuarios','permisosAsignados'));
+
+		// return view('accesos.asignarUsuarioSubRol',compact('usuarios','permisosAsignados'));
+		// return view('accesos.asignarUsuarioSubRolUsuario',compact('usuarios','permisosAsignados'));
+		// }
 	}
 //Formulario de asignacion de nuevos subroles a un usuario
 	public function nuevaAsignacion($id)

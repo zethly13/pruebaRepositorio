@@ -58,5 +58,35 @@ class funcionSeeder extends Seeder
             
         ]);
 
+        App\Funcion::create([
+
+            'nombre_funcion'=>'TRIBUNAL'
+            
+        ]);
+
+        App\Funcion::create([
+
+            'nombre_funcion'=>'PRESIDENTE'
+            
+        ]);
+
+        App\Funcion::create([
+
+            'nombre_funcion'=>'TUTOR'
+            
+        ]);
+
+        App\Funcion::create([
+
+            'nombre_funcion'=>'DECANO'
+            
+        ]); 
+
+        App\Funcion::create([
+
+            'nombre_funcion'=>'MIEMBRO'
+            
+        ]);
+
     }
 }

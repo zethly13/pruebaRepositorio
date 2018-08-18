@@ -17,13 +17,13 @@ class CreateMigrarEstudiantes extends Migration
 
             $table->increments('id');
             $table->string('codigo');
-            $table->string('ci',20);
-            $table->string('nombres',50);
-            $table->string('apellidos',50);
+            $table->string('ci',20)->nullable();
+            $table->string('nombres',50)->nullable();
+            $table->string('apellidos',50)->nullable();
             $table->string('plan',20);
-            $table->date('fecha');
+            $table->date('fecha')->nullable();
             $table->string('sexo',10);
-            $table->string('inscrito',10);
+            $table->string('inscrito',10)->default('NO');
 
             $table->timestamps();
         });

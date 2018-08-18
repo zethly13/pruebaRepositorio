@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Unidad extends Model
 {
     protected $table = 'unidades';
@@ -23,4 +23,5 @@ class Unidad extends Model
 	{
 		return $this->hasMany('App\Unidad_materia', 'id_unidad','id');
 	}
+	
 }

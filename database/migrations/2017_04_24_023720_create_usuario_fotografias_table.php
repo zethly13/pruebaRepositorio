@@ -18,7 +18,7 @@ class CreateUsuarioFotografiasTable extends Migration
             $table->string('fotografia',80);
             $table->date('fecha_subida');
             $table->enum('valida',['SI','NO']);
-            $table->string('observacion',200);
+            $table->string('observacion',200)->default('NINGUNA');
  
             $table->integer('id_usuario')->unsigned();
 

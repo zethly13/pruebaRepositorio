@@ -15,11 +15,11 @@ class CreateGestionesTable extends Migration
     {
         Schema::create('gestiones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('anio',10);
-            $table->string('periodo',10);
+            $table->string('anio',10)->default('0');
+            $table->string('periodo',10)->default('0');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->enum('activo',['SI','NO']);
+            $table->enum('activo',['SI','NO'])->default('SI');
             $table->integer('peso_gestion');
 
             $table->integer('id_tipo_gestion')->unsigned();

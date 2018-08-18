@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Auth\RegistroIngresoSistema',
         ],
         'App\Events\Auth\UsuarioExit'=>[
-            'App\Listeners\Usuario\SalidaSistema',
+            'App\Listeners\Auth\SalidaSistema',
         ],
         'App\Events\Usuario\UsuarioNuevoBit'=>[
             'App\Listeners\Usuario\UsuarioNuevoRegistroBit',

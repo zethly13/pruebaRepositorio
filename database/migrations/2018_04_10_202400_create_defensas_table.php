@@ -8,7 +8,7 @@ class CreateDefensasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 
      * @return void
      */
     public function up()
@@ -17,16 +17,18 @@ class CreateDefensasTable extends Migration
             $table->increments('id');
             $table->string('titulo_defensa',100);
             $table->date('fecha_defensa');
-            $table->dateTime('hora_defensa');
+            $table->time('hora_defensa');
             $table->string('descripcion',100);
             $table->char('avance');
             $table->string('empresa')->nullable();
 
             $table->integer('id_modalidad_titulacion')->unsigned();
             $table->integer('id_ambiente')->unsigned();
+            $table->integer('id_cd')->unsigned();
 
             $table->foreign('id_modalidad_titulacion')->references('id')->on('modalidad_titulaciones')->onDelete('cascade');
             $table->foreign('id_ambiente')->references('id')->on('ambientes')->onDelete('cascade');
+            $table->foreign('id_cd')->references('id')->on('cds')->onDelete('cascade');
 
             $table->timestamps();
         });

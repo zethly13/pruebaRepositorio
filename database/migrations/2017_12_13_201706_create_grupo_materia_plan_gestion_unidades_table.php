@@ -17,12 +17,12 @@ class CreateGrupoMateriaPlanGestionUnidadesTable extends Migration
             $table->increments('id');
 
             $table->string('cod_grupo',20);
-            $table->enum('grupo_principal',['SI','NO']);
+            $table->enum('grupo_principal',['SI','NO'])->default('SI');
 
             $table->integer('id_mat_plan_gestion_unidad')->unsigned();
             $table->integer('id_agrupar_materias')->unsigned();
             
-            $table->integer('id_tipo_planilla')->unsigned();
+            $table->integer('id_tipo_planilla')->unsigned()->default(1);
 
             $table->foreign('id_mat_plan_gestion_unidad','id_mat')->references('id')->on('materia_plan_gestion_unidades')->onDelete('cascade');
             $table->foreign('id_tipo_planilla')->references('id')->on('tipo_planillas')->onDelete('cascade');

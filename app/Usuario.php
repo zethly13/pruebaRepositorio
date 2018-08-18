@@ -114,7 +114,32 @@ class Usuario extends User
 
 		return $resultado;
 	}
-
+	public function scopeIdentidad($query,$ci)
+	{
+		// $consultaAux=$query;
+		if($ci!=null)
+		// if($ci)
+		{
+			return $query->where('doc_identidad','like','%'.$ci.'%');
+		}
+	}
+	public function scopeNombres($query,$nombreUsuario)
+	{
+		// if(!empty($nombreUsuario))
+		if($nombreUsuario!=null)
+		{
+			return $query->where('nombres','like','%'.$nombreUsuario.'%');
+		}
+	}
+	public function scopeApellido($query,$apellido)
+	{
+		if($apellido!=null)
+		// if($apellido)
+		{
+			return $query->where('apellidos','like','%'.$apellido.'%');
+			
+		}
+	}
 	public function getNombreCompletoAttribute()
 	{
 		return $this->nombres." ".$this->apellidos;

@@ -16,7 +16,7 @@ class CreateUsuarioEmailsTable extends Migration
         Schema::create('usuario_emails', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email',100);
-            $table->enum('email_activo',['SI','NO']);
+            $table->enum('email_activo',['SI','NO'])->default('NO');
             
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_tipo_email')->unsigned();

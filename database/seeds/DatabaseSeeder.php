@@ -47,7 +47,6 @@ class DatabaseSeeder extends Seeder
         $this->call(bitacoraSeeder::class);
         $this->call(tipoAmbienteSeeder::class);
         $this->call(ambienteSeeder::class);
-        $this->call(funcionDefensaSeeder::class);
         $this->call(modalidadTitulacionSeeder::class);
 
     }

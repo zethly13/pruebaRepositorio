@@ -187,3 +187,6 @@
         transform: scale(1);
     }
 }
+.text-muted{
+color: #eff2f5 !important;
+}
