@@ -1,5 +1,5 @@
-@extends('layout.master')
-@section('contenido')
+{{-- @extends('layout.master') --}}
+{{-- @section('contenido') --}}
 <div class="container">
   <div class="row">
     <!-- <div class="col-md-4 ml-auto mr-auto"> -->
@@ -80,5 +80,5 @@
 </div>
  @include('titulacion.partials.modals')
 
-@endsection
+{{-- @endsection --}}
 

@@ -14,4 +14,10 @@ class Modalidad_titulacion extends Model
 	{
 		return $this->hasMany('App\Defensa', 'id_modalidad_titulacion', 'id');
 	}
+	public function scopeModalidad($query,$id)
+	{
+		if($id>0){
+			return $query->where('id','=',$id);
+		}
+	}
 }

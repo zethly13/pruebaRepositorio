@@ -115,28 +115,15 @@ class TitulacionController extends Controller
 		}
 	}
 
-	public function crearActa()
+public function crearActa(Request $request)
 	{
 		$modalidades=Modalidad_titulacion::all()->pluck('nombre_modalidad','id');
-		return view('titulacion.crearActa',compact('modalidades')); 
-	}
+		if($request->modalidades!='')
+		{
 
-	public function create(request $request){
-		$modalidades=Modalidad_titulacion::all()->pluck('nombre_modalidad','id');
-		return view('titulacion.crearActa',compact('modalidades')); 
-	
-		// $usuario=Usuario::where('usuarios.id','=',18)
-		// ->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
-		// ->where('a.id_sub_rol',11)
-		// ->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','a.id')
-		// ->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
-		// // ->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
-		// // ->join('defensas as e','e.id','=','d.id_defensa')
-		// ->join('plan_gestion_unidades as f','f.id','=','b.id_plan_gestion_unidad')
-		// ->join('planes as g','g.id','=','f.id_plan')
-		// ->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','g.nombre_plan','c.id as id_ins_grupo_mat_plan_ges_unidad')
-		// ->first();
-		// return $usuario;
+		$modalidad=Modalidad_titulacion::modalidad($request->modalidades)->get()->first();
+		}else
+			$modalidad="vacio";	
 
 		$funciones=funcion::wherein('nombre_funcion',['PRESIDENTE','TUTOR','DECANO','MIEMBRO'])->get();
 		$funcionPresidentes=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
@@ -161,57 +148,7 @@ class TitulacionController extends Controller
 		$ambiente=ambiente::all();
 		$tipo_ambiente=Tipo_ambiente::all()->pluck('nombre_tipo_ambiente','id');
 		$unidad=Unidad::all()->pluck('nombre_unidad','id');
-
-		$modalidad=Modalidad_titulacion::where('id','=',$request->modalidades)->get()->first();
-		$cantidad=$request->cantidad;
-
-		return view('titulacion.create',compact('cantidad','modalidad','funcionPresidentes','funcionMiembro','funcionTutor','funcionDecano','ambiente','tipo_ambiente','unidad','funciones','usuario'));
-		
-	}
-
-	public function crear(request $request){
-		// $usuario=Usuario::where('usuarios.id','=',18)
-		// ->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
-		// ->where('a.id_sub_rol',11)
-		// ->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','a.id')
-		// ->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
-		// // ->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
-		// // ->join('defensas as e','e.id','=','d.id_defensa')
-		// ->join('plan_gestion_unidades as f','f.id','=','b.id_plan_gestion_unidad')
-		// ->join('planes as g','g.id','=','f.id_plan')
-		// ->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','g.nombre_plan','c.id as id_ins_grupo_mat_plan_ges_unidad')
-		// ->first();
-		// return $usuario;
-
-		$funciones=funcion::wherein('nombre_funcion',['PRESIDENTE','TUTOR','DECANO','MIEMBRO'])->get();
-		$funcionPresidentes=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
-				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['PRESIDENTE'])
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
-
-		$funcionMiembro=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
-				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['MIEMBRO','DOCENTE'])
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
-
-		$funcionTutor=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
-				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['TUTOR','DOCENTE'])
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
-
-		$funcionDecano=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
-				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['DECANO'])
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
-		$ambiente=ambiente::all();
-		$tipo_ambiente=Tipo_ambiente::all()->pluck('nombre_tipo_ambiente','id');
-		$unidad=Unidad::all()->pluck('nombre_unidad','id');
-
-		$modalidad=Modalidad_titulacion::where('id','=',$request->modalidades)->get()->first();
-		$cantidad=$request->cantidad;
-
-		return view('titulacion.create',compact('cantidad','modalidad','funcionPresidentes','funcionMiembro','funcionTutor','funcionDecano','ambiente','tipo_ambiente','unidad','funciones','usuario'));
-		
+		return view('titulacion.crearActa',compact('modalidad','modalidades','funcionPresidentes','funcionMiembro','funcionTutor','funcionDecano','ambiente','tipo_ambiente','unidad','funciones','usuario')); 
 	}
 
 	public function buscar(Request $request){
@@ -618,7 +555,7 @@ class TitulacionController extends Controller
 		}
 	}
 
-	 public function generar_testimonio()
+	 public function generar_testimonio($id)
 	{
 		$fecha=Date::today()->format('l\, j F \d\e\l Y');
 		$usuario=Usuario::where('usuarios.id','=',$id)
