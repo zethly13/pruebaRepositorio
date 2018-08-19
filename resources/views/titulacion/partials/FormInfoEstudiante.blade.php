@@ -1,8 +1,11 @@
 
-<a class="btn btn-secondary btn-sm" href="#" data-target="#buscarEstudiante" data-toggle="modal" id="buscar"><i class="fa fa-pencil"></i>Agregar Estudiante</a>
+<div class="text-center">
+<a class="btn btn-warning btn-md" href="#" data-target="#buscarEstudiante" data-toggle="modal" id="buscar"><i class="fa fa-user"></i> Agregar Estudiante</a>
+</div>
+<br>
 {{-- <div id="mostrarUsuario" > --}}
 	
-	<table id='mostrarUsuario'>
+	{{-- <table id='mostrarUsuario'>
 		<tr>
 			<div class="form-group row">
 				<td>{!! Form::label('codSis','* Cod Sis:')!!}</td>
@@ -27,8 +30,9 @@
 				<td>{!! Form::text('carrera',"",['placeholder' => 'Ingrese carrera', 'class'=>'form-control', 'id'=>'carreraUsuario','data-target'=>"#buscarEstudiante",'data-toggle'=>"modal",'disabled'=>'disabled']) !!}</td>
 			</div>
 		</tr>
-
-	</table>
+	</table> --}}
+	<div id="mostrarDatos" >
+		
+	</div>
 	{{-- <input type="hidden" name="id_ins_grupo_mat_plan_ges_unidad" value="{{ $usuario->id_ins_grupo_mat_plan_ges_unidad }}"> --}}
 {{-- </div> --}}
-

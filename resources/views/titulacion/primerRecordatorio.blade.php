@@ -6,7 +6,7 @@
 	</head>
 	<body class="bodyBody">
 		<div class="divReturnAddress">
-			{{ $fecha }}<br/>
+			Cochabamba {{ $fecha }}<br/>
 			CICA - as12-23-j232-23<br/>
 			<br/>
 		</div>
@@ -22,12 +22,12 @@
 		</div>
 
 		<div class="divSubject">
-			<u>REF.: NOTIFICACION DE DEFENSA</u>
+			<u>REF.: NOTIFICACIÓN DE DEFENSA</u>
 		</div>
 
 		<div class="divContents">
 			<p align="justify" class="divSaludo">
-				De mi consideracion:
+				De mi consideración:
 			</p>
 
 			<p align="justify">

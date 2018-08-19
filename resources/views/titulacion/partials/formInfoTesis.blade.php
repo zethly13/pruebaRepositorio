@@ -13,7 +13,8 @@
 <div class="form-group row">
 	{!! Form::label('nota','Nota numeral:',['class'=>'col-md-2']) !!}
 	<div class="col-md-3">
-	{!! Form::text('nota',null,['type'=>'input','placeholder' => 'nota numeral','class'=>'form-control numbers','size' => '30x3','id'=>'nota']) !!}
+		<input type="number" name="nota" id="nota" class="form-control" min="1" max="100" onkeyup="if(this.value>100){this.value='100';}else if(this.value<0){this.value='0'}">
+	{{-- {!! Form::text('nota',null,['type'=>'input','placeholder' => 'nota numeral','class'=>'form-control numbers','size' => '30x3','id'=>'nota']) !!} --}}
 	</div>
 	{!! Form::label('nota_literal','Nota Literal:',['class'=>'col-md-2 ']) !!}
 	<div class="col-md-3">

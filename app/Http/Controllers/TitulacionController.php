@@ -166,7 +166,14 @@ public function crearActa(Request $request)
 		// return view('titulacion.search');
 	}
 	public function buscarUsuario(Request $request){
-		$usuarios=Usuario_asignar_sub_rol::where('usuario_asignar_sub_roles.id',$request->id)->join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')->get();
+		$usuarios=Usuario_asignar_sub_rol::where('usuario_asignar_sub_roles.id','=',$request->id)->join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
+			->where('usuario_asignar_sub_roles.id_sub_rol','=',11)
+			->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','usuario_asignar_sub_roles.id')
+			->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
+			->join('plan_gestion_unidades as f','f.id','=','b.id_plan_gestion_unidad')
+			->join('planes as g','g.id','=','f.id_plan')
+			->select('a.id as id_usuario','usuario_asignar_sub_roles.id as id_usu_asig_sub_rol','a.nombres','a.apellidos','usuario_asignar_sub_roles.cod_sis','g.nombre_plan','c.id as id_ins','c.id_inscripcion')
+			->first();
 		return $response=Response::json($usuarios);
 	}
 	
@@ -209,7 +216,7 @@ public function crearActa(Request $request)
 		return response()->json($ambiente);
 	}
 
-	public function showAmbiente(Request $request)
+	public function showAmbiente($id)
 	{
 		$ambiente=Ambiente::find($id);
 		return response()->json($ambiente);
@@ -321,7 +328,7 @@ public function crearActa(Request $request)
 		
 	} 
 
-	public function store(Request $request, $id)
+	public function store(Request $request)
 	{
 
 		$defensa_user					=new Defensa();
@@ -335,13 +342,6 @@ public function crearActa(Request $request)
 		$defensa_user->empresa='null'; //td
 		$defensa_user->id_cd=1; //relacionar
 		$defensa_user->save();
-	
-		$est_defensa 				=new Estudiante_defensa();
-		$est_defensa->nota 			=$request->nota;
-		$est_defensa->observacion	=$request->observacion;
-		$est_defensa->id_defensa	=$defensa_user->id;
-		$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$request->id_ins_grupo_mat_plan_ges_unidad;
-		$est_defensa->save();
 
 		$asignar_presidente=new Asignar_funcion_defensa();
 		$asignar_presidente->observacion="presidente";
@@ -384,6 +384,20 @@ public function crearActa(Request $request)
 		$asignar_decano->id_usuario_asignar_sub_rol=$request->decano;
 		$asignar_decano->id_funcion=$request->decano_funcion;
 		$asignar_decano->save();
+		
+		$id_usuario=$request->id_usuario;
+		if(is_array($id_usuario))
+		{
+			foreach ($id_usuario as $id_usuarios)
+			{		
+				$est_defensa 				=new Estudiante_defensa();
+				$est_defensa->nota 			=$request->nota;
+				$est_defensa->observacion	=$request->observacion;
+				$est_defensa->id_defensa	=$defensa_user->id;
+				$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$id_usuarios;
+				$est_defensa->save();
+			}
+		}
 		return redirect()->route('titulacion.crearActa');
 	}
 	
@@ -414,7 +428,7 @@ public function crearActa(Request $request)
 		// return Carbon::getlocale();	
 		// $fecha=Carbon::now()->formatLocalized('%A %d %B %Y');
 // Cochabamba 14 abril del 2018
-		$fecha=Date::today()->format('l\, j F \d\e\l Y');
+		$fecha=Date::today()->format('j F \d\e\l Y');
 		// $fecha=Carbon::now()->addYear()->diffForHumans();
 		// $fecha
 		//return $fecha;	   
@@ -460,7 +474,7 @@ public function crearActa(Request $request)
 
 	 public function generar_primerRecordatorio($id)
 	{
-		$fecha=Date::today()->format('l\, j F \d\e\l Y');
+		$fecha=Date::today()->format('j F \d\e\l Y');
 		$usuario=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
 			->where('a.id_sub_rol',11)
@@ -501,7 +515,7 @@ public function crearActa(Request $request)
 
 	 public function generar_actaDefensa($id)
 	{
-		$fecha=Date::today()->format('l\, j F \d\e\l Y');
+		$fecha=Date::today()->format('j F \d\e\l Y');
 		$usuario=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
 			->where('a.id_sub_rol',11)
@@ -557,7 +571,7 @@ public function crearActa(Request $request)
 
 	 public function generar_testimonio($id)
 	{
-		$fecha=Date::today()->format('l\, j F \d\e\l Y');
+		$fecha=Date::today()->format('j F \d\e\l Y');
 		$usuario=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
 			->where('a.id_sub_rol',11)

@@ -10,7 +10,7 @@
             @foreach ($funcionPresidentes as $presidente)
             <option value="{{$presidente->id_us_sig_sub_rol}}" class="edit{{$presidente->id}}">{{$presidente->nombre_completo_user}}</option>
             @endforeach 
-            {{-- <input type="hidden" name="presidente_funcion" value="{{ $presidente->id }}"> --}}
+            <input type="hidden" name="presidente_funcion" value="{{ $presidente->id }}">
     </select>
 	</div>
 	<div class="col-md-2 col-lg-2">
@@ -94,7 +94,7 @@
             @foreach ($funcionDecano as $decano)
             <option value="{{$decano->id_us_sig_sub_rol}}" class="edit{{$decano->id}}">{{$decano->nombre_completo_user}}</option>
             @endforeach
-            {{-- <input type="hidden" name="decano_funcion" value="{{ $decano->id}}"> --}}
+            <input type="hidden" name="decano_funcion" value="{{ $decano->id}}">
            
     </select>
 	{{-- {!! Form::select('decano',$funcionDecano->pluck('nombre_completo_user','id'),null,['placeholder' => 'Seleccione','class'=>'form-control'])!!} --}}

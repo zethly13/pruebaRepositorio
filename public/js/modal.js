@@ -113,6 +113,7 @@ $('.modal-footer').on('click', '.edit', function() {
       'max_estudiantes': $('#max_estudiantes2').val()
 },
     success: function(data) {
+      document.getElementById('select').getElementsByTagName('option')[$("#fid").val()].innerHTML = $('#nombre_ambiente2').val();
       $('.edit'+data.id).replaceWith("<option class='edit"+data.id+"' value='"+data.id+"'>"+ data.nombre_ambiente +"</option>");
     }
   });
