@@ -339,8 +339,9 @@ public function crearActa(Request $request)
 	} 
 
 	public function store(Request $request)
-	{
+	{	
 
+		
 		$defensa_user					=new Defensa();
 		$defensa_user->titulo_defensa	=$request->titulo_defensa;
 		$defensa_user->fecha_defensa	=$request->fecha_defensa;
@@ -349,7 +350,11 @@ public function crearActa(Request $request)
 		$defensa_user->descripcion			=$request->descripcion;
 		$defensa_user->id_modalidad_titulacion=$request->modalidad;
 		$defensa_user->id_ambiente 		=$request->id_ambiente;
-		$defensa_user->empresa='null'; //td
+		if($request->nombre_modalidad=="TRABAJO DIRIGIDO" or $request->nombre_modalidad=="ADSCRIPCION" ){
+			$defensa_user->empresa=$request->empresa;
+		}else{
+			$defensa_user->empresa='null';
+		}
 		$defensa_user->id_cd=1; //relacionar
 		$defensa_user->save();
 
@@ -409,6 +414,7 @@ public function crearActa(Request $request)
 			}
 		}
 		return redirect()->route('titulacion.crearActa');
+		
 	}
 	
 	public function show($id)
