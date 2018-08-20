@@ -150,6 +150,65 @@ class usuarioSeeder extends Seeder
 			'id_tipo_doc_identidad' => '1'
 
          ]);
+
+        App\Usuario::create([
+
+			'doc_identidad' => '4444444',
+			'login' => 'elmer',
+			'clave' => bcrypt('elmer'),
+			'apellidos' => 'PEREZ AMADOR',
+			'nombres' => 'ELMER',
+			'sexo' => 'MASCULINO',
+			'fecha_nac' => '1980-05-12',
+			'usuario_activo' => 'SI',
+			'inscribir_adm' => 'SI',
+			'estilo' => 'General',
+			'subir_foto' => 'SI',
+			'id_estado_civil' => '2',
+			'id_provincia' =>'39',
+			'ciudad_expedido_doc' => '2',
+			'id_tipo_doc_identidad' => '1'
+
+         ]);
+        App\Usuario::create([
+
+			'doc_identidad' => '3333333',
+			'login' => 'weymar',
+			'clave' => bcrypt('weymar'),
+			'apellidos' => 'MIRANDA ROMERO',
+			'nombres' => 'WEYMAR',
+			'sexo' => 'MASCULINO',
+			'fecha_nac' => '1985-10-12',
+			'usuario_activo' => 'SI',
+			'inscribir_adm' => 'SI',
+			'estilo' => 'General',
+			'subir_foto' => 'SI',
+			'id_estado_civil' => '2',
+			'id_provincia' =>'39',
+			'ciudad_expedido_doc' => '2',
+			'id_tipo_doc_identidad' => '1'
+
+         ]);
+        
+        App\Usuario::create([
+
+			'doc_identidad' => '5555555',
+			'login' => 'walter',
+			'clave' => bcrypt('walter'),
+			'apellidos' => 'ORELLANA ARAOZ',
+			'nombres' => 'WALTER',
+			'sexo' => 'MASCULINO',
+			'fecha_nac' => '1980-10-12',
+			'usuario_activo' => 'SI',
+			'inscribir_adm' => 'SI',
+			'estilo' => 'General',
+			'subir_foto' => 'SI',
+			'id_estado_civil' => '2',
+			'id_provincia' =>'39',
+			'ciudad_expedido_doc' => '2',
+			'id_tipo_doc_identidad' => '1'
+
+         ]);
         
         
     }

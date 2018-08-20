@@ -67,5 +67,29 @@ class usuarioTituloSeeder extends Seeder
         	'id_usuario'=>'7',
         	'id_titulo'=>'4'
          ]);
+
+        App\Usuario_titulo::create([
+
+            'descripcion'=>'',
+            'fecha_titulo'=>'2006-12-11',
+            'id_usuario'=>'8',
+            'id_titulo'=>'8'
+         ]);
+
+        App\Usuario_titulo::create([
+
+            'descripcion'=>'',
+            'fecha_titulo'=>'2006-12-11',
+            'id_usuario'=>'9',
+            'id_titulo'=>'6'
+         ]);
+
+         App\Usuario_titulo::create([
+
+            'descripcion'=>'',
+            'fecha_titulo'=>'2006-12-11',
+            'id_usuario'=>'10',
+            'id_titulo'=>'6'
+         ]);
     }
 }

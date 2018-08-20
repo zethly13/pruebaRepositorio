@@ -33,7 +33,7 @@ class Usuario_asignar_sub_rol extends Model
 	}
 	public function getNombreCompletoUserAttribute()
 	{
-		return $this->usuario->nombres." ".$this->usuario->apellidos;
+		return $this->usuario->apellidos." ".$this->usuario->nombres;
 	}
 	// public function scopeUnidadUsuario($query,$idUnidad)
 	// {

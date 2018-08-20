@@ -126,25 +126,35 @@ public function crearActa(Request $request)
 			$modalidad="vacio";	
 
 		$funciones=funcion::wherein('nombre_funcion',['PRESIDENTE','TUTOR','DECANO','MIEMBRO'])->get();
+
 		$funcionPresidentes=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['PRESIDENTE'])
+				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				// ->join('titulos as d','d.id','=','c.id_titulo')
 				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
 
-		$funcionMiembro=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
+		$funcionMiembro=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['MIEMBRO','DOCENTE'])
+				->wherein('b.nombre_funcion',['DOCENTE'])
+				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				// ->join('titulos as d','d.id','=','c.id_titulo')
 				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
 
-		$funcionTutor=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
+		$funcionTutor=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
-				->wherein('b.nombre_funcion',['TUTOR','DOCENTE'])
+				->wherein('b.nombre_funcion',['DOCENTE'])
+				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				// ->join('titulos as d','d.id','=','c.id_titulo')
 				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
 
-		$funcionDecano=usuario_asignar_sub_rol::join('usuarios','usuarios.id','=','usuario_asignar_sub_roles.id_usuario')
+		$funcionDecano=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['DECANO'])
+				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				// ->join('titulos as d','d.id','=','c.id_titulo')
 				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
+
 		$ambiente=ambiente::all();
 		$tipo_ambiente=Tipo_ambiente::all()->pluck('nombre_tipo_ambiente','id');
 		$unidad=Unidad::all()->pluck('nombre_unidad','id');

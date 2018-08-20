@@ -88,6 +88,57 @@ class usuarioAsignarSubRolSeeder extends Seeder
             'id_usuario'=>'6'
 
          ]);
+        App\Usuario_asignar_sub_rol::create([
+
+            'cod_sis'=>'200301849',
+            'fecha_inicio'=>'2000-03-10',
+            'fecha_fin'=>'2030-03-10',
+            'activo'=>'SI',
+            'id_funcion'=>'12',
+            'id_sub_rol'=>'7',
+            'id_unidad'=>'7',
+            'id_usuario'=>'7'
+
+         ]);
+        App\Usuario_asignar_sub_rol::create([
+
+            'cod_sis'=>'200301850',
+            'fecha_inicio'=>'2000-03-10',
+            'fecha_fin'=>'2030-03-10',
+            'activo'=>'SI',
+            'id_funcion'=>'12',
+            'id_sub_rol'=>'7',
+            'id_unidad'=>'7',
+            'id_usuario'=>'8'
+
+         ]);
+
+
+        App\Usuario_asignar_sub_rol::create([
+
+            'cod_sis'=>'200301408',
+            'fecha_inicio'=>'2000-03-10',
+            'fecha_fin'=>'2030-03-10',
+            'activo'=>'SI',
+            'id_funcion'=>'10',
+            'id_sub_rol'=>'7',
+            'id_unidad'=>'7',
+            'id_usuario'=>'9'
+
+         ]);
+
+        App\Usuario_asignar_sub_rol::create([
+
+            'cod_sis'=>'200301506',
+            'fecha_inicio'=>'2000-03-10',
+            'fecha_fin'=>'2030-03-10',
+            'activo'=>'SI',
+            'id_funcion'=>'1',
+            'id_sub_rol'=>'7',
+            'id_unidad'=>'7',
+            'id_usuario'=>'10'
+
+         ]);
  
     }
 }
