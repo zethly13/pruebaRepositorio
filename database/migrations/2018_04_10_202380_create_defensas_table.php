@@ -24,11 +24,9 @@ class CreateDefensasTable extends Migration
 
             $table->integer('id_modalidad_titulacion')->unsigned();
             $table->integer('id_ambiente')->unsigned();
-            $table->integer('id_cd')->unsigned();
-
             $table->foreign('id_modalidad_titulacion')->references('id')->on('modalidad_titulaciones')->onDelete('cascade');
             $table->foreign('id_ambiente')->references('id')->on('ambientes')->onDelete('cascade');
-            $table->foreign('id_cd')->references('id')->on('cds')->onDelete('cascade');
+            
 
             $table->timestamps();
         });

@@ -29,4 +29,8 @@ class Defensa extends Model
 	{
 		return $this->belongsTo('App\Ambiente', 'id_ambiente','id');
 	}
+	public function cds()
+	{
+		return $this->hasMany('App\Cd', 'id_defensa','id');
+	}
 }
