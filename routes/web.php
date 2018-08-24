@@ -33,6 +33,19 @@ Route::get('titulacion/generar/testimonio/{id}','TitulacionController@generar_te
 
 // &&&&&&&&&&&&&&&&
 
+// Examen de grado
+Route::get('examen_grado/registrarNotas','Examen_GradoController@registrarNotas')->name('examenGrado.registrarNotas');
+Route::get('examen_grado/adminOpciones','Examen_GradoController@adminOpciones')->name('examenGrado.adminOpciones');
+Route::get('examen_grado/imprimirListas','Examen_GradoController@imprimirListas')->name('examenGrado.imprimirListas');
+Route::get('examen_grado/reportes','Examen_GradoController@reportes')->name('examenGrado.reportes');
+	
+Route::get('examenGrado/subir_script_inst_tit','ScriptInsTitEgController@subirScriptInscritosTitulacion')->name('examenGrado.scriptInsEg');
+
+Route::get('examenGrado/subir_script_pagaron_insc','ScriptPagaronInsEgController@subirScriptPagaronEg');
+Route::resource('examen_grado','Examen_GradoController');
+
+	///////////////////////////////////////////////
+
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
 //Route::any('usuarios/acceso/{id}','UsuariosController@subRolesAsignadosMenu')->name('usuarios.subRolesAsignadosMenu');
@@ -79,4 +92,7 @@ Route::group(['middleware'=>'permisos:7'],function(){
 	 Route::get('gestiones/subir_script','ScriptController@subirScript');
 	 Route::post('gestiones/subir','ScriptController@importarScript')->name('gestiones.importarScript');
 	Route::resource('gestiones','GestionesController');
+
+
+
 });
