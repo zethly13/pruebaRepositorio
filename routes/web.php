@@ -33,6 +33,7 @@ Route::get('titulacion/generar/testimonio/{id}','TitulacionController@generar_te
 
 // &&&&&&&&&&&&&&&&
 
+
 // Examen de grado
 Route::get('examen_grado/registrarNotas','Examen_GradoController@registrarNotas')->name('examenGrado.registrarNotas');
 Route::get('examen_grado/adminOpciones','Examen_GradoController@adminOpciones')->name('examenGrado.adminOpciones');
@@ -46,6 +47,7 @@ Route::resource('examen_grado','Examen_GradoController');
 
 	///////////////////////////////////////////////
 
+
 Route::post('usuarios/ciudades/{id}','UsuariosController@getCiudades');
 Route::post('usuarios/provincias/{id}','UsuariosController@getProvincias');
 //Route::any('usuarios/acceso/{id}','UsuariosController@subRolesAsignadosMenu')->name('usuarios.subRolesAsignadosMenu');
@@ -58,6 +60,8 @@ Route::group(['middleware'=>'autentificado'], function(){
 	Route::post('usuarios/{id}/validarModContrasena','UsuariosController@ValidarModContrasena')->name('usuarios.validarModContrasena');
 	Route::get('Usuarios/bitacora','UsuariosController@bitacora')->name('usuarios.bitacora');
 	Route::get('Usuarios/verBitacora/{id}','UsuariosController@bitacoraUser')->name('usuarios.verBitacora');
+	Route::get('Usuarios/asignarClaveNotas','UsuariosController@asignarClaveNotas')->name('usuarios.asignarClaveNotas');
+
 	Route::resource('roles', 'RolesController');
 	Route::resource('sub_roles', 'Sub_RolesController');
 	Route::resource('usuarios', 'UsuariosController');

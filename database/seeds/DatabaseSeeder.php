@@ -48,6 +48,8 @@ class DatabaseSeeder extends Seeder
         $this->call(tipoAmbienteSeeder::class);
         $this->call(ambienteSeeder::class);
         $this->call(modalidadTitulacionSeeder::class);
+        $this->call(titulacionAreaSeeder::class);
+        $this->call(titulacionGestionPlanAreaSeeder::class);
 
     }
 }

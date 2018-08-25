@@ -52,7 +52,7 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administracion Examen de grado</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Asignar Clave para registrar Datos</a>
+								<a class="dropdown-item" href="{{ route('usuarios.asignarClaveNotas')}}">Asignar Clave para registrar Datos</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.registrarNotas') }}">Registrar Notas Examen de Grado</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.adminOpciones') }}">Administracion Opciones Examen de grado</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.imprimirListas') }}">Imprimir listas Examen de grado</a>
