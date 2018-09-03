@@ -8,7 +8,7 @@ class Tipo_email extends Model
 {
     protected $table = 'tipo_emails';
     
-    protected $fillable = ['nombre_tipo_email', 'peso_tipo_email'];
+    protected $fillable = ['nombre_tipo_email'];
 
     public function usuario_emails()
 	{

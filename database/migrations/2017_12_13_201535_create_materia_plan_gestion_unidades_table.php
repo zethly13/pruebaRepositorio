@@ -20,8 +20,8 @@ class CreateMateriaPlanGestionUnidadesTable extends Migration
             $table->string('plan_global',100);
             $table->string('version',10);
 
-            $table->integer('id_unidad_materia')->unsigned();
-            $table->integer('id_plan_gestion_unidad')->unsigned();
+            $table->integer('id_unidad_materia')->default('0')->unsigned();
+            $table->integer('id_plan_gestion_unidad')->default('0')->unsigned();
 
             $table->foreign('id_unidad_materia')->references('id')->on('unidad_materias')->onDelete('cascade');
             $table->foreign('id_plan_gestion_unidad')->references('id')->on('plan_gestion_unidades')->onDelete('cascade');

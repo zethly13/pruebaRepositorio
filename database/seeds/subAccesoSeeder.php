@@ -18,7 +18,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción de trabajo permite crear un nuevo usuario dentro el Sistema.',
 			'icono_sub_acceso' =>'iconoCrearUsuario.gif',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'90',
 			'id_acceso' => '1'
          ]);
         App\Sub_acceso::create([
@@ -28,7 +27,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción de trabajo permite, visualizar la informacion de un Usuarios Registrado en el Sistema segun requirimiento.',
 			'icono_sub_acceso' =>'iconoBuscarUsuario.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'87',
 			'id_acceso' => '1'
          ]);        
         App\Sub_acceso::create([
@@ -38,7 +36,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción de trabajo permite crear un nuevo Rol para el Sistema',
 			'icono_sub_acceso' =>'iconoCrearRol.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'86',
 			'id_acceso' => '2'
          ]);        
         App\Sub_acceso::create([
@@ -48,7 +45,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción le permite editar o eliminar un Rol Seleccionado.',
 			'icono_sub_acceso' =>'iconoEditarRol.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'85',
 			'id_acceso' => '2'
          ]);
         
@@ -59,7 +55,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción de trabajo permite crear un nuevo Sub-Rol para el Sistema',
 			'icono_sub_acceso' =>'iconoCrearSubRol.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'86',
 			'id_acceso' => '2'
          ]);        
         App\Sub_acceso::create([
@@ -68,7 +63,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opción le permite editar un Sub-Rol Seleccionado.',
 			'icono_sub_acceso' =>'iconoEditarSubRol.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'85',
 			'id_acceso' => '2'
          ]);        
         App\Sub_acceso::create([
@@ -77,7 +71,6 @@ class subAccesoSeeder extends Seeder
 			'descripcion_sub_acceso' =>'Esta opcion permite crear buscar a un usuario segun parametros y ver los permisos que tiene, ademas de mostrarle opciones adicionales.',
 			'icono_sub_acceso' =>'iconoEditarRol.png',
 			'defecto_sub_acceso' =>'NO',
-			'peso_sub_acceso' =>'85',
 			'id_acceso' => '2'
          ]);        
         

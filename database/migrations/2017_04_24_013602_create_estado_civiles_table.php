@@ -15,7 +15,7 @@ class CreateEstadoCivilesTable extends Migration
     {
         Schema::create('estado_civiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('estado_civil',50);
+            $table->string('estado_civil',20);
             $table->timestamps();
         });
     }

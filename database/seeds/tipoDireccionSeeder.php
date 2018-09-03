@@ -13,20 +13,17 @@ class tipoDireccionSeeder extends Seeder
     {
         App\Tipo_direccion::create([
 
-        	'nombre_tipo_direccion' => 'PARTICULAR',
-        	'peso_tipo_direccion' => '100'
+        	'nombre_tipo_direccion' => 'PARTICULAR', 	
          ]);
-
 
         App\Tipo_direccion::create([
 
-        	'nombre_tipo_direccion' => 'TRABAJO',
-        	'peso_tipo_direccion' => '85'
+        	'nombre_tipo_direccion' => 'TRABAJO',        	
          ]);
+
         App\Tipo_direccion::create([
 
-        	'nombre_tipo_direccion' => 'OTRA',
-        	'peso_tipo_direccion' => '75'
+        	'nombre_tipo_direccion' => 'OTRA',       	
          ]);
       
     }

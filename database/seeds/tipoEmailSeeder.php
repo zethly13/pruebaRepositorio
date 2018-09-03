@@ -14,22 +14,18 @@ class tipoEmailSeeder extends Seeder
         App\Tipo_email::create([
 
         	'nombre_tipo_email' => 'PARTICULAR',
-        	'peso_tipo_email' => '100'
          ]);
          App\Tipo_email::create([
 
         	'nombre_tipo_email' => 'FACULTATIVO',
-        	'peso_tipo_email' => '95'
          ]);
           App\Tipo_email::create([
 
         	'nombre_tipo_email' => 'TRABAJO',
-        	'peso_tipo_email' => '94'
          ]);
            App\Tipo_email::create([
 
         	'nombre_tipo_email' => 'MESSENGER',
-        	'peso_tipo_email' => '93'
          ]);
     }
 }

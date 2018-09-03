@@ -8,7 +8,7 @@ class Pais extends Model
 {
     protected $table = 'paises';
 
-    protected $fillable = ['nombre_pais', 'peso_pais'];
+    protected $fillable = ['nombre_pais'];
 
     public function ciudades()
 	{

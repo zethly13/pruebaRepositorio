@@ -15,8 +15,8 @@ class CreateTitulosTable extends Migration
     {
         Schema::create('titulos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titlo_abreviado',20);
-            $table->string('titulo_descripcion',40);
+            $table->string('titlo_abreviado',20)->default('');
+            $table->string('titulo_descripcion',50)->default('');
 
             $table->integer('id_grado_instruccion')->unsigned();
 

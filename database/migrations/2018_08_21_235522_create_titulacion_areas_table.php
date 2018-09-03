@@ -15,7 +15,7 @@ class CreateTitulacionAreasTable extends Migration
     {
         Schema::create('titulacion_areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo_area');
+            $table->string('codigo_area',10);
             $table->string('nombre_area',50);
             $table->string('nombre_corto',10);
 

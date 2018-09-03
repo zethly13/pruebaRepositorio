@@ -15,9 +15,9 @@ class CreatePlanGestionUnidadesTable extends Migration
     {
         Schema::create('plan_gestion_unidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_gestion')->unsigned();
-            $table->integer('id_plan')->unsigned();
-            $table->integer('id_unidad')->unsigned();
+            $table->integer('id_gestion')->default('0')->unsigned();
+            $table->integer('id_plan')->default('0')->unsigned();
+            $table->integer('id_unidad')->default('0')->unsigned();
             $table->enum('activo',['SI','NO']);
             
             $table->foreign('id_gestion')->references('id')->on('gestiones')->onDelete('cascade');

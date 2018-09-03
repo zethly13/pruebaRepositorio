@@ -405,8 +405,11 @@ class UsuariosController extends Controller
 		$bitacoras=bitacora::orderBy('fecha_bitacora','desc')->join('tipo_operacion_bitacoras','tipo_operacion_bitacoras.id','=','bitacoras.id_tipo_op_bitacora')->where('bitacoras.id_usuario',$id)->paginate(10);
 		return view('usuarios.verBitacora',compact('bitacoras'));
 	}
-	public function asignarClaveNotas()
+	public function asignarClaveNotas($id)
     {
-        return view('usuarios.asignarClaveNotas');
+    	//return ($id);
+    	$usuario=Usuario::where('usuarios.id','=',$id)->get()->first();
+    	//$tarjeta=
+     	return view('usuarios.asignarClaveNotas',compact('usuario'));
     }
 }

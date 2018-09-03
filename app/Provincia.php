@@ -8,7 +8,7 @@ class Provincia extends Model
 {
     protected $table = 'provincias';
 
-    protected $fillable = ['nombre_provincia', 'peso_provincia', 'id_ciudad'];
+    protected $fillable = ['nombre_provincia','id_ciudad'];
 
     public function usuarios()
 	{

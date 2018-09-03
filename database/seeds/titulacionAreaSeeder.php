@@ -13,60 +13,60 @@ class titulacionAreaSeeder extends Seeder
     {
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'1',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA CONTABLE',
             'nombre_corto'=>'CON'
          ]);
 
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'2',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA ECONÓMICA Y CUANTITATIVA',
             'nombre_corto'=>'ECO'
          ]);
 
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'3',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA AUDITORÍA',
             'nombre_corto'=>'AUD'
          ]);
 
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'4',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA ADMINISTRATIVA',
             'nombre_corto'=>'ADM'
          ]);
 
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'5',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA GESTIÓN FINANCIERA Y PROYECTOS',
             'nombre_corto'=>'GES'
          ]);
 
         App\Titulacion_area::create([
 			
-			'codigo_area'=>'6',
+			'codigo_area'=>'',
 			'nombre_area'=>'ÁREA FINANZAS ESPECIFICAS',
             'nombre_corto'=>'FIN'
          ]);
         App\Titulacion_area::create([
             
-            'codigo_area'=>'7',
+            'codigo_area'=>'',
             'nombre_area'=>'ÁREA MICROECONOMÍA',
             'nombre_corto'=>'MIC'
          ]);
         App\Titulacion_area::create([
             
-            'codigo_area'=>'8',
+            'codigo_area'=>'',
             'nombre_area'=>'ÁREA POLITÍCA ECONÓMICA',
             'nombre_corto'=>'POL'
          ]);
         App\Titulacion_area::create([
             
-            'codigo_area'=>'9',
+            'codigo_area'=>'',
             'nombre_area'=>'ÁREA ESTADÍSTICAS',
             'nombre_corto'=>'EST'
          ]);

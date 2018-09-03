@@ -16,7 +16,6 @@ class CreateTipoDireccionesTable extends Migration
         Schema::create('tipo_direcciones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_tipo_direccion',50);
-            $table->integer('peso_tipo_direccion');
             $table->timestamps();
         });
     }

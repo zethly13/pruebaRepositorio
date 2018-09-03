@@ -37,13 +37,13 @@ class modalidadTitulacionSeeder extends Seeder
 
         App\Modalidad_titulacion::create([
 
-        	'nombre_modalidad'=>'EXCELENCIA ACADEMICO',
+        	'nombre_modalidad'=>'EXCELENCIA ACADEMICA',
 			'descripcion_modalidad'=>''
         ]);
 
         App\Modalidad_titulacion::create([
 
-        	'nombre_modalidad'=>'RENDIMIENTO ACADEMICA',
+        	'nombre_modalidad'=>'RENDIMIENTO ACADEMICO',
 			'descripcion_modalidad'=>''
         ]);
 

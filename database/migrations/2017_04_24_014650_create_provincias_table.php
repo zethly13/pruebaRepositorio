@@ -15,10 +15,9 @@ class CreateProvinciasTable extends Migration
     {
         Schema::create('provincias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_provincia',50);
-            $table->integer('peso_provincia');
+            $table->string('nombre_provincia',50)->nullable();
            
-            $table->integer('id_ciudad')->unsigned();
+            $table->integer('id_ciudad')->default('0')->unsigned();
             
             $table->foreign('id_ciudad')->references('id')->on('ciudades')->onDelete('cascade');
             

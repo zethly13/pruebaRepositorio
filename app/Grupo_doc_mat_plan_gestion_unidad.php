@@ -18,4 +18,8 @@ class Grupo_doc_mat_plan_gestion_unidad extends Model
 	{
 		return $this->belongsTo('App\Tipo_planilla', 'id_tipo_planilla', 'id');
 	}
+	public function titulacion_gest_plan_area_gr_doc()
+	{
+		return $this->hasMany('App\Titulacion_gest_plan_area_gr_docente','id_grupo_doc_mat_plan_gest_unid','id');
+	}
 } 

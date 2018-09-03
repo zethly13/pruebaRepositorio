@@ -8,7 +8,7 @@ class Estudiante_defensa extends Model
 {
     protected $table = 'estudiante_defensas';
     
-    protected $fillable = ['nota','observacion'];
+    protected $fillable = ['nota','nota_literal','resultado_final','observacion','id_inscripcion_grupo_materia_plan_gestion_unidad','id_defensa'];
 
     public function defensa()
 	{

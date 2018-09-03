@@ -40,7 +40,7 @@ class MenuDinamicoServiceProvider extends ServiceProvider
                 ->where('usuario_asignar_sub_roles.activo','SI')
                 ->where('usuario_asignar_sub_roles.fecha_fin','>',Carbon::now()->format('y-m-d'))
                 ->groupBy('sub_accesos.id_acceso');
-            })->orderBy('peso_acceso','asc')
+            })->orderBy('nombre_acceso','asc')
             ->get();
             $usuarioLogueado=Usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')->where('a.id',Auth::user()->id)->first();
             $usuarioLogueado->each(function($usuarioLogueado){

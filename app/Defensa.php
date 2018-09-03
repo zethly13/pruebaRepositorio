@@ -8,7 +8,7 @@ class Defensa extends Model
 {
     protected $table = 'defensas';
 
-	protected $fillable = ['titulo_defensa','fecha_defensa','hora_defensa','descripcion','avance','empresa','id_modalidad_titulacion','id_ambiente'];
+	protected $fillable = ['titulo_defensa','fecha_defensa','hora_inicio_defensa','hora_fin_defensa','descripcion','avance','resumen','empresa','grupo_ptaang','facultad','modalidad_ptaang','version','expedido','universidad','empresa','numero_resolucion','fecha_resolucion','id_modalidad_titulacion','id_ambiente'];
 
 	public function estudiante_defensas()
 	{

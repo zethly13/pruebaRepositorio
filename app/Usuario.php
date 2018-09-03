@@ -66,6 +66,14 @@ class Usuario extends User
 	{
 		return $this->hasMany('App\Usuario_titulo', 'id_usuario', 'id');
 	}
+	public function clave_tarjetas()
+	{
+		return $this->hasMany('App\Clave_tarjeta', 'id_usuario', 'id');
+	}
+	public function clave_registro_notas()
+	{
+		return $this->hasMany('App\Clave_registro_nota', 'id_usuario', 'id');
+	}
 
 	/**
 	 * Get the unique identifier for the user.

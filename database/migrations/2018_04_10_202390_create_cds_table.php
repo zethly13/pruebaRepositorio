@@ -18,7 +18,9 @@ class CreateCdsTable extends Migration
 			$table->date('fecha_registro');
 			$table->string('observacion',100);
 			$table->enum('entregado',['SI','NO']);
+
 			$table->integer('id_defensa')->unsigned()->nullable();
+			
 			$table->foreign('id_defensa')->references('id')->on('defensas')->onDelete('cascade');
 			$table->timestamps();
 		});

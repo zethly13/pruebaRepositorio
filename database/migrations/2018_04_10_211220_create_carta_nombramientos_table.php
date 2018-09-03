@@ -17,9 +17,9 @@ class CreateCartaNombramientosTable extends Migration
             $table->increments('id');
             $table->date('fecha_carta');
             $table->char('cite');
-            $table->string('campo_extra_1',30);
-            $table->string('campo_extra_2',30);
-            $table->string('campo_extra_3',30);
+            $table->string('campo_extra_1',30)->nullable();
+            $table->string('campo_extra_2',30)->nullable();
+            $table->string('campo_extra_3',30)->nullable();
             
             $table->integer('id_asignar_funcion_defensa')->unsigned();
 

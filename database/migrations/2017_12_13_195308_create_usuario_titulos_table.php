@@ -15,7 +15,7 @@ class CreateUsuarioTitulosTable extends Migration
     {
         Schema::create('usuario_titulos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descripcion',50)->nullable()->default('NULL');
+            $table->string('descripcion',50)->nullable();
             $table->date('fecha_titulo');
 
             $table->integer('id_usuario')->unsigned();

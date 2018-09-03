@@ -16,11 +16,10 @@ class CreateAccesosTable extends Migration
         Schema::create('accesos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_acceso', 100);
-            $table->string('ruta_acceso', 70);
+            $table->string('ruta_acceso', 70)->default('');
             $table->text('descripcion_acceso');
-            $table->string('icono_acceso', 50);
-            $table->enum('defecto_acceso',['SI','NO']);
-            $table->integer('peso_acceso');    
+            $table->string('icono_acceso', 50)->nullable();
+            $table->enum('defecto_acceso',['SI','NO'])->default('NO');  
         
             $table->timestamps();
 

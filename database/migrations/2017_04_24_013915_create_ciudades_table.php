@@ -15,10 +15,10 @@ class CreateCiudadesTable extends Migration
     {
         Schema::create('ciudades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_ciudad',50)->dafault('NULL')->nullable();
-            $table->integer('peso_ciudad');
+            $table->string('nombre_ciudad',50)->nullable();
+            
 
-            $table->integer('id_pais')->unsigned();
+            $table->integer('id_pais')->default('0')->unsigned();
 
             $table->foreign('id_pais')->references('id')->on('paises')->onDelete('cascade');
             

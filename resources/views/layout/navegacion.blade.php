@@ -33,7 +33,6 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administracion de Gestiones</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ route('gestiones.create') }}">Crear Gestión</a>
-								<a class="dropdown-item" href="#">Buscar acta</a>
 								<a class="dropdown-item" href="{{ route('gestiones.index') }}">Listar Gestiones</a>
 								<a class="dropdown-item" href="{{ URL::to('gestiones/subir_script')}}"">Cargar archivo CSV registrar estudiantes gestión</a>
 							</div>
@@ -42,8 +41,8 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administracion de titulación</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ route('titulacion.crearActa') }}">Registrar acta</a>
-								<a class="dropdown-item" href="#">Buscar acta</a>
-								<a class="dropdown-item" href="{{ route('titulacion.index') }}">Imprimir acta</a>
+								<a class="dropdown-item" href="{{ route('titulacion.index') }}">Buscar acta</a>
+								<a class="dropdown-item" href="{{ route('titulacion.imprimirActas') }}">Imprimir acta</a>
 								<a class="dropdown-item" href="#">Registrar Cd</a>
 								<a class="dropdown-item" href="#">Eliminar Cd</a>
 								<a class="dropdown-item" href="#">Reportes Actas</a>
@@ -52,7 +51,7 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Administracion Examen de grado</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="{{ route('usuarios.asignarClaveNotas')}}">Asignar Clave para registrar Datos</a>
+								<a class="dropdown-item" href="{{ route('usuarios.index')}}">Asignar Clave para registrar Datos</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.registrarNotas') }}">Registrar Notas Examen de Grado</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.adminOpciones') }}">Administracion Opciones Examen de grado</a>
 								<a class="dropdown-item" href="{{ route('examenGrado.imprimirListas') }}">Imprimir listas Examen de grado</a>

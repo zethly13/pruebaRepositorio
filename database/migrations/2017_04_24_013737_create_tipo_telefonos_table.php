@@ -15,8 +15,7 @@ class CreateTipoTelefonosTable extends Migration
     {
         Schema::create('tipo_telefonos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_tipo_telefono',80);
-            $table->integer('peso_tipo_telefono');
+            $table->string('nombre_tipo_telefono',50);
             $table->timestamps();
         });
     }

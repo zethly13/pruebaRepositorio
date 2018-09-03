@@ -18,7 +18,6 @@ class accesoSeeder extends Seeder
 			'descripcion_acceso' =>'Módulo principal que trabaja con la información principal de usuario, las opciones que puede utilizar se hayan en el menú superior o el de la parte izquierda.',
 			'icono_acceso' =>'iconoMenuAdministracionUsuarios.png',
 			'defecto_acceso' => 'NO',
-			'peso_acceso' =>'40'
          ]);
         App\Acceso::create([
 
@@ -27,7 +26,6 @@ class accesoSeeder extends Seeder
 			'descripcion_acceso' =>'Modulo donde se configura la asignacion de permisos a las diferentes funcionalidades del SISTEMA',
 			'icono_acceso' =>'iconoMenuAdministracionGrupos.png',
 			'defecto_acceso' =>'NO',
-			'peso_acceso' =>'41'
          ]);
 
     }

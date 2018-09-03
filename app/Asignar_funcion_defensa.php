@@ -8,7 +8,7 @@ class Asignar_funcion_defensa extends Model
 {
     protected $table = 'asignar_funcion_defensas';
 
-	protected $fillable = ['observacion','id_funcion_defensa','id_defensa','id_usuario_asignar_sub_rol'];
+	protected $fillable = ['funcion','id_funcion_defensa','id_defensa','id_usuario_asignar_sub_rol'];
 
 	public function carta_nombramientos()
 	{

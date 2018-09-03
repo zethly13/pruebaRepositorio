@@ -16,7 +16,6 @@ class CreateTipoEmailsTable extends Migration
         Schema::create('tipo_emails', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_tipo_email',50);
-            $table->integer('peso_tipo_email');
             $table->timestamps();
         });
     }

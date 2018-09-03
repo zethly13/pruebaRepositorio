@@ -8,7 +8,7 @@ class Tipo_telefono extends Model
 {
     protected $table = 'tipo_telefonos';
 
-    protected $fillable = ['nombre_tipo_telefono', 'peso_tipo_telefono'];
+    protected $fillable = ['nombre_tipo_telefono'];
 
     public function usuario_telefonos()
 	{

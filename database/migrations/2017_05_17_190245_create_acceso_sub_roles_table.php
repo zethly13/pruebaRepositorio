@@ -16,8 +16,8 @@ class CreateAccesoSubRolesTable extends Migration
         Schema::create('acceso_sub_roles', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_sub_acceso')->unsigned();
-            $table->integer('id_sub_rol')->unsigned();
+            $table->integer('id_sub_acceso')->default('0')->unsigned();
+            $table->integer('id_sub_rol')->default('0')->unsigned();
 
             $table->foreign('id_sub_acceso')->references('id')->on('sub_accesos')->onDelete('cascade');
             $table->foreign('id_sub_rol')->references('id')->on('sub_roles')->onDelete('cascade');

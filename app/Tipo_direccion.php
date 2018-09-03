@@ -8,7 +8,7 @@ class Tipo_direccion extends Model
 {
     protected $table = 'tipo_direcciones';
     
-    protected $fillable = ['nombre_tipo_direccion', 'peso_tipo_direccion'];
+    protected $fillable = ['nombre_tipo_direccion'];
 
     public function usuario_direcciones()
 	{

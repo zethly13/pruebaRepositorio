@@ -11,11 +11,11 @@
 					        <tbody>
 					            <tr>
 					              <th class="table-info"  WIDTH="255">DOC IDENTIDAD USR</th>
-					              <td>1214</td>
+					              <td>{{ $usuario->doc_identidad }}</td>
 					            </tr>
 					            <tr>
 					              <th class="table-info">NOMBRE COMPLETO USR:</th>
-					              <td class="text-uppercase"></td>
+					              <td class="text-uppercase">{{ $usuario->nombreCompleto }}</td>
 					            </tr>
 					            <tr>
 					              <th class="table-info">ID TARJETA DE CLAVES ACTUAL:</th>

@@ -14,13 +14,13 @@ class paisSeeder extends Seeder
         App\Pais::create([
 
         	'nombre_pais' => 'BOLIVIA',
-        	'peso_pais'   => '100'
+        	
 
          ]);
         App\Pais::create([
 
             'nombre_pais' => 'EXTRANJERO',
-            'peso_pais'   => '100'
+            
 
          ]);
         

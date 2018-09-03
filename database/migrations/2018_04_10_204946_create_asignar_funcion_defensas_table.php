@@ -15,7 +15,7 @@ class CreateAsignarFuncionDefensasTable extends Migration
     {
         Schema::create('asignar_funcion_defensas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('observacion',300)->default('NINGUNA');
+            $table->string('funcion',50);
 
             $table->integer('id_funcion')->unsigned();
             $table->integer('id_defensa')->unsigned();

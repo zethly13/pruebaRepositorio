@@ -8,7 +8,7 @@ class Acceso extends Model
 {
     protected $table = "accesos";
 
-    protected $fillable = ['nombre_acceso', 'ruta_acceso', 'descripcion_acceso', 'icono_acceso', 'defecto_acceso', 'peso_acceso'];
+    protected $fillable = ['nombre_acceso', 'ruta_acceso', 'descripcion_acceso', 'icono_acceso', 'defecto_acceso'];
 
     public function sub_accesos()
 	{

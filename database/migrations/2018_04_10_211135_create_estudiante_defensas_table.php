@@ -18,7 +18,7 @@ class CreateEstudianteDefensasTable extends Migration
             $table->integer('nota');
             $table->string('nota_literal',20);
             $table->string('resultado_final',20);
-            $table->string('funcion',50);
+            $table->string('observacion',300)->default('NINGUNA');;
             
             $table->integer('id_inscripcion_grupo_materia_plan_gestion_unidad')->unsigned();
             $table->integer('id_defensa')->unsigned();

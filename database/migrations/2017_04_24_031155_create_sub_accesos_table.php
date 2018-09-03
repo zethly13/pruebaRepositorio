@@ -16,12 +16,11 @@ class CreateSubAccesosTable extends Migration
         Schema::create('sub_accesos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_sub_acceso', 100);
-            $table->string('ruta_sub_acceso', 70);
+            $table->string('ruta_sub_acceso', 70)->default('');
             $table->text('descripcion_sub_acceso');
-            $table->string('icono_sub_acceso', 50)->nullable()->default('NULL');
+            $table->string('icono_sub_acceso', 50)->nullable();
             $table->enum('defecto_sub_acceso',['SI','NO'])->default('NO');
-            $table->integer('peso_sub_acceso');
-            
+             
             $table->integer('id_acceso')->unsigned();
 
             $table->foreign('id_acceso')->references('id')->on('accesos')->onDelete('cascade');

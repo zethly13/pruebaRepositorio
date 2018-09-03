@@ -20,7 +20,6 @@ class CreateGestionesTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->enum('activo',['SI','NO'])->default('SI');
-            $table->integer('peso_gestion');
 
             $table->integer('id_tipo_gestion')->unsigned();
 

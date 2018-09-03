@@ -15,8 +15,8 @@ class CreatePlanesTable extends Migration
     {
         Schema::create('planes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cod_plan',20);
-            $table->string('nombre_plan',60);
+            $table->string('cod_plan',20)->default('');
+            $table->string('nombre_plan',60)->default('');
             $table->string('nombre_plan_corto',50);
             $table->timestamps();
         });

@@ -24,4 +24,9 @@ class Inscripcion extends Model
 	{
 		return $this->belongsTo('App\Plan_gestion_unidad', 'id_plan_gestion_unidad','id');
 	}
+
+	public function titulacion_ins_areas()
+	{
+		return $this->hasMany('App\Titulacion_ins_area','id_inscripcion','id');
+	}
 }

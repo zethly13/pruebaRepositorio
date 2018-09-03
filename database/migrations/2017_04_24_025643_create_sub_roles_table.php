@@ -18,7 +18,7 @@ class CreateSubRolesTable extends Migration
             $table->string('nombre_sub_rol',60);
             $table->string('descripcion_sub_rol',100)->nullable(); 
             
-            $table->integer('id_rol')->unsigned();
+            $table->integer('id_rol')->default('0')->unsigned();
 
             $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');
 

@@ -21,7 +21,7 @@ class CreateBitacorasTable extends Migration
             // $table->date('fecha_bitacora');
             // $table->time('hora_bitacora');
 
-            $table->integer('id_usuario')->unsigned();
+            $table->integer('id_usuario')->default('0')->unsigned();
             $table->integer('id_tipo_op_bitacora')->unsigned();
 
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');

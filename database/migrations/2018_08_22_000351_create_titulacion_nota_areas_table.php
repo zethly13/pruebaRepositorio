@@ -19,7 +19,7 @@ class CreateTitulacionNotaAreasTable extends Migration
             $table->integer('correccion_nota');
             $table->integer('nota_recuperatorio');
             $table->integer('promedio_final');
-            $table->string('resultado_final',20);
+            $table->enum('resultado_final',['APROBADO','REPROBADO','ABANDONO'])->default('ABANDONO');
 
             $table->integer('id_titulacion_ins_area')->unsigned();
 

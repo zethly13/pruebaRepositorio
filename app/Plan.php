@@ -14,4 +14,10 @@ class Plan extends Model
 	{
 		return $this->hasMany('App\Plan_gestion_unidad', 'id_plan', 'id');
 	}
+
+	public function titulacion_gestion_plan_areas()
+	{
+		return $this->hasMany('App\Titulacion_gestion_plan_area', 'id_plan', 'id');
+	}
+
 }
