@@ -15,10 +15,10 @@ class CreateEstudianteDefensasTable extends Migration
     {
         Schema::create('estudiante_defensas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('nota');
-            $table->string('nota_literal',20);
-            $table->string('resultado_final',20);
-            $table->string('observacion',300)->default('NINGUNA');;
+            $table->integer('nota')->nullable();
+            $table->string('nota_literal',20)->nullable();
+            $table->string('resultado_final',20)->nullable();
+            $table->string('observacion',300)->default('NINGUNA');
             
             $table->integer('id_inscripcion_grupo_materia_plan_gestion_unidad')->unsigned();
             $table->integer('id_defensa')->unsigned();

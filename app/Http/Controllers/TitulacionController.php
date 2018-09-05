@@ -81,6 +81,62 @@ class TitulacionController extends Controller
 		}// return $planes;
 	   return view('titulacion.index',compact('usuarios','planes'));
 	}
+
+	public function imprimirActas(Request $request)
+	{
+		$usuarioLogueado=Usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')->where('a.id',Auth::user()->id)->where('activo','SI')->select('usuario_asignar_sub_roles.id_unidad')->first();
+		$planOficial=$this->planUsuarioLogueado($usuarioLogueado->id_unidad);
+		// return $request->carrera;
+		if($planOficial!='vacio')
+		{	$usuarios=Usuario::identidad($request->ci)
+			->nombres($request->nombre)
+			->apellido($request->apellido)
+			// ->with('usuario_asignar_sub_roles')
+			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
+			->join('inscripciones as b','b.id_usuario_a signar_sub_rol','=','a.id')
+			->join('plan_gestion_unidades as c','c.id','=','b.id_plan_gestion_unidad')
+			->join('planes as d','d.id','=','c.id_plan')
+			->join('inscripcion_grupo_materia_plan_gestion_unidades as e','e.id_inscripcion','=','b.id')
+			->join('estudiante_defensas as f','f.id_inscripcion_grupo_materia_plan_gestion_unidad','=','e.id')
+			->join('defensas as g','g.id','=','f.id_defensa')
+			->where('a.id_sub_rol',11)
+			->where('d.cod_plan',$planOficial)
+			->orderby('apellidos','desc')->paginate(10);
+			$planes=Plan::where('cod_plan','=',$planOficial)->get();
+		}elseif($request->carrera==""){
+		$usuarios=Usuario::identidad($request->ci)
+			->nombres($request->nombre)
+			->apellido($request->apellido)
+			// ->with('usuario_asignar_sub_roles')
+			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
+			->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','a.id')
+			->join('plan_gestion_unidades as c','c.id','=','b.id_plan_gestion_unidad')
+			->join('planes as d','d.id','=','c.id_plan')
+			->where('a.id_sub_rol',11)
+			// if($request->carrera)
+			// ->where('d.id',$request->carrera)
+			->orderby('apellidos','desc')->paginate(10);
+			$planes=Plan::all();
+			
+		}else{
+		$usuarios=Usuario::identidad($request->ci)
+			->nombres($request->nombre)
+			->apellido($request->apellido)
+			// ->with('usuario_asignar_sub_roles')
+			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
+			->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','a.id')
+			->join('plan_gestion_unidades as c','c.id','=','b.id_plan_gestion_unidad')
+			->join('planes as d','d.id','=','c.id_plan')
+			->where('a.id_sub_rol',11)
+			// if($request->carrera)
+			->where('d.id',$request->carrera)
+			->orderby('apellidos','desc')->paginate(10);
+			$planes=Plan::all();
+				
+		}// return $planes;
+	   return view('titulacion.imprimirActas',compact('usuarios','planes'));
+	}
+
 	public function planUsuarioLogueado($idUnidad)
 	{
 		switch ($idUnidad) {
@@ -340,81 +396,130 @@ public function crearActa(Request $request)
 
 	public function store(Request $request)
 	{	
-
+		$defensa_user=new Defensa($request->all());
+		$defensa_user->id_modalidad_titulacion=$request->id_modalidad;
 		
-		$defensa_user					=new Defensa();
-		$defensa_user->titulo_defensa	=$request->titulo_defensa;
-		$defensa_user->fecha_defensa	=$request->fecha_defensa;
-		$defensa_user->hora_defensa		='2018-08-11 07:26:00';//corregir
-		$defensa_user->avance			=$request->avance;
-		$defensa_user->descripcion			=$request->descripcion;
-		$defensa_user->id_modalidad_titulacion=$request->modalidad;
-		$defensa_user->id_ambiente 		=$request->id_ambiente;
-		if($request->nombre_modalidad=="TRABAJO DIRIGIDO" or $request->nombre_modalidad=="ADSCRIPCION" ){
-			$defensa_user->empresa=$request->empresa;
-		}else{
-			$defensa_user->empresa='null';
-		}
-		$defensa_user->id_cd=1; //relacionar
-		$defensa_user->save();
-
-		$asignar_presidente=new Asignar_funcion_defensa();
-		$asignar_presidente->observacion="presidente";
-		$asignar_presidente->id_defensa=$defensa_user->id;
-		$asignar_presidente->id_usuario_asignar_sub_rol=$request->presidente;
-		$asignar_presidente->id_funcion=$request->presidente_funcion;
-		$asignar_presidente->save();
-
-		$asignar_miembro1=new Asignar_funcion_defensa();
-		$asignar_miembro1->observacion="miembro1";
-		$asignar_miembro1->id_defensa=$defensa_user->id;
-		$asignar_miembro1->id_usuario_asignar_sub_rol=$request->miembro1;
-		$asignar_miembro1->id_funcion=$request->miembro1_funcion;
-		$asignar_miembro1->save();
-
-		$asignar_miembro2=new Asignar_funcion_defensa();
-		$asignar_miembro2->observacion="miembro2";
-		$asignar_miembro2->id_defensa=$defensa_user->id;
-		$asignar_miembro2->id_usuario_asignar_sub_rol=$request->miembro2;
-		$asignar_miembro2->id_funcion=$request->miembro2_funcion;
-		$asignar_miembro2->save();
-
-		$asignar_miembro3=new Asignar_funcion_defensa();
-		$asignar_miembro3->observacion="miembro3";
-		$asignar_miembro3->id_defensa=$defensa_user->id;
-		$asignar_miembro3->id_usuario_asignar_sub_rol=$request->miembro3;
-		$asignar_miembro3->id_funcion=$request->miembro3_funcion;
-		$asignar_miembro3->save();
-
-		$asignar_tutor=new Asignar_funcion_defensa();
-		$asignar_tutor->observacion="tutor";
-		$asignar_tutor->id_defensa=$defensa_user->id;
-		$asignar_tutor->id_usuario_asignar_sub_rol=$request->tutor;
-		$asignar_tutor->id_funcion=$request->tutor_funcion;
-		$asignar_tutor->save();
-
-		$asignar_decano=new Asignar_funcion_defensa();
-		$asignar_decano->observacion="decano";
-		$asignar_decano->id_defensa=$defensa_user->id;
-		$asignar_decano->id_usuario_asignar_sub_rol=$request->decano;
-		$asignar_decano->id_funcion=$request->decano_funcion;
-		$asignar_decano->save();
-		
-		$id_usuario=$request->id_usuario;
-		if(is_array($id_usuario))
+		if($request->nombre_modalidad=="PROYECTO DE GRADO" or $request->nombre_modalidad=="ADSCRIPCION" or $request->nombre_modalidad=="TESIS" or $request->nombre_modalidad=="TRABAJO DIRIGIDO" or $request->nombre_modalidad=="TRABAJO DE INTERNADO")
 		{
-			foreach ($id_usuario as $id_usuarios)
-			{		
-				$est_defensa 				=new Estudiante_defensa();
-				$est_defensa->nota 			=$request->nota;
-				$est_defensa->observacion	=$request->observacion;
-				$est_defensa->id_defensa	=$defensa_user->id;
-				$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$id_usuarios;
-				$est_defensa->save();
+			if($request->nombre_modalidad=="TRABAJO DIRIGIDO" or $request->nombre_modalidad=="ADSCRIPCION" ){
+				$defensa_user->empresa        =$request->empresa;
+			}else{
+				$defensa_user->empresa='null';
+			}
+			$defensa_user->save();
+
+			$asignar_presidente=new Asignar_funcion_defensa();
+			$asignar_presidente->funcion="presidente";
+			$asignar_presidente->id_defensa=$defensa_user->id;
+			$asignar_presidente->id_usuario_asignar_sub_rol=$request->presidente;
+			$asignar_presidente->id_funcion=$request->presidente_funcion;
+			$asignar_presidente->save();
+
+			$asignar_miembro1=new Asignar_funcion_defensa();
+			$asignar_miembro1->funcion="miembro1";
+			$asignar_miembro1->id_defensa=$defensa_user->id;
+			$asignar_miembro1->id_usuario_asignar_sub_rol=$request->miembro1;
+			$asignar_miembro1->id_funcion=$request->miembro1_funcion;
+			$asignar_miembro1->save();
+
+			$asignar_miembro2=new Asignar_funcion_defensa();
+			$asignar_miembro2->funcion="miembro2";
+			$asignar_miembro2->id_defensa=$defensa_user->id;
+			$asignar_miembro2->id_usuario_asignar_sub_rol=$request->miembro2;
+			$asignar_miembro2->id_funcion=$request->miembro2_funcion;
+			$asignar_miembro2->save();
+
+			$asignar_miembro3=new Asignar_funcion_defensa();
+			$asignar_miembro3->funcion="miembro3";
+			$asignar_miembro3->id_defensa=$defensa_user->id;
+			$asignar_miembro3->id_usuario_asignar_sub_rol=$request->miembro3;
+			$asignar_miembro3->id_funcion=$request->miembro3_funcion;
+			$asignar_miembro3->save();
+
+			$asignar_tutor=new Asignar_funcion_defensa();
+			$asignar_tutor->funcion="tutor";
+			$asignar_tutor->id_defensa=$defensa_user->id;
+			$asignar_tutor->id_usuario_asignar_sub_rol=$request->tutor;
+			$asignar_tutor->id_funcion=$request->tutor_funcion;
+			$asignar_tutor->save();
+
+			$asignar_decano=new Asignar_funcion_defensa();
+			$asignar_decano->funcion="decano";
+			$asignar_decano->id_defensa=$defensa_user->id;
+			$asignar_decano->id_usuario_asignar_sub_rol=$request->decano;
+			$asignar_decano->id_funcion=$request->decano_funcion;
+			$asignar_decano->save();
+			
+			$id_usuario=$request->id_usuario;
+			if(is_array($id_usuario))
+			{
+				foreach ($id_usuario as $id_usuarios)
+				{		
+					$est_defensa 				=new Estudiante_defensa();
+					$est_defensa->nota 			=$request->nota;
+					$est_defensa->nota_literal	=$request->nota_literal;
+					$est_defensa->observacion	=$request->observacion;
+					$est_defensa->resultado_final='0';
+					$est_defensa->id_defensa	=$defensa_user->id;
+					$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$id_usuarios;
+					$est_defensa->save();
+				}
 			}
 		}
-		return redirect()->route('titulacion.crearActa');
-		
+
+		if($request->nombre_modalidad=="PTAANG")
+		{
+			$defensa_user->id_ambiente 		  ='2';
+			$defensa_user->facultad 		  ='FACULTAD DE CIENCIAS ECONOMICAS';
+			$defensa_user->universidad 		  ='UNIVERSIDAD MAYOR DE SAN SIMON';
+			$defensa_user->save();
+
+			$id_usuario=$request->id_usuario;
+			if(is_array($id_usuario))
+			{
+				foreach ($id_usuario as $id_usuarios)
+				{	
+					$est_defensa 				      =new Estudiante_defensa();
+					$est_defensa->nota 			  =$request->nota_ptaang;
+					$est_defensa->nota_literal=$request->nota_literal_ptaang;
+					$est_defensa->observacion	='NULL';
+					$est_defensa->resultado_final='0';
+					$est_defensa->id_defensa	=$defensa_user->id;
+					$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$id_usuarios;
+					$est_defensa->save();
+				}
+			}		
+		}
+
+		if($request->nombre_modalidad=="EXCELENCIA ACADEMICA" or $request->nombre_modalidad=="RENDIMIENTO ACADEMICO")
+		{
+			$defensa_user->numero_resolucion=$request->numero_resolucion;
+			$defensa_user->fecha_resolucion=$request->fecha_resolucion;
+			$defensa_user->id_ambiente 		  ='2';
+			$defensa_user->save();
+
+			$asignar_autoridad=new Asignar_funcion_defensa();
+			$asignar_autoridad->funcion=$request->nombre_modalidad;
+			$asignar_autoridad->id_defensa=$defensa_user->id;
+			$asignar_autoridad->id_usuario_asignar_sub_rol=$request->autoridad;
+			$asignar_autoridad->id_funcion=$request->autoridad_funcion;
+			$asignar_autoridad->save();
+
+			$id_usuario=$request->id_usuario;
+			if(is_array($id_usuario))
+			{
+				foreach ($id_usuario as $id_usuarios)
+				{	
+					$est_defensa 				      =new Estudiante_defensa();
+					$est_defensa->observacion	=$request->nombre_modalidad;;
+					$est_defensa->resultado_final='0';
+					$est_defensa->id_defensa	=$defensa_user->id;
+					$est_defensa->id_inscripcion_grupo_materia_plan_gestion_unidad=$id_usuarios;
+					$est_defensa->save();
+				}
+			}	
+		}
+		return redirect()->route('titulacion.crearActa');	
 	}
 	
 	public function show($id)

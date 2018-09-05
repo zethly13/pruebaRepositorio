@@ -13,17 +13,14 @@ Route::post('logear','UsuariosController@logear')->name('usuarios.logear');
 // titulacion 
 
 Route::any('titulacion/crearActa','TitulacionController@crearActa')->name('titulacion.crearActa');
-
 Route::get('/titulacion/imprimirActas','TitulacionController@imprimirActas')->name('titulacion.imprimirActas');
 
 
 Route::resource('titulacion', 'TitulacionController');
 Route::post('/titulacion/addAmbiente','TitulacionController@addAmbiente');
 Route::post('/titulacion/addProfesional','TitulacionController@addProfesional');
-
 Route::post('/titulacion/editAmbiente','TitulacionController@editAmbiente');
 Route::post('/titulacion/editProfesional','TitulacionController@editProfesional');
-
 Route::get('/titulacion/showAmbiente/{id}','TitulacionController@showAmbiente');
 Route::get('/titulacion/showProfesional/{id}','TitulacionController@showProfesional');
 

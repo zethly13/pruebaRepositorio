@@ -55,12 +55,6 @@ class modalidadTitulacionSeeder extends Seeder
 
         App\Modalidad_titulacion::create([
 
-        	'nombre_modalidad'=>'EXAMEN DE GRADO',
-			'descripcion_modalidad'=>''
-        ]);
-
-        App\Modalidad_titulacion::create([
-
         	'nombre_modalidad'=>'PTAANG',
 			'descripcion_modalidad'=>''
         ]);

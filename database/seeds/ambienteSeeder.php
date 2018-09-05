@@ -28,6 +28,14 @@ class ambienteSeeder extends Seeder
 			'id_unidad'=>'7',
 			'id_tipo_ambiente'=>'2'
         ]);
+        App\Ambiente::create([
+
+            'nombre_ambiente'=>'EXCELENCIA ACADEMICA',
+            'max_estudiantes'=>'40',
+            'ambiente_activo'=>'SI',
+            'id_unidad'=>'7',
+            'id_tipo_ambiente'=>'8'
+        ]);
 
     }
 }

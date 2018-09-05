@@ -18,6 +18,6 @@
 			</div>
 		</div>
 		<div class="text-center">
-			{!! Form::button('Buscar', array('type'=> 'submit','class'=>'btn btn-primary','id'=>'buscarEst'))!!}
+			{!! Form::button('<i class="fa fa-search"></i>  Buscar Usuario', array('type'=> 'submit','class'=>'btn btn-primary','id'=>'buscarEst'))!!}
 		</div>
 	
