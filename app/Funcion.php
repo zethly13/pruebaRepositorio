@@ -14,4 +14,8 @@ class Funcion extends Model
 	{
 		return $this->hasMany('App\Usuario_asignar_sub_rol', 'id_funcion','id');
 	}
+	public function asignar_funcion_defensas()
+	{
+		return $this->hasMany('App\Asignar_funcion_defensa','id_funcion','id');
+	}
 }

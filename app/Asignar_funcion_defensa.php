@@ -8,7 +8,7 @@ class Asignar_funcion_defensa extends Model
 {
     protected $table = 'asignar_funcion_defensas';
 
-	protected $fillable = ['funcion','id_funcion_defensa','id_defensa','id_usuario_asignar_sub_rol'];
+	protected $fillable = ['funcion','id_funcion','id_defensa','id_usuario_asignar_sub_rol'];
 
 	public function carta_nombramientos()
 	{
@@ -20,9 +20,9 @@ class Asignar_funcion_defensa extends Model
 		return $this->belongsTo('App\Defensa', 'id_defensa','id');
 	}
 
-	public function funcion_defensa()
+	public function funcion()
 	{
-		return $this->belongsTo('App\Funcion_defensa', 'id_funcion_defensa','id');
+		return $this->belongsTo('App\Funcion', 'id_funcion','id');
 	}
 
 	public function usuario_asignar_sub_rol()
