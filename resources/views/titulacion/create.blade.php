@@ -6,13 +6,15 @@
 		<div class="card-header card-header-primary text-center">
 		<h5>REGISTRO DE ACTA</h5>
 				<p class="category">MODALIDAD: {{ $modalidad->nombre_modalidad }}</p>
+				
 		</div>
 		<div class="card-body">
 			
 			{!! Form::open(['route'=>'titulacion.store','method'=>'POST']) !!}
 			{{ csrf_field() }}
-			<input type="hidden" name="modalidad" value="{{ $modalidad->id }}">
-				<h5>Informacion del(os) Estudiante(s)</h5>
+			<input type="hidden" name="id_modalidad" value="{{ $modalidad->id }}">
+			<input type="hidden" name="nombre_modalidad" value="{{ $modalidad->nombre_modalidad }}">
+				<h5>Informacion de l(os) Estudiante(s)</h5>
 				<hr class="lineaHorizontal">
 					@include('titulacion.partials.formInfoEstudiante')
 				
@@ -44,9 +46,9 @@
 					<h5 class="text-lowercase">Informacion {{ $modalidad->nombre_modalidad}}</h5>
 					<hr class="lineaHorizontal">
 					<div class="form-group row">
-						{!! Form::label('resolucion','Nº Resolución:', ['class'=>'col-md-2']) !!}
+						{!! Form::label('numero_resolucion','Nº Resolución:', ['class'=>'col-md-2']) !!}
 						<div class="col-md-10">
-						{!! Form::text('resolucion',null,['placeholder' => 'Ingrese el numero de Resolución','class'=>'form-control']) !!}
+						{!! Form::text('numero_resolucion',null,['placeholder' => 'Ingrese el numero de Resolución','class'=>'form-control']) !!}
 						</div>
 					</div>
 
@@ -57,7 +59,13 @@
 						</div>
 						{!! Form::label('autoridad','Autoridad:',['class'=>'col-md-2'])!!}
 						<div class="col-md-5">
-						{!! Form::text('autoridad',null,['placeholder' => 'Nombre Autoridad', 'class'=>'form-control']) !!}
+							<select name="autoridad" class="form-control" id="decano" >
+        				<option value='-1'>Seleccione</option>
+			            @foreach ($funcionDecano as $decano)
+			          <option value="{{$decano->id_us_sig_sub_rol}}" class="edit{{$decano->id}}">{{$decano->nombre_completo_user}}</option>
+			            @endforeach
+			            <input type="hidden" name="autoridad_funcion" value="{{ $decano->id}}">      
+    					</select>
 						</div>
 					</div>
 

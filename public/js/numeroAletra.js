@@ -71,3 +71,15 @@ $(function() {
 		$("#nota_literal").val(words);
 	}
 });
+
+
+$(function() {
+	$("#nota_ptaang").on("keydown keyup", per);
+	function per() {
+		var nota_literal= (
+		Number($("#nota_ptaang").val()));
+		$("#totalval").val(nota_literal);
+		words = toWords(nota_literal);
+		$("#nota_literal_ptaang").val(words);
+	}
+});

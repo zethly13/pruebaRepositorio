@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="container-fluid">
 	<div class="card">
-		<div class="card-header card-header-primary text-center"><h5>LISTAR ACTAS</h5></div>
+		<div class="card-header card-header-primary text-center"><h5>DETALLE ACTAS</h5></div>
 		<div class="card-body">
 			<div class="container">
 				{!! Form::open(array('route' => array('titulacion.index'), 'method' =>'get'), array('role'=>'form')) !!}
@@ -55,10 +55,10 @@
 					<td>{{ $usuario->cod_sis }}</td>
 					<td>{{ $usuario->nombre_plan }} </td>
 					<td class="text-center">
-						<a target="_black" role="button" href="{{ route('designacionTribunal.pdf', $usuario->id_usuario) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Designacion de tribunal"><i class="fa fa-print"></i></a>
-						<a target="_black" role="button" href="{{ route('primerRecordatorio.pdf', $usuario->id_usuario) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Notificacion de defensa"><i class="fa fa-print"></i></a>
-						<a target="_black" role="button" href="{{ route('actaDefensa.pdf', $usuario->id_usuario) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="acta de defensa"><i class="fa fa-print" ></i></a>
-						<a target="_black" role="button" href="{{ route('testimonio.pdf', $usuario->id_usuario) }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="testimonio de Acta"><i class="fa fa-print"></i></a>
+						<a  role="button" href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Información del Acta"><i class="fa fa-file-pdf-o"></i></a>
+						<a role="button" href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Resumen de la Tesis"><i class="fa fa-file-pdf-o"></i></a>
+						<a role="button" href="#" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar Acta"><i class="fa fa-pencil" ></i></a>
+						<a role="button" href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar Acta"><i class="fa fa-times"></i></a>
 					</td>
 				</tr>
 				@endforeach

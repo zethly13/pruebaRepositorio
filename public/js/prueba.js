@@ -34,19 +34,20 @@ $(document).ready(function(){
 				data: {'ci':ci,'nombre':nombre,'apellido':apellido,'id_quitar':id_quitar,'_token': $('input[name=_token]').val()},
 				
 				success : function(data){
-					usuarios='<table class="table table-sm table-condensed table-striped table-bordered"><thead><tr class="text-center table-info"><td>COD SIS</td><td>NOMBRE COMPLETO</td><td>CARRERA</td><td>ACCION</td></tr></thead><tbody>';
+					usuarios='<div class="container"><table class="table table-sm table-condensed table-striped table-bordered table-condensed table-striped table-responsive-sm"><thead><tr class="text-center table-info"><td>COD SIS</td><td>NOMBRE COMPLETO</td><td>CARRERA</td><td>ACCION</td></tr></thead><tbody>';
 					for(var i=0;i<data.length;i++){
 						usuarios+='<tr>'+
 						'<td>'+data[i].cod_sis+'</td>'+
 						'<td>'+data[i].nombres+" "+data[i].apellidos+'</td>'+
 						'<td>'+data[i].nombre_plan+'</td>'+
-						'<td>'+data[i].id_usuario_asignar_sub_rol+'</td>'+
+						// '<td>'+data[i].id_usuario_asignar_sub_rol+'</td>'+
 						'<td><button class="btn btn-success glyphicon glyphicon-edit" data-dismiss="modal" onclick="agregarEst('+data[i].id_usuario_asignar_sub_rol+')">AGREGAR</button></td>'+
 						'</tr>';
+						// $('#buscar').prop('disabled',true)
 					}
 					// console.log(data);
 	  			// });
-	  			usuarios+='</tbody></table>';
+	  			usuarios+='</tbody></table></div>';
 	  			$('#listaUsuarios').html(usuarios);
 	  		}
 	  	});

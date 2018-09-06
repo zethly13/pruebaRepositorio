@@ -182,39 +182,40 @@ public function crearActa(Request $request)
 			$modalidad="vacio";	
 
 		$funciones=funcion::wherein('nombre_funcion',['PRESIDENTE','TUTOR','DECANO','MIEMBRO'])->get();
+		$titulos=titulo::all();
 
 		$funcionPresidentes=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['PRESIDENTE'])
-				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
-				// ->join('titulos as d','d.id','=','c.id_titulo')
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
+				->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				->join('titulos as d','d.id','=','c.id_titulo')
+				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario','d.titulo_abreviado')->get();
 
 		$funcionMiembro=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['DOCENTE'])
-				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
-				// ->join('titulos as d','d.id','=','c.id_titulo')
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
+				->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				->join('titulos as d','d.id','=','c.id_titulo')
+				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario','d.titulo_abreviado')->get();
 
 		$funcionTutor=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['DOCENTE'])
-				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
-				// ->join('titulos as d','d.id','=','c.id_titulo')
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
+				->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				->join('titulos as d','d.id','=','c.id_titulo')
+				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario','d.titulo_abreviado')->get();
 
 		$funcionDecano=usuario_asignar_sub_rol::join('usuarios as a','a.id','=','usuario_asignar_sub_roles.id_usuario')
 				->join('funciones as b','b.id','=','usuario_asignar_sub_roles.id_funcion')
 				->wherein('b.nombre_funcion',['DECANO'])
-				// ->join('usuario_titulos as c','c.id_usuario','=','a.id')
-				// ->join('titulos as d','d.id','=','c.id_titulo')
-				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario')->get();
+				->join('usuario_titulos as c','c.id_usuario','=','a.id')
+				->join('titulos as d','d.id','=','c.id_titulo')
+				->select('usuario_asignar_sub_roles.id as id_us_sig_sub_rol','b.id','usuario_asignar_sub_roles.id_usuario','d.titulo_abreviado')->get();
 
 		$ambiente=ambiente::all();
 		$tipo_ambiente=Tipo_ambiente::all()->pluck('nombre_tipo_ambiente','id');
 		$unidad=Unidad::all()->pluck('nombre_unidad','id');
-		return view('titulacion.crearActa',compact('modalidad','modalidades','funcionPresidentes','funcionMiembro','funcionTutor','funcionDecano','ambiente','tipo_ambiente','unidad','funciones','usuario')); 
+		return view('titulacion.crearActa',compact('modalidad','modalidades','funcionPresidentes','funcionMiembro','funcionTutor','funcionDecano','ambiente','tipo_ambiente','unidad','funciones','usuario','titulos')); 
 	}
 
 	public function buscar(Request $request){
@@ -289,12 +290,16 @@ public function crearActa(Request $request)
 	}
 	public function addProfesional(Request $request)
 	{
+		
+		
+		//return $request;
 		$rules = array(
 			'apellidos' => 'required|string',
 			'nombres' => 'required|string',
 			'doc_identidad' => 'required|string',
 			'sexo'=>'required',
-			'id_funcion'=>'required'
+			'id_funcion'=>'required',
+			'titulo_nombre'=>'required'
 		);
 		$validator = Validator::make ( Input::all(), $rules);
 		if ($validator->fails()){
@@ -303,57 +308,62 @@ public function crearActa(Request $request)
 			$user=new Usuario($request->all());
 			$user->login =$request->doc_identidad;
 			$user->clave =bcrypt($request->doc_identidad);
-			$user->sexo=$request->sexo;
-			$user->fecha_nac="1992-11-08";
-			$user->usuario_activo='SI';
-			$user->inscribir_adm='SI';
-			$user->estilo='Moderno';	
-			$user->subir_foto='SI';
-			$user->id_estado_civil=1;
-			$user->id_provincia=1;
-			$user->ciudad_expedido_doc=1;
-			$user->id_tipo_Doc_identidad=1;
 			$user->save();
+			
 			$usuario=Usuario::all()->last()->id;
 
-			$subrol= new Usuario_asignar_sub_rol($request->all());
-			 $subrol->cod_sis="1312321";
-			 $subrol->fecha_inicio="1992-11-08";
-			 $subrol->fecha_fin="1992-11-08";
-			 $subrol->activo='SI';
-			 $subrol->id_sub_rol=7;
-			 $subrol->id_unidad=7;
-			 $subrol->id_usuario=$usuario;
-			 $subrol->save();
+			$id_titulo=titulo::where('titulos.titulo_abreviado', $request->titulo_nombre)->select('titulos.id')->first();
+			
+			$titulo=new usuario_titulo($request->all());
+			$titulo->id_usuario=$usuario;
+			$titulo->id_titulo=$id_titulo['id'];
+			$titulo->save();
 
+			$subrol= new Usuario_asignar_sub_rol($request->all());
+			$subrol->id_sub_rol=7;
+			$subrol->id_unidad=7;
+			$subrol->id_usuario=$usuario;
+			if($request->id_funcion==10 or $request->id_funcion==12){
+				$subrol->id_funcion=1;
+			}elseif($request->id_funcion==11){
+				$subrol->id_funcion=11;
+			}elseif($request->id_funcion==9){
+				$subrol->id_funcion=9;
+			}
+			$subrol->save();
+		
 			$arreglo = array(
-				// "doc_identidad"=>$user->doc_identidad,
-				// "doc_identidad"=>$user->login,
 				"doc_identidad"=> $user->clave,
 				"apellidos"=>$user->apellidos,
 				"nombres"=>$user->nombres,
 				"sexo"=>$user->sexo,
-				"1992-11-08"=>$user->fecha_nac,
-				"usuario_activo"=>'SI',
-				"inscribir_adm"=>'SI',
-				"estilo"=>'Moderno',
-				"subir_foto"=>'SI',
-				"id_estado_civil"=>1,
-				"id_provincia"=>1,
-				"ciudad_expedido_doc"=>1,
-				"id_tipo_Doc_identidad"=>1,
-				"id"=>$user->id,
-				"cod_sis"=>"1312321",
-				"fecha_inicio"=>"1992-11-08",
-				"fecha_fin"=>"1992-11-08",
-				"activo"=>'SI',
+				"id"=>$user->id,		
 				"id_funcion"=>$subrol->id_funcion,
 				"id_sub_rol"=>7,
 				"id_unidad"=>7,
-				"id_usuario"=>$user->id
+				"id_usuario"=>$user->id,
+				"titulo_nombre"=>$request->titulo_nombre
 			);
 			return response()->json($arreglo);
 		}      
+	}
+
+	public function showProfesional($id)
+	{
+		$user=Usuario::where('usuarios.id','=',$id)->first();
+		$user_funcion=usuario_asignar_sub_rol::where('usuario_asignar_sub_roles.id_usuario','=',$id)->first();
+
+		$profesional=array(
+			"id"=>$user_funcion->id,
+			"nombres"=>$user->nombres,
+			"apellidos"=>$user->apellidos,
+			"doc_identidad"=>$user->doc_identidad,
+			"sexo"=>$user->sexo,
+			"id_funcion"=>$user_funcion->id_funcion
+
+		);
+		return response()->json($profesional);
+		
 	}
 	public function editProfesional(Request $request)
 	{
@@ -377,22 +387,7 @@ public function crearActa(Request $request)
 		return response()->json($prof);
 	}
 
-	public function showProfesional(Request $request, $id)
-	{
-		$user=Usuario::where('usuarios.id','=',$id)->get()->first();
-		$user_funcion=usuario_asignar_sub_rol::where('usuario_asignar_sub_roles.id_usuario','=',$id)->get()->first();
-
-		$profesional=array(
-			"nombres"=>$user->nombres,
-			"apellidos"=>$user->apellidos,
-			"doc_identidad"=>$user->doc_identidad,
-			"sexo"=>$user->sexo,
-			"id_funcion"=>$user_funcion->id_funcion
-
-		);
-		return response()->json($profesional);
-		
-	} 
+	 
 
 	public function store(Request $request)
 	{	
@@ -548,11 +543,7 @@ public function crearActa(Request $request)
 		// Carbon::setlocale(LC_TIME, 'America/La_paz');
 		// return Carbon::getlocale();	
 		// $fecha=Carbon::now()->formatLocalized('%A %d %B %Y');
-// Cochabamba 14 abril del 2018
-		$fecha=Date::today()->format('j F \d\e\l Y');
-		// $fecha=Carbon::now()->addYear()->diffForHumans();
-		// $fecha
-		//return $fecha;	   
+		$fecha=Date::today()->format('j F \d\e\l Y'); 
 		$usuario=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
 			->where('a.id_sub_rol',11)
@@ -560,11 +551,25 @@ public function crearActa(Request $request)
 			->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
-			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
 			->join('plan_gestion_unidades as g','g.id','=','b.id_plan_gestion_unidad')
 			->join('planes as h','h.id','=','g.id_plan')
 			->join('Modalidad_titulaciones as i','i.id','=','e.id_modalidad_titulacion')
-			->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','h.nombre_plan','e.titulo_defensa','e.id_modalidad_titulacion','f.id_usuario_asignar_sub_rol','i.nombre_modalidad','d.id_defensa')->first();
+			->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','h.nombre_plan','e.titulo_defensa','e.id_modalidad_titulacion','i.nombre_modalidad','d.id_defensa')->first();
+			
+		// $tribunales=Usuario::where('usuarios.id','=',$id)
+		// 	->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
+		// 	->where('a.id_sub_rol',11)
+		// 	->join('inscripciones as b','b.id_usuario_asignar_sub_rol','=','a.id')
+		// 	->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
+		// 	->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
+		// 	->join('defensas as e','e.id','=','d.id_defensa')
+		// 	->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
+		// 	->wherein('f.observacion',['miembro1','miembro2','miembro3'])
+		// 	->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
+		// 	->join('usuarios as h','h.id','=','g.id_usuario')
+		// 	->join('usuario_titulos as i','i.id_usuario','=','h.id')
+		// 	->join('titulos as j','j.id','=','i.id_titulo')
+		// 	->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
 
 		$tribunales=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
@@ -573,13 +578,13 @@ public function crearActa(Request $request)
 			->join('inscripcion_grupo_materia_plan_gestion_unidades as c','c.id_inscripcion','=','b.id')
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
-			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->wherein('f.observacion',['miembro1','miembro2','miembro3'])
+			->join('asignar_funcion_defensas as f','f.id_defensa','=','e.id')
+			->wherein('f.funcion',['miembro1','miembro2','miembro3'])
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 
 			if(!is_null($usuario)){
 				$view = \View::make('titulacion.designacionTribunal', compact('usuario','tribunales','fecha'))->render();
@@ -604,7 +609,7 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Modalidad_titulaciones as f','f.id','=','e.id_modalidad_titulacion')
-			->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','e.titulo_defensa','e.id_modalidad_titulacion','e.fecha_defensa','e.hora_defensa','f.nombre_modalidad')->first();
+			->select('usuarios.id as id_usuario','a.cod_sis','usuarios.nombres','usuarios.apellidos','e.titulo_defensa','e.id_modalidad_titulacion','e.fecha_defensa','e.hora_inicio_defensa','e.hora_fin_defensa','f.nombre_modalidad')->first();
 
 		$tribunales=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
@@ -614,12 +619,12 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->wherein('f.observacion',['miembro1','miembro2','miembro3'])
+			->wherein('f.funcion',['miembro1','miembro2','miembro3'])
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 			if(!is_null($usuario)){
 				$view = \View::make('titulacion.primerRecordatorio', compact('usuario','tribunales','fecha'))->render();
 				$pdf = \App::make('dompdf.wrapper');
@@ -629,9 +634,6 @@ public function crearActa(Request $request)
 			else{
 				return ('no tiene actas');
 			}
-
-		  
-		
 	}
 
 	 public function generar_actaDefensa($id)
@@ -658,12 +660,12 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->where('f.observacion','=','presidente')
+			->where('f.funcion','=','presidente')
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 			
 			$tribunales=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
@@ -673,12 +675,12 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->wherein('f.observacion',['miembro1','miembro2','miembro3'])
+			->wherein('f.funcion',['miembro1','miembro2','miembro3'])
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 		if(!is_null($usuario)){
 			$view = \View::make('titulacion.actaDefensa', compact('usuario','presidente','tribunales','fecha'))->render();
 		   
@@ -714,12 +716,12 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->where('f.observacion','=','presidente')
+			->where('f.funcion','=','presidente')
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 			
 			$tribunales=Usuario::where('usuarios.id','=',$id)
 			->join('usuario_asignar_sub_roles as a','a.id_usuario','=','usuarios.id')
@@ -729,12 +731,12 @@ public function crearActa(Request $request)
 			->join('estudiante_defensas as d','d.id_inscripcion_grupo_materia_plan_gestion_unidad','=','c.id')
 			->join('defensas as e','e.id','=','d.id_defensa')
 			->join('Asignar_funcion_defensas as f','f.id_defensa','=','e.id')
-			->wherein('f.observacion',['miembro1','miembro2','miembro3'])
+			->wherein('f.funcion',['miembro1','miembro2','miembro3'])
 			->join('usuario_asignar_sub_roles as g','g.id','=','f.id_usuario_asignar_sub_rol')
 			->join('usuarios as h','h.id','=','g.id_usuario')
 			->join('usuario_titulos as i','i.id_usuario','=','h.id')
 			->join('titulos as j','j.id','=','i.id_titulo')
-			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titlo_abreviado')->get();
+			->select('usuarios.id as id_usuario','f.id_usuario_asignar_sub_rol','h.nombres','h.apellidos','j.titulo_abreviado')->get();
 
 		if(!is_null($usuario)){
 			$view = \View::make('titulacion.testimonio', compact('usuario','presidente','tribunales','fecha'))->render();

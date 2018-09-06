@@ -8,7 +8,7 @@ class Titulo extends Model
 {
     protected $table = 'titulos';
 
-    protected $fillable = [ 'titlo_abreviado','titulo_descripcion','id_grado_instruccion'];
+    protected $fillable = [ 'titulo_abreviado','titulo_descripcion','id_grado_instruccion'];
 
     public function grado_instrucciones()
 	{
